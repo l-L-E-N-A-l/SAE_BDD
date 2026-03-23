@@ -41,7 +41,7 @@
    <Table>
       <Name>Organisme</Name>
       <Column>
-         <Name>reference</Name>
+         <Name>referenceOrg</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
@@ -55,7 +55,7 @@
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>reference</Key>
+         <Key>referenceOrg</Key>
       </PK>
       <AK>
          <Key>siret</Key>
@@ -68,7 +68,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>nom</Name>
+         <Name>nomO</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
@@ -103,7 +103,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>nom</Name>
+         <Name>nomSauce</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
@@ -117,7 +117,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>nom</Name>
+         <Name>nomIngr</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
@@ -143,11 +143,11 @@
    <Table>
       <Name>TypeMachine</Name>
       <Column>
-         <Name>nomType</Name>
+         <Name>nomTypeM</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>nomType</Key>
+         <Key>nomTypeM</Key>
       </PK>
    </Table>
    <Table>
@@ -167,7 +167,7 @@
    <Table>
       <Name>TypeEntretien</Name>
       <Column>
-         <Name>type</Name>
+         <Name>typeEnt</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
@@ -176,7 +176,7 @@
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>type</Key>
+         <Key>typeEnt</Key>
       </PK>
    </Table>
    <Table>
@@ -247,7 +247,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>nom</Name>
+         <Name>nomT</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
@@ -276,7 +276,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>nom</Name>
+         <Name>nomLeg</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
@@ -290,7 +290,7 @@
    <Table>
       <Name>LieuPartenaire</Name>
       <Column>
-         <Name>adresse</Name>
+         <Name>adressePart</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
@@ -304,7 +304,7 @@
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>adresse</Key>
+         <Key>adressePart</Key>
       </PK>
       <FK>
          <Key>codePostale, ville</Key>
@@ -314,28 +314,28 @@
    <Table>
       <Name>Modele</Name>
       <Column>
-         <Name>nomType</Name>
+         <Name>nomTypeM</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>reference</Name>
+         <Name>referenceMod</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>type</Name>
+         <Name>typeEnt</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>nomType, reference</Key>
+         <Key>nomTypeM, referenceMod</Key>
       </PK>
       <FK>
-         <Key>nomType</Key>
-         <Reference>TypeMachine(nomType)</Reference>
+         <Key>nomTypeM</Key>
+         <Reference>TypeMachine(nomTypeM)</Reference>
       </FK>
       <FK>
-         <Key>type</Key>
-         <Reference>TypeEntretien(type)</Reference>
+         <Key>typeEnt</Key>
+         <Reference>TypeEntretien(typeEnt)</Reference>
       </FK>
    </Table>
    <Table>
@@ -376,12 +376,12 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>nom</Name>
+         <Name>nomT</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>prenom</Name>
+         <Name>prenomT</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
@@ -395,7 +395,7 @@
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>adresse</Name>
+         <Name>adresseT</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
@@ -437,7 +437,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>reference</Name>
+         <Name>referenceOrg</Name>
          <Type>NUMBER(10)</Type>
          <Property>NOT NULL</Property>
       </Column>
@@ -478,8 +478,8 @@
          <Reference>Club(numClub)</Reference>
       </FK>
       <FK>
-         <Key>reference</Key>
-         <Reference>Organisme(reference)</Reference>
+         <Key>referenceOrg</Key>
+         <Reference>Organisme(referenceOrg)</Reference>
       </FK>
       <FK>
          <Key>typeDignite</Key>
@@ -505,7 +505,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>reference</Name>
+         <Name>referenceOrg</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
@@ -513,7 +513,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <PK>
-         <Key>numOrdre, numClub, idTenrac, reference, idCarte</Key>
+         <Key>numOrdre, numClub, idTenrac, referenceOrg, idCarte</Key>
       </PK>
       <FK>
          <Key>numOrdre</Key>
@@ -528,8 +528,8 @@
          <Reference>Tenrac(idTenrac)</Reference>
       </FK>
       <FK>
-         <Key>reference</Key>
-         <Reference>Organisme(reference)</Reference>
+         <Key>referenceOrg</Key>
+         <Reference>Organisme(referenceOrg)</Reference>
       </FK>
    </Table>
    <Table>
@@ -539,7 +539,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>nom</Name>
+         <Name>nomPlat</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
@@ -561,7 +561,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>adresse</Name>
+         <Name>adressePart</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
@@ -569,24 +569,24 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>date_heure</Name>
+         <Name>dateReu</Name>
          <Type>TIMESTAMP WITH TIME ZONE</Type>
       </Column>
       <Column>
-         <Name>nom</Name>
+         <Name>nomReu</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>idRepas, adresse, idGroupe, date_heure</Key>
+         <Key>idRepas, adressePart, idGroupe, dateReu</Key>
       </PK>
       <FK>
          <Key>idRepas</Key>
          <Reference>Repas(idRepas)</Reference>
       </FK>
       <FK>
-         <Key>adresse</Key>
-         <Reference>LieuPartenaire(adresse)</Reference>
+         <Key>adressePart</Key>
+         <Reference>LieuPartenaire(adressePart)</Reference>
       </FK>
       <FK>
          <Key>idGroupe</Key>
@@ -596,29 +596,29 @@
    <Table>
       <Name>Machine</Name>
       <Column>
-         <Name>nomType</Name>
+         <Name>nomTypeM</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>reference</Name>
+         <Name>referenceMod</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>nom</Name>
+         <Name>nomM</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>nomType, reference, nom</Key>
+         <Key>nomTypeM, referenceMod, nomM</Key>
       </PK>
       <FK>
-         <Key>nomType, reference</Key>
-         <Reference>Modele(nomType, reference)</Reference>
+         <Key>nomTypeM, referenceMod</Key>
+         <Reference>Modele(nomTypeM, referenceMod)</Reference>
       </FK>
    </Table>
    <Table>
       <Name>Entretien</Name>
       <Column>
-         <Name>type</Name>
+         <Name>typeEnt</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
@@ -626,7 +626,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>date_</Name>
+         <Name>dateEntre</Name>
          <Type>TIMESTAMP</Type>
       </Column>
       <Column>
@@ -640,26 +640,26 @@
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>nomType</Name>
+         <Name>nomTypeM</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>reference</Name>
+         <Name>referenceMod</Name>
          <Type>NUMBER(10)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>nom</Name>
+         <Name>nomM</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>type, idTenrac, date_</Key>
+         <Key>typeEnt, idTenrac, dateEntre</Key>
       </PK>
       <FK>
-         <Key>type</Key>
-         <Reference>TypeEntretien(type)</Reference>
+         <Key>typeEnt</Key>
+         <Reference>TypeEntretien(typeEnt)</Reference>
       </FK>
       <FK>
          <Key>idTenrac</Key>
@@ -670,8 +670,8 @@
          <Reference>Registre(numClub, numOrdre)</Reference>
       </FK>
       <FK>
-         <Key>nomType, reference, nom</Key>
-         <Reference>Machine(nomType, reference, nom)</Reference>
+         <Key>nomTypeM, referenceMod, nomM</Key>
+         <Reference>Machine(nomTypeM, referenceMod, nomM)</Reference>
       </FK>
    </Table>
    <Table>
@@ -737,7 +737,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>adresse</Name>
+         <Name>adressePart</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
@@ -745,19 +745,19 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>date_heure</Name>
+         <Name>dateReu</Name>
          <Type>TIMESTAMP WITH TIME ZONE</Type>
       </Column>
       <PK>
-         <Key>idTenrac, idRepas, adresse, idGroupe, date_heure</Key>
+         <Key>idTenrac, idRepas, adressePart, idGroupe, dateReu</Key>
       </PK>
       <FK>
          <Key>idTenrac</Key>
          <Reference>Tenrac(idTenrac)</Reference>
       </FK>
       <FK>
-         <Key>idRepas, adresse, idGroupe, date_heure</Key>
-         <Reference>Reunion(idRepas, adresse, idGroupe, date_heure)</Reference>
+         <Key>idRepas, adressePart, idGroupe, dateReu</Key>
+         <Reference>Reunion(idRepas, adressePart, idGroupe, dateReu)</Reference>
       </FK>
    </Table>
    <Table>
@@ -811,7 +811,7 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>adresse</Name>
+         <Name>adressePart</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
@@ -819,31 +819,31 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>date_heure</Name>
+         <Name>dateReu</Name>
          <Type>TIMESTAMP WITH TIME ZONE</Type>
       </Column>
       <Column>
-         <Name>nomType</Name>
+         <Name>nomTypeM</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>reference</Name>
+         <Name>referenceMod</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>nom</Name>
+         <Name>nomM</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>idRepas, adresse, idGroupe, date_heure, nomType, reference, nom</Key>
+         <Key>idRepas, adressePart, idGroupe, dateReu, nomTypeM, referenceMod, nomM</Key>
       </PK>
       <FK>
-         <Key>idRepas, adresse, idGroupe, date_heure</Key>
-         <Reference>Reunion(idRepas, adresse, idGroupe, date_heure)</Reference>
+         <Key>idRepas, adressePart, idGroupe, dateReu</Key>
+         <Reference>Reunion(idRepas, adressePart, idGroupe, dateReu)</Reference>
       </FK>
       <FK>
-         <Key>nomType, reference, nom</Key>
-         <Reference>Machine(nomType, reference, nom)</Reference>
+         <Key>nomTypeM, referenceMod, nomM</Key>
+         <Reference>Machine(nomTypeM, referenceMod, nomM)</Reference>
       </FK>
    </Table>
    <Table>
@@ -897,19 +897,19 @@
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>adresse</Name>
+         <Name>adressePart</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>numOrdre, adresse</Key>
+         <Key>numOrdre, adressePart</Key>
       </PK>
       <FK>
          <Key>numOrdre</Key>
          <Reference>Ordre(numOrdre)</Reference>
       </FK>
       <FK>
-         <Key>adresse</Key>
-         <Reference>LieuPartenaire(adresse)</Reference>
+         <Key>adressePart</Key>
+         <Reference>LieuPartenaire(adressePart)</Reference>
       </FK>
    </Table>
    <Table>
