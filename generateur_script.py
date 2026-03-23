@@ -8,10 +8,10 @@ fake = Faker(locale="fr_CA")
 liste_prenom = ([unidecode(fake.unique.first_name_male()).upper() for _ in range(70)],[unidecode(fake.unique.first_name_female()).upper() for _ in range(70)]) # 0 = homme , 1 = femme
 liste_nom = [unidecode(fake.unique.last_name()).upper() for _ in range(250)]
 
-liste_grade = (["AFFILIE", "SYMPATISANT", "ADHERANT", "CHEVALIER", "GRAND CHEVALIER", "COMMANDEUR" , "GRAND CROIX"],["AFFILIEE", "SYMPATISANTE", "ADHERANTE", "DAME", "HAUTE DAME", "COMMANDERESSE" , "GRANDE-CROIX"])
-liste_rang = ["'NOVICE'","'COMPAGNON'"]
-liste_titre = ["'PHILANTROPHE'","'PROTECTEUR'","'HONORABLE'"]
-liste_dignite = ["'MAITRE'","'GRAND CHANCELIER'","'GRAND MAITRE'"]
+liste_grade = (["'AFFILIE'", "'SYMPATISANT'", "'ADHERANT'", "'CHEVALIER'", "'GRAND CHEVALIER'", "'COMMANDEUR'" , "'GRAND CROIX'"],["'AFFILIEE'", "'SYMPATISANTE'", "'ADHERANTE'", "'DAME'", "'HAUTE DAME'", "'COMMANDERESSE'" , "'GRANDE-CROIX'"])
+liste_rang = ["'NOVICE'","'COMPAGNON'"] # - - - - - - - - - - - - - v
+liste_titre = ["'PHILANTROPHE'","'PROTECTEUR'","'HONORABLE'"] # guillemet + apostrophe car possibilité de null (sans apostrophes)
+liste_dignite = ["'MAITRE'","'GRAND CHANCELIER'","'GRAND MAITRE'"] # - - A 
 
 # Codes_postaux
 codes_villes = pa.read_csv("./codes_villes.csv", encoding="latin-1")
@@ -84,14 +84,29 @@ for _ in range(100_000):
 # Hommes
 for i in range(len(liste_grade[0])-1) :
     if i == len(liste_grade[0]) -1:
-        file.write(f"INSERT INTO Grade(typeGrade) VALUES ({liste_grade[0][i]})")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[0][i]},null)")
     else :
-        file.write(f"INSERT INTO Grade(typeGrade, superieurGrade) VALUES ({liste_grade[0][i]},{liste_grade[0][i+1]}); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[0][i]},{liste_grade[0][i+1]}); \n")
 # Femmes
 for i in range(len(liste_grade[1])-1) :
     if i == len(liste_grade[1]) -1:
-        file.write(f"INSERT INTO Grade(typeGrade) VALUES ({liste_grade[1][i]})")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[1][i]},null)")
     else :
-        file.write(f"INSERT INTO Grade(typeGrade, superieurGrade) VALUES ({liste_grade[1][i]},{liste_grade[1][i+1]}); \n")
-    
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[1][i]},{liste_grade[1][i+1]}); \n")
+
+
+# RANG
+file.write(f"INSERT INTO Rang(typeRang,superieurRang) VALUES ({liste_rang[0]},{liste_rang[1]}); \n")
+file.write(f"INSERT INTO Rang(typeRang,superieurRang) VALUES ({liste_rang[1]},null); \n")
+
+# TITRE
+file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ({liste_titre[0]},{liste_titre[1]}); \n")
+file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ({liste_titre[1]},{liste_titre[2]}); \n")
+file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ({liste_titre[2]},null); \n")
+
+# DIGNITE
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[0]},{liste_dignite[1]}); \n")
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[1]},{liste_dignite[2]}); \n")
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[2]},null); \n")
+
 print("- - - FINI - - -")
