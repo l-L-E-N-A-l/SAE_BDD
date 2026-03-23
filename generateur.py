@@ -6,8 +6,13 @@ fake = Faker(locale="fr_CA")
 
 liste_prenom = ([unidecode(fake.unique.first_name_male()).upper() for _ in range(70)],[unidecode(fake.unique.first_name_female()).upper() for _ in range(70)]) # 0 = homme , 1 = femme
 liste_nom = [unidecode(fake.unique.last_name()).upper() for _ in range(250)]
-liste_dignite = ["MAITRE","GRAND CHANCELIER","GRAND MAITRE"]
-liste_grade = (["AFFILIE", "SYMPATISANT", "ADHERANT", "CHEVALIER", "GRAND CHEVALIER", "COMMANDEUR" , "GRAND CROIX"],["AFFILIE", "SYMPATISANT", "ADHERANT", "DAME", "HAUTE DAME", "COMMANDEUR" , "GRAND CROIX"])
+
+liste_grade = (["AFFILIE", "SYMPATISANT", "ADHERANT", "CHEVALIER", "GRAND CHEVALIER", "COMMANDEUR" , "GRAND CROIX"],["AFFILIE", "SYMPATISANT", "ADHERANT", "DAME", "HAUTE DAME", "COMMANDEUR" , "GRAND-CROIX"])
+liste_rang = ["'NOVICE'","'COMPAGNON'"]
+liste_titre = ["'PHILANTROPHE'","'PROTECTEUR'","'HONORABLE'"]
+liste_dignite = ["'MAITRE'","'GRAND CHANCELIER'","'GRAND MAITRE'"]
+
+
 
 def email_generator(nom,prenom):
     email = ""
@@ -32,15 +37,43 @@ def email_generator(nom,prenom):
         email += "@yahoo.com"
     return email
 
+def random_rang_titre_dignite():
+    res = []
+    r , t , d = randint(0,5) , randint(0,9) , randint(0,9)
+    
+    if r == 5: res.append(liste_rang[1])
+    elif r >= 3: res.append(liste_rang[0])
+    else : res.append("null")
+
+    if t == 9: res.append(liste_titre[2])
+    elif t >= 7: res.append(liste_titre[1])
+    elif t >= 4: res.append(liste_titre[0])
+    else : res.append("null")
+
+    if d == 9: res.append(liste_dignite[2])
+    elif d >= 7: res.append(liste_dignite[1])
+    elif d >= 4: res.append(liste_dignite[0])
+    else : res.append("null")
+
+    return res
+
+
+
+
+
 open("./script.sql", 'w').close()
 file = open("./script.sql",'a')
 
 
-for _ in range(100_000):
-    i = randint(0,1)
-    if i == 0 :
-        data_tenrac = (liste_nom[randint(0,len(liste_nom)-1)],liste_prenom[0][randint(0,len(liste_prenom[0])-1)],'M',liste_grade[0][randint(0,len(liste_grade[0])-1)])
-    else : data_tenrac = (liste_nom[randint(0,len(liste_nom)-1)],liste_prenom[1][randint(0,len(liste_prenom[1])-1)],'F',liste_grade[1][randint(0,len(liste_grade[1])-1)])
 
-    file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeGrade) VALUES({fake.unique.random_int(min=0,max=1_000_000_000)},'{data_tenrac[0]}','{data_tenrac[1]}','{email_generator(data_tenrac[0],data_tenrac[1])}','06{fake.unique.random_int(0,99_999_999)}','{unidecode(fake.street_address())}','{data_tenrac[2]}','{data_tenrac[3]}'); \n")
+# TENRAC
+for _ in range(100_000):
+    rtd = random_rang_titre_dignite()
+    data_tenrac = {"id":fake.unique.random_int(min=0,max=1_000_000_000), "nom":liste_nom[randint(0,len(liste_nom)-1)], "prenom":liste_prenom[0][randint(0,len(liste_prenom[0])-1)], "tel":"06"+str(fake.unique.random_int(0,99_999_999)), "adresse":unidecode(fake.street_address()), "sexe":'M', "rang":rtd[0], "titre":rtd[1], "dignite":rtd[2], "grade":liste_grade[0][randint(0,len(liste_grade[0])-1)]}
+    i = randint(0,1)
+    if i==1 : 
+        data_tenrac["sexe"] = 'F'
+        data_tenrac["prenom"] = liste_prenom[1][randint(0,len(liste_prenom[0])-1)]
+
+    file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}',{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["dignite"]},'{data_tenrac["grade"]}'); \n")
     
