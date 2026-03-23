@@ -4,9 +4,10 @@ from random import randint
 
 fake = Faker(locale="fr_CA")
 
-liste_prenom_m = [unidecode(fake.unique.first_name_male()).upper() for _ in range(70)]
-liste_prenom_f = [unidecode(fake.unique.first_name_female()).upper() for _ in range(70)]
+liste_prenom = ([unidecode(fake.unique.first_name_male()).upper() for _ in range(70)],[unidecode(fake.unique.first_name_female()).upper() for _ in range(70)]) # 0 = homme , 1 = femme
 liste_nom = [unidecode(fake.unique.last_name()).upper() for _ in range(250)]
+liste_dignite = ["MAITRE","GRAND CHANCELIER","GRAND MAITRE"]
+liste_grade = (["AFFILIE", "SYMPATISANT", "ADHERANT", "CHEVALIER", "GRAND CHEVALIER", "COMMANDEUR" , "GRAND CROIX"],["AFFILIE", "SYMPATISANT", "ADHERANT", "DAME", "HAUTE DAME", "COMMANDEUR" , "GRAND CROIX"])
 
 def email_generator(nom,prenom):
     email = ""
@@ -34,10 +35,12 @@ def email_generator(nom,prenom):
 open("./script.sql", 'w').close()
 file = open("./script.sql",'a')
 
+
 for _ in range(100_000):
     i = randint(0,1)
     if i == 0 :
-        nom_prenom_sexe = (liste_nom[randint(0,len(liste_nom)-1)],liste_prenom_m[randint(0,len(liste_prenom_m)-1)],'M')
-    else : nom_prenom_sexe = (liste_nom[randint(0,len(liste_nom)-1)],liste_prenom_f[randint(0,len(liste_prenom_f)-1)],'F')
-    file.write(f"INSERT INTO Tenrac(idTenrac,nom,prenom,email,telephone,adresse,sexe) VALUES({fake.unique.random_int(min=0,max=1_000_000_000)},'{nom_prenom_sexe[0]}','{nom_prenom_sexe[1]}','{email_generator(nom_prenom_sexe[0],nom_prenom_sexe[1])}','06{fake.unique.random_int(0,99_999_999)}','{unidecode(fake.street_address())}','{nom_prenom_sexe[2]}'); \n")
+        data_tenrac = (liste_nom[randint(0,len(liste_nom)-1)],liste_prenom[0][randint(0,len(liste_prenom[0])-1)],'M',liste_grade[0][randint(0,len(liste_grade[0])-1)])
+    else : data_tenrac = (liste_nom[randint(0,len(liste_nom)-1)],liste_prenom[1][randint(0,len(liste_prenom[1])-1)],'F',liste_grade[1][randint(0,len(liste_grade[1])-1)])
+
+    file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeGrade) VALUES({fake.unique.random_int(min=0,max=1_000_000_000)},'{data_tenrac[0]}','{data_tenrac[1]}','{email_generator(data_tenrac[0],data_tenrac[1])}','06{fake.unique.random_int(0,99_999_999)}','{unidecode(fake.street_address())}','{data_tenrac[2]}','{data_tenrac[3]}'); \n")
     
