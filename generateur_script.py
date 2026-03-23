@@ -34,28 +34,21 @@ def email_generator(nom, prenom):
 
     return prefixe + milieu + domaine
 
+
 def random_rang_titre_dignite():
-    res = []
-    r , t , d = randint(0,5) , randint(0,9) , randint(0,9)
+    r, t, d = randint(0, 5), randint(0, 9), randint(0, 9)
+
+    rang = liste_rang[1] if r == 5 else liste_rang[0] if r >= 3 else "null"
     
-    if r == 5: res.append(liste_rang[1])
-    elif r >= 3: res.append(liste_rang[0])
-    else : res.append("null")
+    titre = (liste_titre[2] if t == 9 else
+             liste_titre[1] if t >= 7 else
+             liste_titre[0] if t >= 4 else "null")
+    
+    dignite = (liste_dignite[2] if d == 9 else
+               liste_dignite[1] if d >= 7 else
+               liste_dignite[0] if d >= 4 else "null")
 
-    if t == 9: res.append(liste_titre[2])
-    elif t >= 7: res.append(liste_titre[1])
-    elif t >= 4: res.append(liste_titre[0])
-    else : res.append("null")
-
-    if d == 9: res.append(liste_dignite[2])
-    elif d >= 7: res.append(liste_dignite[1])
-    elif d >= 4: res.append(liste_dignite[0])
-    else : res.append("null")
-
-    return res
-
-
-
+    return [rang, titre, dignite]
 
 
 open("./script.sql", 'w').close()
