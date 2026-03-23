@@ -82,8 +82,8 @@ for _ in range(100_000):
 # GRADE
 for i in range(len(liste_grade[0])-1) :
 
-    if i == len(liste_grade[0]-1) :
+    if i == len(liste_grade[0])-1 :
 
         file.write(f"INSERT INTO Tenrac(typeGrade) VALUES ({liste_grade[0][i]})")
     else :
-        file.write(f"INSERT INTO Tenrac(typeGrade, superieurGrade) VALUES ({liste_grade[0][i]},{liste_grade[0][i+1]})")
+        file.write(f"INSERT INTO Tenrac(typeGrade, superieurGrade) VALUES ({liste_grade[0][i]},{liste_grade[0][i+1]}); \n")
