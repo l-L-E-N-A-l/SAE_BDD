@@ -20,48 +20,39 @@ codes_villes = codes_villes.reset_index(drop=True)
 codes = codes_villes["Code_postal"]
 villes = codes_villes["Nom_de_la_commune"]
 
-def email_generator(nom,prenom):
-    email = ""
-    n1 , n2 , n3 = randint(0,2) , randint(0,2) , randint(0,2)
-    if n1 == 0:
-        email += prenom.lower()
-    if n1 == 1:
-        email += prenom[:1].lower()
-    if n1 == 2:
-        email += prenom.lower()+"."
-    if n2 == 0:
-        email += nom
-    if n2 == 1:
-        email += nom.lower()
-    if n2 == 2:
-        email += nom.lower()+str(randint(0,9999))
-    if n3 == 0:
-        email += "@gmail.com"
-    if n3 == 1:
-        email += "@outlook.com"
-    if n3 == 2:
-        email += "@yahoo.com"
-    return email
+def email_generator(nom, prenom):
+    match randint(0, 2):
+        case 0: prefixe = prenom.lower()
+        case 1: prefixe = prenom[:1].lower()
+        case 2: prefixe = prenom.lower() + "."
+
+    match randint(0, 2):
+        case 0: milieu = nom
+        case 1: milieu = nom.lower()
+        case 2: milieu = nom.lower() + str(randint(0, 9999))
+
+    match randint(0, 2):
+        case 0: domaine = "@gmail.com"
+        case 1: domaine = "@outlook.com"
+        case 2: domaine = "@yahoo.com"
+
+    return prefixe + milieu + domaine
+
 
 def random_rang_titre_dignite():
-    res = []
-    r , t , d = randint(0,5) , randint(0,9) , randint(0,9)
+    r, t, d = randint(0, 5), randint(0, 9), randint(0, 9)
+
+    rang = liste_rang[1] if r == 5 else liste_rang[0] if r >= 3 else "null"
     
-    if r == 5: res.append(liste_rang[1])
-    elif r >= 3: res.append(liste_rang[0])
-    else : res.append("null")
+    titre = (liste_titre[2] if t == 9 else
+             liste_titre[1] if t >= 7 else
+             liste_titre[0] if t >= 4 else "null")
+    
+    dignite = (liste_dignite[2] if d == 9 else
+               liste_dignite[1] if d >= 7 else
+               liste_dignite[0] if d >= 4 else "null")
 
-    if t == 9: res.append(liste_titre[2])
-    elif t >= 7: res.append(liste_titre[1])
-    elif t >= 4: res.append(liste_titre[0])
-    else : res.append("null")
-
-    if d == 9: res.append(liste_dignite[2])
-    elif d >= 7: res.append(liste_dignite[1])
-    elif d >= 4: res.append(liste_dignite[0])
-    else : res.append("null")
-
-    return res
+    return [rang, titre, dignite]
 
 
 
