@@ -13,8 +13,12 @@ liste_rang = ["'NOVICE'","'COMPAGNON'"]
 liste_titre = ["'PHILANTROPHE'","'PROTECTEUR'","'HONORABLE'"]
 liste_dignite = ["'MAITRE'","'GRAND CHANCELIER'","'GRAND MAITRE'"]
 
-codes_villes = pa.read_csv("./codes_villes")
-codes_villes = codes_villes[["Nom_de_la_commune","Code_postal"]]
+# Codes_postaux
+codes_villes = pa.read_csv("./codes_villes.csv", encoding="latin-1")
+codes_villes = codes_villes.drop_duplicates(subset=["Code_postal", "Nom_de_la_commune"])
+codes_villes = codes_villes.reset_index(drop=True)
+codes = codes_villes["Code_postal"]
+villes = codes_villes["Nom_de_la_commune"]
 
 def email_generator(nom,prenom):
     email = ""
@@ -67,15 +71,21 @@ open("./script.sql", 'w').close()
 file = open("./script.sql",'a')
 
 
+# ADRESSE POSTALE
+for i in range(len(codes)):
+    file.write(f"INSERT INTO AdressePostale(codePostal,ville) VALUES('{codes[i]}','{villes[i]}'); \n")
+
 
 # TENRAC
 for _ in range(100_000):
+    id_ville = randint(0,len(villes)-1)
     rtd = random_rang_titre_dignite()
-    data_tenrac = {"id":fake.unique.random_int(min=0,max=1_000_000_000), "nom":liste_nom[randint(0,len(liste_nom)-1)], "prenom":liste_prenom[0][randint(0,len(liste_prenom[0])-1)], "tel":"06"+str(fake.unique.random_int(0,99_999_999)), "adresse":unidecode(fake.street_address()), "sexe":'M', "rang":rtd[0], "titre":rtd[1], "dignite":rtd[2], "grade":liste_grade[0][randint(0,len(liste_grade[0])-1)]}
+    data_tenrac = {"id":fake.unique.random_int(min=0,max=1_000_000_000), "nom":liste_nom[randint(0,len(liste_nom)-1)], "prenom":liste_prenom[0][randint(0,len(liste_prenom[0])-1)], "tel":"06"+str(fake.unique.random_int(0,99_999_999)), "adresse":unidecode(fake.street_address()), "sexe":'M', "rang":rtd[0], "titre":rtd[1], "codePostal":codes[id_ville], "ville":villes[id_ville], "dignite":rtd[2], "grade":liste_grade[0][randint(0,len(liste_grade[0])-1)]}
     i = randint(0,1)
     if i==1 : 
         data_tenrac["sexe"] = 'F'
         data_tenrac["prenom"] = liste_prenom[1][randint(0,len(liste_prenom[0])-1)]
 
-    file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}',{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["dignite"]},'{data_tenrac["grade"]}'); \n")
-    
+    file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}',{data_tenrac["rang"]},{data_tenrac["titre"]},'{data_tenrac["codePostal"]}','{data_tenrac["ville"]}',{data_tenrac["dignite"]},'{data_tenrac["grade"]}'); \n")
+
+print("- - - FINI - - -")
