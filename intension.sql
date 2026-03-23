@@ -1,11 +1,52 @@
+
+CREATE TABLE Tenrac(
+   idTenrac NUMBER(10),
+   nomT VARCHAR2(50) NOT NULL,
+   prenomT VARCHAR2(50),
+   courriel VARCHAR2(50) NOT NULL,
+   tel CHAR(10) NOT NULL,
+   adresseT VARCHAR2(50) NOT NULL,
+   sexe VARCHAR2(1) NOT NULL,
+   doctrine VARCHAR2(60) NOT NULL,
+   typeRang VARCHAR2(50),
+   typeTitre VARCHAR2(50),
+   codePostal CHAR(5) NOT NULL,
+   ville VARCHAR2(50) NOT NULL,
+   numOrdre NUMBER(10) NOT NULL,
+   numClub NUMBER(10),
+   referenceOrg NUMBER(10) NOT NULL,
+   typeDignite VARCHAR2(50),
+   typeGrade VARCHAR2(50) NOT NULL,
+   CONSTRAINT pk_Tenrac PRIMARY KEY(idTenrac),
+   CONSTRAINT fk_doctrine FOREIGN KEY(doctrine) REFERENCES Croyance(doctrine),
+   CONSTRAINT fk_typeRang FOREIGN KEY(typeRang) REFERENCES Rang(typeRang),
+   CONSTRAINT fk_typeTitre FOREIGN KEY(typeTitre) REFERENCES Titre(typeTitre),
+   CONSTRAINT fk_tenrac_adressePostale FOREIGN KEY(codePostal, ville) REFERENCES AdressePostale(codePostal, ville),
+   CONSTRAINT fk_Tenrac_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre),
+   CONSTRAINT fk_numClub FOREIGN KEY(numClub) REFERENCES Club(numClub),
+   CONSTRAINT fk_reference FOREIGN KEY(referenceOrg) REFERENCES Organisme(referenceOrg),
+   CONSTRAINT fk_typeDignite FOREIGN KEY(typeDignite) REFERENCES Dignite(typeDignite),
+   CONSTRAINT fk_typeGrade FOREIGN KEY(typeGrade) REFERENCES Grade(typeGrade),
+   CONSTRAINT ck_typegrade_sexe CHECK (
+    (sexe = 'M' AND typeGrade IN (
+        'AFFILIE', 'SYMPATHISANT', 'ADHERENT',
+        'CHEVALIER', 'GRAND CHEVALIER', 'COMMANDEUR', 'GRAND-CROIX'
+    ))	
+    OR
+    (sexe = 'F' AND typeGrade IN (
+        'AFFILIEE', 'SYMPATHISANTE', 'ADHERENTE',
+        'DAME', 'HAUTE DAME', 'COMMANDERESSE', 'GRANDE-CROIX'
+    ))
+   )
+);
+
 CREATE TABLE Grade(
    typeGrade VARCHAR2(50),
    superieurGrade VARCHAR2(50),
    CONSTRAINT pk_Grade PRIMARY KEY(typeGrade),
-   CONSTRAINT ck_type_grade CHECK (typeGrade IN (('AFFILIE','AFFILIEE', 'SYMPATHISANT', 'SYMPATHISANTE' ,'ADHERENT', 
-                                                 'ADHERENTE' ,
-                                                 'CHEVALIER' , 'DAME', 'GRAND CHEVALIER',
-                                                 'HAUTE DAME', 'COMMANDEUR', 'COMMANDERESSE','GRAND’CROIX', 'GRANDE’CROIX'))),
+   CONSTRAINT ck_type_grade CHECK (typeGrade IN ('AFFILIE','AFFILIEE', 'SYMPATHISANT', 'SYMPATHISANTE' ,'ADHERENT', 
+                                                 'ADHERENTE', 'CHEVALIER' , 'DAME', 'GRAND CHEVALIER',
+                                                 'HAUTE DAME', 'COMMANDEUR', 'COMMANDERESSE','GRAND-CROIX', 'GRANDE-CROIX')),
    CONSTRAINT fk_superieurGrade FOREIGN KEY(superieurGrade) REFERENCES Grade(typeGrade)
 );
 
@@ -13,7 +54,7 @@ CREATE TABLE Dignite(
    typeDignite VARCHAR2(50),
    superieurDignite VARCHAR2(50),
    CONSTRAINT pk_Dignite PRIMARY KEY(typeDignite),
-   CONSTRAINT ck_type_dignite CHECK (typeDignite IN (('MAITRE', 'GRAND CHANCELIER', 'GRAND MAITRE'))),
+   CONSTRAINT ck_type_dignite CHECK (typeDignite IN ('MAITRE', 'GRAND CHANCELIER', 'GRAND MAITRE')),
    CONSTRAINT fk_superieurDignite FOREIGN KEY(superieurDignite) REFERENCES Dignite(typeDignite)
 );
 
@@ -32,7 +73,10 @@ CREATE TABLE Ordre(
    CONSTRAINT fk_chefO FOREIGN KEY(chefO) REFERENCES Tenrac(idTenrac),
    CONSTRAINT pk_Ordre PRIMARY KEY(numOrdre)
 );
-
+/** si probleme avec reference circulaire (on enleve fk_chef0 et on ajoute Alter table...) 
+ALTER TABLE Ordre
+ADD CONSTRAINT fk_chefO FOREIGN KEY (chefO) REFERENCES Tenrac(idTenrac);
+*/
 CREATE TABLE Repas(
    idRepas NUMBER(10),
    intitule VARCHAR2(50) NOT NULL,
@@ -79,7 +123,7 @@ CREATE TABLE Rang(
    typeRang VARCHAR2(50),
    superieurRang VARCHAR2(50),
    CONSTRAINT pk_Rang PRIMARY KEY(typeRang),
-   CONSTRAINT ck_type_rang CHECK (typeRang IN (('NOVICE', 'COMPAGNON'))),
+   CONSTRAINT ck_type_rang CHECK (typeRang IN ('NOVICE', 'COMPAGNON')),
    CONSTRAINT fk_superieurRang FOREIGN KEY(superieurRang) REFERENCES Rang(typeRang)
 );
 
@@ -107,7 +151,7 @@ CREATE TABLE Club(
    chefC VARCHAR2(50) NOT NULL,
    numOrdre NUMBER(10) NOT NULL,
    CONSTRAINT pk_Club PRIMARY KEY(numClub),
-   CONSTRAINT fk_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre)
+   CONSTRAINT fk_Club_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre)
 );
 
 CREATE TABLE Legume(
@@ -122,14 +166,14 @@ CREATE TABLE LieuPartenaire(
    codePostale CHAR(5) NOT NULL,
    ville VARCHAR2(50) NOT NULL,
    CONSTRAINT pk_LieuPartenaire PRIMARY KEY(adressePart),
-   CONSTRAINT fk_adresse_postale FOREIGN KEY(codePostale,ville) REFERENCES AdressePostale(codePostale, ville)
+   CONSTRAINT fk_LieuPartenaire_adressePostale FOREIGN KEY(codePostale,ville) REFERENCES AdressePostale(codePostale, ville)
 );
 
 CREATE TABLE Modele(
    nomTypeM VARCHAR2(50),
    referenceMod NUMBER(10),
    typeEnt VARCHAR2(50) NOT NULL,
-   CONSTRAINT pk_Modele PRIMARY KEY(nomType, reference),
+   CONSTRAINT pk_Modele PRIMARY KEY(nomTypeM, referenceMod),
    CONSTRAINT fk_nomType FOREIGN KEY(nomTypeM) REFERENCES TypeMachine(nomTypeM),
    CONSTRAINT fk_type FOREIGN KEY(typeEnt) REFERENCES TypeEntretien(typeEnt)
 );
@@ -140,49 +184,8 @@ CREATE TABLE Registre(
    dateOuverture DATE NOT NULL,
    dateFermeture DATE,
    CONSTRAINT pk_Registre PRIMARY KEY(numClub, numOrdre),
-   CONSTRAINT fk_numClub FOREIGN KEY(numClub) REFERENCES Club(numClub),
-   CONSTRAINT fk_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre)
-);
-
-CREATE TABLE Tenrac(
-   idTenrac NUMBER(10),
-   nomT VARCHAR2(50) NOT NULL,
-   prenomT VARCHAR2(50),
-   courriel VARCHAR2(50) NOT NULL,
-   tel CHAR(10) NOT NULL,
-   adresseT VARCHAR2(50) NOT NULL,
-   sexe VARCHAR2(1) NOT NULL,
-   doctrine VARCHAR2(60) NOT NULL,
-   typeRang VARCHAR2(50),
-   typeTitre VARCHAR2(50),
-   codePostal CHAR(5) NOT NULL,
-   ville VARCHAR2(50) NOT NULL,
-   numOrdre NUMBER(10) NOT NULL,
-   numClub NUMBER(10),
-   referenceOrg NUMBER(10) NOT NULL,
-   typeDignite VARCHAR2(50),
-   typeGrade VARCHAR2(50) NOT NULL,
-   CONSTRAINT pk_Tenrac PRIMARY KEY(idTenrac),
-   CONSTRAINT fk_doctrine FOREIGN KEY(doctrine) REFERENCES Croyance(doctrine),
-   CONSTRAINT fk_typeRang FOREIGN KEY(typeRang) REFERENCES Rang(typeRang),
-   CONSTRAINT fk_typeTitre FOREIGN KEY(typeTitre) REFERENCES Titre(typeTitre),
-   CONSTRAINT fk_adresse_postale FOREIGN KEY(codePostal, ville) REFERENCES AdressePostale(codePostal, ville),
-   CONSTRAINT fk_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre),
-   CONSTRAINT fk_numClub FOREIGN KEY(numClub) REFERENCES Club(numClub),
-   CONSTRAINT fk_reference FOREIGN KEY(referenceOrg) REFERENCES Organisme(referenceOrg),
-   CONSTRAINT fk_typeDignite FOREIGN KEY(typeDignite) REFERENCES Dignite(typeDignite),
-   CONSTRAINT fk_typeGrade FOREIGN KEY(typeGrade) REFERENCES Grade(typeGrade),
-   CONSTRAINT ck_typegrade_sexe CHECK (
-    (sexe = 'M' AND typeGrade IN (
-        'AFFILIE', 'SYMPATHISANT', 'ADHERENT',
-        'CHEVALIER', 'GRAND CHEVALIER', 'COMMANDEUR', 'GRAND’CROIX'
-    ))	
-    OR
-    (sexe = 'F' AND typeGrade IN (
-        'AFFILIEE', 'SYMPATHISANTE', 'ADHERENTE',
-        'DAME', 'HAUTE DAME', 'COMMANDERESSE', 'GRANDE’CROIX'
-    ))
-   )
+   CONSTRAINT fk_Registre_numClub FOREIGN KEY(numClub) REFERENCES Club(numClub),
+   CONSTRAINT fk_Registre_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre)
 );
 
 CREATE TABLE Carte(
@@ -219,7 +222,7 @@ CREATE TABLE Reunion(
 );
 
 CREATE TABLE Machine(
-   nomType VARCHAR2(50),
+   nomTypeM VARCHAR2(50),
    referenceMod NUMBER(10),
    nomM VARCHAR2(50),
    CONSTRAINT pk_Machine PRIMARY KEY(nomTypeM, referenceMod, nomM),
@@ -282,9 +285,11 @@ CREATE OR REPLACE TRIGGER trg_check_grade_preside
     FROM Tenrac
     WHERE idTenrac = :NEW.idTenrac
         AND typeGrade IN (
-        'CHEVALIER', 'DAME', 'GRAND CHEVALIER',
-        'HAUTE DAME', 'COMMANDEUR', 'COMMANDERESSE', 'GRAND’CROIX','GRANDE’CROIX'
-        );
+         SELECT typeGrade
+         FROM Grade
+         START WITH typeGrade IN ('CHEVALIER', 'DAME')
+         CONNECT BY typeGrade = PRIOR superieurGrade
+);
 
     IF v_count = 0 THEN
         RAISE_APPLICATION_ERROR(
@@ -329,6 +334,7 @@ CREATE TABLE Utilisable(
    CONSTRAINT fk_Utilisable_Machine FOREIGN KEY(nomTypeM, referenceMod, nomM) REFERENCES Machine(nomTypeM, referenceMod, nomM)
 );
 
+
 CREATE OR REPLACE TRIGGER trg_check_machine_certifiee
 BEFORE INSERT OR UPDATE ON Utilisable
 FOR EACH ROW
@@ -337,13 +343,22 @@ DECLARE
 BEGIN
    SELECT COUNT(*)
    INTO v_count
-   FROM Entretien
-   WHERE nomType = :NEW.nomType
-     AND reference = :NEW.reference
-     AND nom = :NEW.nom;
+   FROM Entretien E
+   JOIN Tenrac t ON t.idTenrac = E.idTenrac
+   WHERE E.nomTypeM    = :NEW.nomTypeM
+     AND E.referenceMod= :NEW.referenceMod
+     AND E.nomM        = :NEW.nomM
+     AND t.typeDignite IN (
+            SELECT typeDignite
+            FROM Dignite
+            START WITH typeDignite = 'MAITRE'
+            CONNECT BY typeDignite = PRIOR superieurDignite);
 
    IF v_count = 0 THEN
-      RAISE_APPLICATION_ERROR(-20002, 'Machine non certifiée');
+      RAISE_APPLICATION_ERROR(
+         -20002,
+         'Machine non certifiée : entretien valide requis avec Tenrac avec dignité >= Maître'
+      );
    END IF;
 END;
 /
@@ -385,5 +400,3 @@ CREATE TABLE Contient(
    CONSTRAINT fk_Partenariat_Legume FOREIGN KEY(idIngredient) REFERENCES Legume(idIngredient),
    CONSTRAINT fk_Partenariat_Allergene FOREIGN KEY(idAller) REFERENCES Allergene(idAller)
 );
-
-
