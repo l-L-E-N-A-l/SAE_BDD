@@ -1,200 +1,200 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <Database>
-   <Name>version_finale2</Name>
+   <Name>version_finale</Name>
    <Table>
-      <Name>GRADE</Name>
+      <Name>Grade</Name>
       <Column>
-         <Name>TYPE_GRADE</Name>
+         <Name>typeGrade</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>TYPE_GRADE</Key>
+         <Key>typeGrade</Key>
       </PK>
    </Table>
    <Table>
-      <Name>DIGNITE</Name>
+      <Name>Dignite</Name>
       <Column>
-         <Name>TYPE_DIGNITE</Name>
+         <Name>typeDignite</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>TYPE_DIGNITE</Key>
+         <Key>typeDignite</Key>
       </PK>
    </Table>
    <Table>
-      <Name>ORGANISME</Name>
+      <Name>Organisme</Name>
       <Column>
-         <Name>REFERENCE</Name>
+         <Name>reference</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>SIRET</Name>
+         <Name>siret</Name>
          <Type>CHAR(14)</Type>
          <Property>NOT NULL UNIQUE</Property>
       </Column>
       <Column>
-         <Name>RAISON_SOCIALE</Name>
+         <Name>raisonSociale</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>REFERENCE</Key>
+         <Key>reference</Key>
       </PK>
       <AK>
-         <Key>SIRET</Key>
+         <Key>siret</Key>
       </AK>
    </Table>
    <Table>
-      <Name>ORDRE</Name>
+      <Name>Ordre</Name>
       <Column>
-         <Name>NUM_0RDRE</Name>
+         <Name>numOrdre</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NOM</Name>
+         <Name>nom</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>CHEF</Name>
+         <Name>chefO</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>NUM_0RDRE</Key>
+         <Key>numOrdre</Key>
       </PK>
    </Table>
    <Table>
-      <Name>REPAS</Name>
+      <Name>Repas</Name>
       <Column>
-         <Name>ID_REPAS</Name>
+         <Name>idRepas</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ITITULE</Name>
+         <Name>intitule</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>ID_REPAS</Key>
+         <Key>idRepas</Key>
       </PK>
    </Table>
    <Table>
-      <Name>SAUCE</Name>
+      <Name>Sauce</Name>
       <Column>
-         <Name>ID_SAUCE</Name>
+         <Name>idSauce</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NOM</Name>
+         <Name>nom</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>ID_SAUCE</Key>
+         <Key>idSauce</Key>
       </PK>
    </Table>
    <Table>
-      <Name>INGREDIENT</Name>
+      <Name>Ingredient</Name>
       <Column>
-         <Name>ID_INGREDIENT</Name>
+         <Name>idIngredient</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NOM</Name>
+         <Name>nom</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>ID_INGREDIENT</Key>
+         <Key>idIngredient</Key>
       </PK>
    </Table>
    <Table>
-      <Name>GROUPE</Name>
+      <Name>Groupe</Name>
       <Column>
-         <Name>ID_GROUPE</Name>
+         <Name>idGroupe</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NB_MEMBRE</Name>
+         <Name>nbMembre</Name>
          <Type>NUMBER(10)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>ID_GROUPE</Key>
+         <Key>idGroupe</Key>
       </PK>
    </Table>
    <Table>
-      <Name>TYPE_MACHINE</Name>
+      <Name>TypeMachine</Name>
       <Column>
-         <Name>NOM_TYPE</Name>
+         <Name>nomType</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>NOM_TYPE</Key>
+         <Key>nomType</Key>
       </PK>
    </Table>
    <Table>
-      <Name>ADRESSE_POSTALE</Name>
+      <Name>AdressePostale</Name>
       <Column>
-         <Name>CODE_POSTALE</Name>
+         <Name>codePostale</Name>
          <Type>CHAR(5)</Type>
       </Column>
       <Column>
-         <Name>VILLE</Name>
+         <Name>ville</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>CODE_POSTALE, VILLE</Key>
+         <Key>codePostale, ville</Key>
       </PK>
    </Table>
    <Table>
-      <Name>TYPE_ENTRETIENT</Name>
+      <Name>TypeEntretien</Name>
       <Column>
-         <Name>TYPE</Name>
+         <Name>type</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>PERIODICITE</Name>
+         <Name>periodicite</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>TYPE</Key>
+         <Key>type</Key>
       </PK>
    </Table>
    <Table>
-      <Name>RANG</Name>
+      <Name>Rang</Name>
       <Column>
-         <Name>TYPE_RANG</Name>
+         <Name>typeRang</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>TYPE_RANG</Key>
+         <Key>typeRang</Key>
       </PK>
    </Table>
    <Table>
-      <Name>TITRE</Name>
+      <Name>Titre</Name>
       <Column>
-         <Name>TYPE_TITRE</Name>
+         <Name>typeTitre</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>TYPE_TITRE</Key>
+         <Key>typeTitre</Key>
       </PK>
    </Table>
    <Table>
-      <Name>CROYANCE</Name>
+      <Name>Croyance</Name>
       <Column>
-         <Name>DOCTRINE</Name>
+         <Name>doctrine</Name>
          <Type>VARCHAR2(60)</Type>
       </Column>
       <PK>
-         <Key>DOCTRINE</Key>
+         <Key>doctrine</Key>
       </PK>
    </Table>
    <Table>
-      <Name>ALLERGENE</Name>
+      <Name>Allergene</Name>
       <Column>
          <Name>idAller</Name>
          <Type>VARCHAR2(50)</Type>
@@ -209,620 +209,624 @@
       </PK>
    </Table>
    <Table>
-      <Name>CLUB</Name>
+      <Name>Club</Name>
       <Column>
-         <Name>NUM_CLUB</Name>
+         <Name>numClub</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NOM</Name>
+         <Name>nom</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>CHEF</Name>
+         <Name>chefC</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>NUM_0RDRE</Name>
+         <Name>numOrdre</Name>
          <Type>NUMBER(10)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>NUM_CLUB</Key>
+         <Key>numClub</Key>
       </PK>
       <FK>
-         <Key>NUM_0RDRE</Key>
-         <Reference>ORDRE(NUM_0RDRE)</Reference>
+         <Key>numOrdre</Key>
+         <Reference>Ordre(numOrdre)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>LEGUME</Name>
+      <Name>Legume</Name>
       <Column>
-         <Name>ID_INGREDIENT</Name>
+         <Name>idIngredient</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NOM</Name>
+         <Name>nom</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>ID_INGREDIENT</Key>
+         <Key>idIngredient</Key>
       </PK>
       <FK>
-         <Key>ID_INGREDIENT</Key>
-         <Reference>INGREDIENT(ID_INGREDIENT)</Reference>
+         <Key>idIngredient</Key>
+         <Reference>Ingredient(idIngredient)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>LIEU_PARTENAIRE</Name>
+      <Name>LieuPartenaire</Name>
       <Column>
-         <Name>ADRESSE</Name>
+         <Name>adresse</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>CODE_POSTALE</Name>
+         <Name>codePostale</Name>
          <Type>CHAR(5)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>VILLE</Name>
+         <Name>ville</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>ADRESSE</Key>
+         <Key>adresse</Key>
       </PK>
       <FK>
-         <Key>CODE_POSTALE, VILLE</Key>
-         <Reference>ADRESSE_POSTALE(CODE_POSTALE, VILLE)</Reference>
+         <Key>codePostale, ville</Key>
+         <Reference>AdressePostale(codePostale, ville)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>MODELE</Name>
+      <Name>Modele</Name>
       <Column>
-         <Name>NOM_TYPE</Name>
+         <Name>nomType</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>REFERENCE</Name>
+         <Name>reference</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>TYPE</Name>
+         <Name>type</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>NOM_TYPE, REFERENCE</Key>
+         <Key>nomType, reference</Key>
       </PK>
       <FK>
-         <Key>NOM_TYPE</Key>
-         <Reference>TYPE_MACHINE(NOM_TYPE)</Reference>
+         <Key>nomType</Key>
+         <Reference>TypeMachine(nomType)</Reference>
       </FK>
       <FK>
-         <Key>TYPE</Key>
-         <Reference>TYPE_ENTRETIENT(TYPE)</Reference>
+         <Key>type</Key>
+         <Reference>TypeEntretien(type)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>REGISTRE</Name>
+      <Name>Registre</Name>
       <Column>
-         <Name>NUM_CLUB</Name>
+         <Name>numClub</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NUM_0RDRE</Name>
+         <Name>numOrdre</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>DATE_OUVERTURE</Name>
+         <Name>dateOuverture</Name>
          <Type>DATE</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>DATE_FERMETURE</Name>
+         <Name>dateFermeture</Name>
          <Type>DATE</Type>
       </Column>
       <PK>
-         <Key>NUM_CLUB, NUM_0RDRE</Key>
+         <Key>numClub, numOrdre</Key>
       </PK>
       <FK>
-         <Key>NUM_CLUB</Key>
-         <Reference>CLUB(NUM_CLUB)</Reference>
+         <Key>numClub</Key>
+         <Reference>Club(numClub)</Reference>
       </FK>
       <FK>
-         <Key>NUM_0RDRE</Key>
-         <Reference>ORDRE(NUM_0RDRE)</Reference>
+         <Key>numOrdre</Key>
+         <Reference>Ordre(numOrdre)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>TENRAC</Name>
+      <Name>Tenrac</Name>
       <Column>
-         <Name>ID_TENRAC</Name>
+         <Name>idTenrac</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NOM</Name>
+         <Name>nom</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>COURRIEL</Name>
+         <Name>prenom</Name>
+         <Type>VARCHAR2(50)</Type>
+      </Column>
+      <Column>
+         <Name>courriel</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>TEL</Name>
+         <Name>tel</Name>
          <Type>CHAR(10)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>ADRESSE</Name>
+         <Name>adresse</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>SEXE</Name>
+         <Name>sexe</Name>
          <Type>VARCHAR2(1)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>ID_TENRAC_1</Name>
+         <Name>idTenrac_1</Name>
          <Type>NUMBER(10)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>DOCTRINE</Name>
+         <Name>doctrine</Name>
          <Type>VARCHAR2(60)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>TYPE_RANG</Name>
+         <Name>typeRang</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>TYPE_TITRE</Name>
+         <Name>typeTitre</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>CODE_POSTALE</Name>
+         <Name>codePostale</Name>
          <Type>CHAR(5)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>VILLE</Name>
+         <Name>ville</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>NUM_0RDRE</Name>
+         <Name>numOrdre</Name>
          <Type>NUMBER(10)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>NUM_CLUB</Name>
+         <Name>numClub</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>REFERENCE</Name>
+         <Name>reference</Name>
          <Type>NUMBER(10)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>TYPE_DIGNITE</Name>
+         <Name>typeDignite</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>TYPE_GRADE</Name>
+         <Name>typeGrade</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>ID_TENRAC</Key>
+         <Key>idTenrac</Key>
       </PK>
       <FK>
-         <Key>ID_TENRAC_1</Key>
-         <Reference>TENRAC(ID_TENRAC)</Reference>
+         <Key>idTenrac_1</Key>
+         <Reference>Tenrac(idTenrac)</Reference>
       </FK>
       <FK>
-         <Key>DOCTRINE</Key>
-         <Reference>CROYANCE(DOCTRINE)</Reference>
+         <Key>doctrine</Key>
+         <Reference>Croyance(doctrine)</Reference>
       </FK>
       <FK>
-         <Key>TYPE_RANG</Key>
-         <Reference>RANG(TYPE_RANG)</Reference>
+         <Key>typeRang</Key>
+         <Reference>Rang(typeRang)</Reference>
       </FK>
       <FK>
-         <Key>TYPE_TITRE</Key>
-         <Reference>TITRE(TYPE_TITRE)</Reference>
+         <Key>typeTitre</Key>
+         <Reference>Titre(typeTitre)</Reference>
       </FK>
       <FK>
-         <Key>CODE_POSTALE, VILLE</Key>
-         <Reference>ADRESSE_POSTALE(CODE_POSTALE, VILLE)</Reference>
+         <Key>codePostale, ville</Key>
+         <Reference>AdressePostale(codePostale, ville)</Reference>
       </FK>
       <FK>
-         <Key>NUM_0RDRE</Key>
-         <Reference>ORDRE(NUM_0RDRE)</Reference>
+         <Key>numOrdre</Key>
+         <Reference>Ordre(numOrdre)</Reference>
       </FK>
       <FK>
-         <Key>NUM_CLUB</Key>
-         <Reference>CLUB(NUM_CLUB)</Reference>
+         <Key>numClub</Key>
+         <Reference>Club(numClub)</Reference>
       </FK>
       <FK>
-         <Key>REFERENCE</Key>
-         <Reference>ORGANISME(REFERENCE)</Reference>
+         <Key>reference</Key>
+         <Reference>Organisme(reference)</Reference>
       </FK>
       <FK>
-         <Key>TYPE_DIGNITE</Key>
-         <Reference>DIGNITE(TYPE_DIGNITE)</Reference>
+         <Key>typeDignite</Key>
+         <Reference>Dignite(typeDignite)</Reference>
       </FK>
       <FK>
-         <Key>TYPE_GRADE</Key>
-         <Reference>GRADE(TYPE_GRADE)</Reference>
+         <Key>typeGrade</Key>
+         <Reference>Grade(typeGrade)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>CARTE</Name>
+      <Name>Carte</Name>
       <Column>
-         <Name>NUM_0RDRE</Name>
+         <Name>numOrdre</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NUM_CLUB</Name>
+         <Name>numClub</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ID_TENRAC</Name>
+         <Name>idTenrac</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>REFERENCE</Name>
+         <Name>reference</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ID_CARTE</Name>
+         <Name>idCarte</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <PK>
-         <Key>NUM_0RDRE, NUM_CLUB, ID_TENRAC, REFERENCE, ID_CARTE</Key>
+         <Key>numOrdre, numClub, idTenrac, reference, idCarte</Key>
       </PK>
       <FK>
-         <Key>NUM_0RDRE</Key>
-         <Reference>ORDRE(NUM_0RDRE)</Reference>
+         <Key>numOrdre</Key>
+         <Reference>Ordre(numOrdre)</Reference>
       </FK>
       <FK>
-         <Key>NUM_CLUB</Key>
-         <Reference>CLUB(NUM_CLUB)</Reference>
+         <Key>numClub</Key>
+         <Reference>Club(numClub)</Reference>
       </FK>
       <FK>
-         <Key>ID_TENRAC</Key>
-         <Reference>TENRAC(ID_TENRAC)</Reference>
+         <Key>idTenrac</Key>
+         <Reference>Tenrac(idTenrac)</Reference>
       </FK>
       <FK>
-         <Key>REFERENCE</Key>
-         <Reference>ORGANISME(REFERENCE)</Reference>
+         <Key>reference</Key>
+         <Reference>Organisme(reference)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>PLAT</Name>
+      <Name>Plat</Name>
       <Column>
-         <Name>ID_PLAT</Name>
+         <Name>idPlat</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NOM</Name>
+         <Name>nom</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>ID_INGREDIENT</Name>
+         <Name>idIngredient</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <PK>
-         <Key>ID_PLAT</Key>
+         <Key>idPlat</Key>
       </PK>
       <FK>
-         <Key>ID_INGREDIENT</Key>
-         <Reference>LEGUME(ID_INGREDIENT)</Reference>
+         <Key>idIngredient</Key>
+         <Reference>Legume(idIngredient)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>REUNION</Name>
+      <Name>Reunion</Name>
       <Column>
-         <Name>ID_REPAS</Name>
+         <Name>idRepas</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ADRESSE</Name>
+         <Name>adresse</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>ID_GROUPE</Name>
+         <Name>idGroupe</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>DATE_HEURE</Name>
+         <Name>date_heure</Name>
          <Type>TIMESTAMP WITH TIME ZONE</Type>
       </Column>
       <Column>
-         <Name>NOM</Name>
+         <Name>nom</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>ID_REPAS, ADRESSE, ID_GROUPE, DATE_HEURE</Key>
+         <Key>idRepas, adresse, idGroupe, date_heure</Key>
       </PK>
       <FK>
-         <Key>ID_REPAS</Key>
-         <Reference>REPAS(ID_REPAS)</Reference>
+         <Key>idRepas</Key>
+         <Reference>Repas(idRepas)</Reference>
       </FK>
       <FK>
-         <Key>ADRESSE</Key>
-         <Reference>LIEU_PARTENAIRE(ADRESSE)</Reference>
+         <Key>adresse</Key>
+         <Reference>LieuPartenaire(adresse)</Reference>
       </FK>
       <FK>
-         <Key>ID_GROUPE</Key>
-         <Reference>GROUPE(ID_GROUPE)</Reference>
+         <Key>idGroupe</Key>
+         <Reference>Groupe(idGroupe)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>MACHINE</Name>
+      <Name>Machine</Name>
       <Column>
-         <Name>NOM_TYPE</Name>
+         <Name>nomType</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>REFERENCE</Name>
+         <Name>reference</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NOM</Name>
+         <Name>nom</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>NOM_TYPE, REFERENCE, NOM</Key>
+         <Key>nomType, reference, nom</Key>
       </PK>
       <FK>
-         <Key>NOM_TYPE, REFERENCE</Key>
-         <Reference>MODELE(NOM_TYPE, REFERENCE)</Reference>
+         <Key>nomType, reference</Key>
+         <Reference>Modele(nomType, reference)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>ENTRETIEN</Name>
+      <Name>Entretien</Name>
       <Column>
-         <Name>TYPE</Name>
+         <Name>type</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>ID_TENRAC</Name>
+         <Name>idTenrac</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>DATE_</Name>
+         <Name>date_</Name>
          <Type>TIMESTAMP</Type>
       </Column>
       <Column>
-         <Name>NUM_CLUB</Name>
+         <Name>numClub</Name>
          <Type>NUMBER(10)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>NUM_0RDRE</Name>
+         <Name>numOrdre</Name>
          <Type>NUMBER(10)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>NOM_TYPE</Name>
+         <Name>nomType</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>REFERENCE</Name>
+         <Name>reference</Name>
          <Type>NUMBER(10)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>NOM</Name>
+         <Name>nom</Name>
          <Type>VARCHAR2(50)</Type>
          <Property>NOT NULL</Property>
       </Column>
       <PK>
-         <Key>TYPE, ID_TENRAC, DATE_</Key>
+         <Key>type, idTenrac, date_</Key>
       </PK>
       <FK>
-         <Key>TYPE</Key>
-         <Reference>TYPE_ENTRETIENT(TYPE)</Reference>
+         <Key>type</Key>
+         <Reference>TypeEntretien(type)</Reference>
       </FK>
       <FK>
-         <Key>ID_TENRAC</Key>
-         <Reference>TENRAC(ID_TENRAC)</Reference>
+         <Key>idTenrac</Key>
+         <Reference>Tenrac(idTenrac)</Reference>
       </FK>
       <FK>
-         <Key>NUM_CLUB, NUM_0RDRE</Key>
-         <Reference>REGISTRE(NUM_CLUB, NUM_0RDRE)</Reference>
+         <Key>numClub, numOrdre</Key>
+         <Reference>Registre(numClub, numOrdre)</Reference>
       </FK>
       <FK>
-         <Key>NOM_TYPE, REFERENCE, NOM</Key>
-         <Reference>MACHINE(NOM_TYPE, REFERENCE, NOM)</Reference>
+         <Key>nomType, reference, nom</Key>
+         <Reference>Machine(nomType, reference, nom)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>MENU</Name>
+      <Name>Menu</Name>
       <Column>
-         <Name>ID_REPAS</Name>
+         <Name>idRepas</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ID_PLAT</Name>
+         <Name>idPlat</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <PK>
-         <Key>ID_REPAS, ID_PLAT</Key>
+         <Key>idRepas, idPlat</Key>
       </PK>
       <FK>
-         <Key>ID_REPAS</Key>
-         <Reference>REPAS(ID_REPAS)</Reference>
+         <Key>idRepas</Key>
+         <Reference>Repas(idRepas)</Reference>
       </FK>
       <FK>
-         <Key>ID_PLAT</Key>
-         <Reference>PLAT(ID_PLAT)</Reference>
+         <Key>idPlat</Key>
+         <Reference>Plat(idPlat)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>COMPOSE</Name>
+      <Name>Compose</Name>
       <Column>
-         <Name>ID_PLAT</Name>
+         <Name>idPlat</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ID_SAUCE</Name>
+         <Name>idSauce</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ID_INGREDIENT</Name>
+         <Name>idIngredient</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <PK>
-         <Key>ID_PLAT, ID_SAUCE, ID_INGREDIENT</Key>
+         <Key>idPlat, idSauce, idIngredient</Key>
       </PK>
       <FK>
-         <Key>ID_PLAT</Key>
-         <Reference>PLAT(ID_PLAT)</Reference>
+         <Key>idPlat</Key>
+         <Reference>Plat(idPlat)</Reference>
       </FK>
       <FK>
-         <Key>ID_SAUCE</Key>
-         <Reference>SAUCE(ID_SAUCE)</Reference>
+         <Key>idSauce</Key>
+         <Reference>Sauce(idSauce)</Reference>
       </FK>
       <FK>
-         <Key>ID_INGREDIENT</Key>
-         <Reference>INGREDIENT(ID_INGREDIENT)</Reference>
+         <Key>idIngredient</Key>
+         <Reference>Ingredient(idIngredient)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>PRESIDE_EST_PRESIDEE</Name>
+      <Name>Preside_EstPreside</Name>
       <Column>
-         <Name>ID_TENRAC</Name>
+         <Name>idTenrac</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ID_REPAS</Name>
+         <Name>idRepas</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ADRESSE</Name>
+         <Name>adresse</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>ID_GROUPE</Name>
+         <Name>idGroupe</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>DATE_HEURE</Name>
+         <Name>date_heure</Name>
          <Type>TIMESTAMP WITH TIME ZONE</Type>
       </Column>
       <PK>
-         <Key>ID_TENRAC, ID_REPAS, ADRESSE, ID_GROUPE, DATE_HEURE</Key>
+         <Key>idTenrac, idRepas, adresse, idGroupe, date_heure</Key>
       </PK>
       <FK>
-         <Key>ID_TENRAC</Key>
-         <Reference>TENRAC(ID_TENRAC)</Reference>
+         <Key>idTenrac</Key>
+         <Reference>Tenrac(idTenrac)</Reference>
       </FK>
       <FK>
-         <Key>ID_REPAS, ADRESSE, ID_GROUPE, DATE_HEURE</Key>
-         <Reference>REUNION(ID_REPAS, ADRESSE, ID_GROUPE, DATE_HEURE)</Reference>
+         <Key>idRepas, adresse, idGroupe, date_heure</Key>
+         <Reference>Reunion(idRepas, adresse, idGroupe, date_heure)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>APPARTIENT</Name>
+      <Name>Appartient</Name>
       <Column>
-         <Name>ID_TENRAC</Name>
+         <Name>idTenrac</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ID_GROUPE</Name>
+         <Name>idGroupe</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <PK>
-         <Key>ID_TENRAC, ID_GROUPE</Key>
+         <Key>idTenrac, idGroupe</Key>
       </PK>
       <FK>
-         <Key>ID_TENRAC</Key>
-         <Reference>TENRAC(ID_TENRAC)</Reference>
+         <Key>idTenrac</Key>
+         <Reference>Tenrac(idTenrac)</Reference>
       </FK>
       <FK>
-         <Key>ID_GROUPE</Key>
-         <Reference>GROUPE(ID_GROUPE)</Reference>
+         <Key>idGroupe</Key>
+         <Reference>Groupe(idGroupe)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>ASSAISONE</Name>
+      <Name>Assaisone</Name>
       <Column>
-         <Name>ID_PLAT</Name>
+         <Name>idPlat</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ID_SAUCE</Name>
+         <Name>idSauce</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <PK>
-         <Key>ID_PLAT, ID_SAUCE</Key>
+         <Key>idPlat, idSauce</Key>
       </PK>
       <FK>
-         <Key>ID_PLAT</Key>
-         <Reference>PLAT(ID_PLAT)</Reference>
+         <Key>idPlat</Key>
+         <Reference>Plat(idPlat)</Reference>
       </FK>
       <FK>
-         <Key>ID_SAUCE</Key>
-         <Reference>SAUCE(ID_SAUCE)</Reference>
+         <Key>idSauce</Key>
+         <Reference>Sauce(idSauce)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>UTILISABLE</Name>
+      <Name>Utilisable</Name>
       <Column>
-         <Name>ID_REPAS</Name>
+         <Name>idRepas</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ADRESSE</Name>
+         <Name>adresse</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>ID_GROUPE</Name>
+         <Name>idGroupe</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>DATE_HEURE</Name>
+         <Name>date_heure</Name>
          <Type>TIMESTAMP WITH TIME ZONE</Type>
       </Column>
       <Column>
-         <Name>NOM_TYPE</Name>
+         <Name>nomType</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <Column>
-         <Name>REFERENCE</Name>
+         <Name>reference</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>NOM</Name>
+         <Name>nom</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>ID_REPAS, ADRESSE, ID_GROUPE, DATE_HEURE, NOM_TYPE, REFERENCE, NOM</Key>
+         <Key>idRepas, adresse, idGroupe, date_heure, nomType, reference, nom</Key>
       </PK>
       <FK>
-         <Key>ID_REPAS, ADRESSE, ID_GROUPE, DATE_HEURE</Key>
-         <Reference>REUNION(ID_REPAS, ADRESSE, ID_GROUPE, DATE_HEURE)</Reference>
+         <Key>idRepas, adresse, idGroupe, date_heure</Key>
+         <Reference>Reunion(idRepas, adresse, idGroupe, date_heure)</Reference>
       </FK>
       <FK>
-         <Key>NOM_TYPE, REFERENCE, NOM</Key>
-         <Reference>MACHINE(NOM_TYPE, REFERENCE, NOM)</Reference>
+         <Key>nomType, reference, nom</Key>
+         <Reference>Machine(nomType, reference, nom)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>ALLERGIE</Name>
+      <Name>Allergie</Name>
       <Column>
-         <Name>ID_TENRAC</Name>
+         <Name>idTenrac</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
@@ -830,65 +834,65 @@
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>ID_TENRAC, idAller</Key>
+         <Key>idTenrac, idAller</Key>
       </PK>
       <FK>
-         <Key>ID_TENRAC</Key>
-         <Reference>TENRAC(ID_TENRAC)</Reference>
+         <Key>idTenrac</Key>
+         <Reference>Tenrac(idTenrac)</Reference>
       </FK>
       <FK>
          <Key>idAller</Key>
-         <Reference>ALLERGENE(idAller)</Reference>
+         <Reference>Allergene(idAller)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>HEURTE</Name>
+      <Name>Heurte</Name>
       <Column>
-         <Name>ID_INGREDIENT</Name>
+         <Name>idIngredient</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>DOCTRINE</Name>
+         <Name>doctrine</Name>
          <Type>VARCHAR2(60)</Type>
       </Column>
       <PK>
-         <Key>ID_INGREDIENT, DOCTRINE</Key>
+         <Key>idIngredient, doctrine</Key>
       </PK>
       <FK>
-         <Key>ID_INGREDIENT</Key>
-         <Reference>LEGUME(ID_INGREDIENT)</Reference>
+         <Key>idIngredient</Key>
+         <Reference>Legume(idIngredient)</Reference>
       </FK>
       <FK>
-         <Key>DOCTRINE</Key>
-         <Reference>CROYANCE(DOCTRINE)</Reference>
+         <Key>doctrine</Key>
+         <Reference>Croyance(doctrine)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>PARTENARIAT</Name>
+      <Name>Partenariat</Name>
       <Column>
-         <Name>NUM_0RDRE</Name>
+         <Name>numOrdre</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
-         <Name>ADRESSE</Name>
+         <Name>adresse</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>NUM_0RDRE, ADRESSE</Key>
+         <Key>numOrdre, adresse</Key>
       </PK>
       <FK>
-         <Key>NUM_0RDRE</Key>
-         <Reference>ORDRE(NUM_0RDRE)</Reference>
+         <Key>numOrdre</Key>
+         <Reference>Ordre(numOrdre)</Reference>
       </FK>
       <FK>
-         <Key>ADRESSE</Key>
-         <Reference>LIEU_PARTENAIRE(ADRESSE)</Reference>
+         <Key>adresse</Key>
+         <Reference>LieuPartenaire(adresse)</Reference>
       </FK>
    </Table>
    <Table>
-      <Name>CONTIENT</Name>
+      <Name>Contient</Name>
       <Column>
-         <Name>ID_INGREDIENT</Name>
+         <Name>idIngredient</Name>
          <Type>NUMBER(10)</Type>
       </Column>
       <Column>
@@ -896,15 +900,15 @@
          <Type>VARCHAR2(50)</Type>
       </Column>
       <PK>
-         <Key>ID_INGREDIENT, idAller</Key>
+         <Key>idIngredient, idAller</Key>
       </PK>
       <FK>
-         <Key>ID_INGREDIENT</Key>
-         <Reference>LEGUME(ID_INGREDIENT)</Reference>
+         <Key>idIngredient</Key>
+         <Reference>Legume(idIngredient)</Reference>
       </FK>
       <FK>
          <Key>idAller</Key>
-         <Reference>ALLERGENE(idAller)</Reference>
+         <Reference>Allergene(idAller)</Reference>
       </FK>
    </Table>
 </Database>
