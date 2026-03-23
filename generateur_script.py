@@ -16,28 +16,23 @@ liste_dignite = ["'MAITRE'","'GRAND CHANCELIER'","'GRAND MAITRE'"]
 codes_villes = pa.read_csv("./codes_villes")
 codes_villes = codes_villes[["Nom_de_la_commune","Code_postal"]]
 
-def email_generator(nom,prenom):
-    email = ""
-    n1 , n2 , n3 = randint(0,2) , randint(0,2) , randint(0,2)
-    if n1 == 0:
-        email += prenom.lower()
-    if n1 == 1:
-        email += prenom[:1].lower()
-    if n1 == 2:
-        email += prenom.lower()+"."
-    if n2 == 0:
-        email += nom
-    if n2 == 1:
-        email += nom.lower()
-    if n2 == 2:
-        email += nom.lower()+str(randint(0,9999))
-    if n3 == 0:
-        email += "@gmail.com"
-    if n3 == 1:
-        email += "@outlook.com"
-    if n3 == 2:
-        email += "@yahoo.com"
-    return email
+def email_generator(nom, prenom):
+    match randint(0, 2):
+        case 0: prefixe = prenom.lower()
+        case 1: prefixe = prenom[:1].lower()
+        case 2: prefixe = prenom.lower() + "."
+
+    match randint(0, 2):
+        case 0: milieu = nom
+        case 1: milieu = nom.lower()
+        case 2: milieu = nom.lower() + str(randint(0, 9999))
+
+    match randint(0, 2):
+        case 0: domaine = "@gmail.com"
+        case 1: domaine = "@outlook.com"
+        case 2: domaine = "@yahoo.com"
+
+    return prefixe + milieu + domaine
 
 def random_rang_titre_dignite():
     res = []
