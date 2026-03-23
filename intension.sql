@@ -1,3 +1,75 @@
+CREATE TABLE Croyance(
+   doctrine VARCHAR2(60),
+   CONSTRAINT pk_Croyance PRIMARY KEY(doctrine)
+);
+
+CREATE TABLE Rang(
+   typeRang VARCHAR2(50),
+   superieurRang VARCHAR2(50),
+   CONSTRAINT pk_Rang PRIMARY KEY(typeRang),
+   CONSTRAINT ck_type_rang CHECK (typeRang IN ('NOVICE', 'COMPAGNON')),
+   CONSTRAINT fk_superieurRang FOREIGN KEY(superieurRang) REFERENCES Rang(typeRang)
+);
+
+CREATE TABLE Titre(
+   typeTitre VARCHAR2(50),
+   superieurTitre VARCHAR2(50),
+   CONSTRAINT pk_Titre PRIMARY KEY(typeTitre),
+   CONSTRAINT fk_superieurTitre FOREIGN KEY(superieurTitre) REFERENCES Titre(typeTitre)
+);
+
+CREATE TABLE AdressePostale(
+   codePostale CHAR(5),
+   ville VARCHAR2(50),
+   CONSTRAINT pk_Adresse_Postale PRIMARY KEY(codePostale, ville)
+);
+
+CREATE TABLE Ordre(
+   numOrdre NUMBER(10),
+   nomO VARCHAR2(50) NOT NULL,
+   chefO NUMBER(10) NOT NULL,
+   --CONSTRAINT fk_chefO FOREIGN KEY(chefO) REFERENCES Tenrac(idTenrac),
+   CONSTRAINT pk_Ordre PRIMARY KEY(numOrdre)
+);
+/** probleme avec reference circulaire (on enleve fk_chef0 et on ajoute Alter table Ordre... a la fin) 
+ALTER TABLE Ordre
+ADD CONSTRAINT fk_chefO FOREIGN KEY (chefO) REFERENCES Tenrac(idTenrac);
+*/
+
+CREATE TABLE Club(
+   numClub NUMBER(10),
+   nomT VARCHAR2(50) NOT NULL,
+   chefC VARCHAR2(50) NOT NULL,
+   numOrdre NUMBER(10) NOT NULL,
+   CONSTRAINT pk_Club PRIMARY KEY(numClub),
+   CONSTRAINT fk_Club_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre)
+);
+
+CREATE TABLE Organisme(
+   referenceOrg NUMBER(10),
+   siret CHAR(14) NOT NULL,
+   raisonSociale VARCHAR2(50) NOT NULL,
+   CONSTRAINT pk_Organisme PRIMARY KEY(referenceOrg),
+   CONSTRAINT uk_siret UNIQUE(siret)
+);
+
+CREATE TABLE Dignite(
+   typeDignite VARCHAR2(50),
+   superieurDignite VARCHAR2(50),
+   CONSTRAINT pk_Dignite PRIMARY KEY(typeDignite),
+   CONSTRAINT ck_type_dignite CHECK (typeDignite IN ('MAITRE', 'GRAND CHANCELIER', 'GRAND MAITRE')),
+   CONSTRAINT fk_superieurDignite FOREIGN KEY(superieurDignite) REFERENCES Dignite(typeDignite)
+);
+
+CREATE TABLE Grade(
+   typeGrade VARCHAR2(50),
+   superieurGrade VARCHAR2(50),
+   CONSTRAINT pk_Grade PRIMARY KEY(typeGrade),
+   CONSTRAINT ck_type_grade CHECK (typeGrade IN ('AFFILIE','AFFILIEE', 'SYMPATHISANT', 'SYMPATHISANTE' ,'ADHERENT', 
+                                                 'ADHERENTE', 'CHEVALIER' , 'DAME', 'GRAND CHEVALIER',
+                                                 'HAUTE DAME', 'COMMANDEUR', 'COMMANDERESSE','GRAND-CROIX', 'GRANDE-CROIX')),
+   CONSTRAINT fk_superieurGrade FOREIGN KEY(superieurGrade) REFERENCES Grade(typeGrade)
+);
 
 CREATE TABLE Tenrac(
    idTenrac NUMBER(10),
@@ -10,7 +82,7 @@ CREATE TABLE Tenrac(
    doctrine VARCHAR2(60) NOT NULL,
    typeRang VARCHAR2(50),
    typeTitre VARCHAR2(50),
-   codePostal CHAR(5) NOT NULL,
+   codePostale CHAR(5) NOT NULL,
    ville VARCHAR2(50) NOT NULL,
    numOrdre NUMBER(10) NOT NULL,
    numClub NUMBER(10),
@@ -21,7 +93,7 @@ CREATE TABLE Tenrac(
    CONSTRAINT fk_doctrine FOREIGN KEY(doctrine) REFERENCES Croyance(doctrine),
    CONSTRAINT fk_typeRang FOREIGN KEY(typeRang) REFERENCES Rang(typeRang),
    CONSTRAINT fk_typeTitre FOREIGN KEY(typeTitre) REFERENCES Titre(typeTitre),
-   CONSTRAINT fk_tenrac_adressePostale FOREIGN KEY(codePostal, ville) REFERENCES AdressePostale(codePostal, ville),
+   CONSTRAINT fk_tenrac_adressePostale FOREIGN KEY(codePostale, ville) REFERENCES AdressePostale(codePostale, ville),
    CONSTRAINT fk_Tenrac_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre),
    CONSTRAINT fk_numClub FOREIGN KEY(numClub) REFERENCES Club(numClub),
    CONSTRAINT fk_reference FOREIGN KEY(referenceOrg) REFERENCES Organisme(referenceOrg),
@@ -40,43 +112,6 @@ CREATE TABLE Tenrac(
    )
 );
 
-CREATE TABLE Grade(
-   typeGrade VARCHAR2(50),
-   superieurGrade VARCHAR2(50),
-   CONSTRAINT pk_Grade PRIMARY KEY(typeGrade),
-   CONSTRAINT ck_type_grade CHECK (typeGrade IN ('AFFILIE','AFFILIEE', 'SYMPATHISANT', 'SYMPATHISANTE' ,'ADHERENT', 
-                                                 'ADHERENTE', 'CHEVALIER' , 'DAME', 'GRAND CHEVALIER',
-                                                 'HAUTE DAME', 'COMMANDEUR', 'COMMANDERESSE','GRAND-CROIX', 'GRANDE-CROIX')),
-   CONSTRAINT fk_superieurGrade FOREIGN KEY(superieurGrade) REFERENCES Grade(typeGrade)
-);
-
-CREATE TABLE Dignite(
-   typeDignite VARCHAR2(50),
-   superieurDignite VARCHAR2(50),
-   CONSTRAINT pk_Dignite PRIMARY KEY(typeDignite),
-   CONSTRAINT ck_type_dignite CHECK (typeDignite IN ('MAITRE', 'GRAND CHANCELIER', 'GRAND MAITRE')),
-   CONSTRAINT fk_superieurDignite FOREIGN KEY(superieurDignite) REFERENCES Dignite(typeDignite)
-);
-
-CREATE TABLE Organisme(
-   referenceOrg NUMBER(10),
-   siret CHAR(14) NOT NULL,
-   raisonSociale VARCHAR2(50) NOT NULL,
-   CONSTRAINT pk_Organisme PRIMARY KEY(referenceOrg),
-   CONSTRAINT uk_siret UNIQUE(siret)
-);
-
-CREATE TABLE Ordre(
-   numOrdre NUMBER(10),
-   nomO VARCHAR2(50) NOT NULL,
-   chefO NUMBER(10) NOT NULL,
-   CONSTRAINT fk_chefO FOREIGN KEY(chefO) REFERENCES Tenrac(idTenrac),
-   CONSTRAINT pk_Ordre PRIMARY KEY(numOrdre)
-);
-/** si probleme avec reference circulaire (on enleve fk_chef0 et on ajoute Alter table...) 
-ALTER TABLE Ordre
-ADD CONSTRAINT fk_chefO FOREIGN KEY (chefO) REFERENCES Tenrac(idTenrac);
-*/
 CREATE TABLE Repas(
    idRepas NUMBER(10),
    intitule VARCHAR2(50) NOT NULL,
@@ -107,51 +142,16 @@ CREATE TABLE TypeMachine(
    CONSTRAINT pk_TypeMachine PRIMARY KEY(nomTypeM)
 );
 
-CREATE TABLE AdressePostale(
-   codePostal CHAR(5),
-   ville VARCHAR2(50),
-   CONSTRAINT pk_Adresse_Postale PRIMARY KEY(codePostal, ville)
-);
-
 CREATE TABLE TypeEntretien(
    typeEnt VARCHAR2(50),
    periodicite VARCHAR2(50) NOT NULL,
    CONSTRAINT pk_TypeEntretien PRIMARY KEY(typeEnt)
 );
 
-CREATE TABLE Rang(
-   typeRang VARCHAR2(50),
-   superieurRang VARCHAR2(50),
-   CONSTRAINT pk_Rang PRIMARY KEY(typeRang),
-   CONSTRAINT ck_type_rang CHECK (typeRang IN ('NOVICE', 'COMPAGNON')),
-   CONSTRAINT fk_superieurRang FOREIGN KEY(superieurRang) REFERENCES Rang(typeRang)
-);
-
-CREATE TABLE Titre(
-   typeTitre VARCHAR2(50),
-   superieurTitre VARCHAR2(50),
-   CONSTRAINT pk_Titre PRIMARY KEY(typeTitre),
-   CONSTRAINT fk_superieurTitre FOREIGN KEY(superieurTitre) REFERENCES Titre(typeTitre)
-);
-
-CREATE TABLE Croyance(
-   doctrine VARCHAR2(60),
-   CONSTRAINT pk_Croyance PRIMARY KEY(doctrine)
-);
-
 CREATE TABLE Allergene(
    idAller VARCHAR2(50),
    nomAller VARCHAR2(50) NOT NULL,
    CONSTRAINT pk_Allergen PRIMARY KEY(idAller)
-);
-
-CREATE TABLE Club(
-   numClub NUMBER(10),
-   nomT VARCHAR2(50) NOT NULL,
-   chefC VARCHAR2(50) NOT NULL,
-   numOrdre NUMBER(10) NOT NULL,
-   CONSTRAINT pk_Club PRIMARY KEY(numClub),
-   CONSTRAINT fk_Club_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre)
 );
 
 CREATE TABLE Legume(
@@ -213,7 +213,7 @@ CREATE TABLE Reunion(
    idRepas NUMBER(10),
    adressePart VARCHAR2(50),
    idGroupe NUMBER(10),
-   dateReu TIMESTAMP WITH TIME ZONE,
+   dateReu TIMESTAMP,
    nomReu VARCHAR2(50) NOT NULL,
    CONSTRAINT pk_Reunion PRIMARY KEY(idRepas, adressePart, idGroupe, dateReu),
    CONSTRAINT fk_Reunion_Repas FOREIGN KEY(idRepas) REFERENCES Repas(idRepas),
@@ -268,7 +268,7 @@ CREATE TABLE Preside_EstPreside(
    idRepas NUMBER(10),
    adressePart VARCHAR2(50),
    idGroupe NUMBER(10),
-   dateReu TIMESTAMP WITH TIME ZONE,
+   dateReu TIMESTAMP,
    CONSTRAINT pk_PresideEstPreside PRIMARY KEY(idTenrac, idRepas, adressePart, idGroupe, dateReu),
    CONSTRAINT fk_PresideEstPreside_Tenrac FOREIGN KEY(idTenrac) REFERENCES Tenrac(idTenrac),
    CONSTRAINT fk_PresideEstPreside_Reunion FOREIGN KEY(idRepas, adressePart, idGroupe, dateReu) REFERENCES Reunion(idRepas, adressePart, idGroupe, dateReu)
@@ -325,7 +325,7 @@ CREATE TABLE Utilisable(
    idRepas NUMBER(10),
    adressePart VARCHAR2(50),
    idGroupe NUMBER(10),
-   dateReu TIMESTAMP WITH TIME ZONE,
+   dateReu TIMESTAMP,
    nomTypeM VARCHAR2(50),
    referenceMod NUMBER(10),
    nomM VARCHAR2(50),
@@ -400,3 +400,6 @@ CREATE TABLE Contient(
    CONSTRAINT fk_Partenariat_Legume FOREIGN KEY(idIngredient) REFERENCES Legume(idIngredient),
    CONSTRAINT fk_Partenariat_Allergene FOREIGN KEY(idAller) REFERENCES Allergene(idAller)
 );
+
+ALTER TABLE Ordre
+ADD CONSTRAINT fk_chefO FOREIGN KEY (chefO) REFERENCES Tenrac(idTenrac);
