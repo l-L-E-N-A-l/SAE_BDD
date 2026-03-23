@@ -1,6 +1,7 @@
 from faker import *
 from unidecode import *
 from random import randint
+import pandas as pa
 
 fake = Faker(locale="fr_CA")
 
@@ -12,7 +13,8 @@ liste_rang = ["'NOVICE'","'COMPAGNON'"]
 liste_titre = ["'PHILANTROPHE'","'PROTECTEUR'","'HONORABLE'"]
 liste_dignite = ["'MAITRE'","'GRAND CHANCELIER'","'GRAND MAITRE'"]
 
-
+codes_villes = pa.read_csv("./codes_villes")
+codes_villes = codes_villes[["Nom_de_la_commune","Code_postal"]]
 
 def email_generator(nom,prenom):
     email = ""
