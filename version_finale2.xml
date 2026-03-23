@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
 <Database>
-   <Name>version_finale</Name>
+   <Name>version_finale2</Name>
    <Table>
       <Name>Grade</Name>
       <Column>
          <Name>typeGrade</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
+      <Column>
+         <Name>typeGrade_1</Name>
+         <Type>VARCHAR2(50)</Type>
+      </Column>
       <PK>
          <Key>typeGrade</Key>
       </PK>
+      <FK>
+         <Key>typeGrade_1</Key>
+         <Reference>Grade(typeGrade)</Reference>
+      </FK>
    </Table>
    <Table>
       <Name>Dignite</Name>
@@ -18,9 +26,17 @@
          <Name>typeDignite</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
+      <Column>
+         <Name>typeDignite_1</Name>
+         <Type>VARCHAR2(50)</Type>
+      </Column>
       <PK>
          <Key>typeDignite</Key>
       </PK>
+      <FK>
+         <Key>typeDignite_1</Key>
+         <Reference>Dignite(typeDignite)</Reference>
+      </FK>
    </Table>
    <Table>
       <Name>Organisme</Name>
@@ -169,9 +185,17 @@
          <Name>typeRang</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
+      <Column>
+         <Name>typeRang_1</Name>
+         <Type>VARCHAR2(50)</Type>
+      </Column>
       <PK>
          <Key>typeRang</Key>
       </PK>
+      <FK>
+         <Key>typeRang_1</Key>
+         <Reference>Rang(typeRang)</Reference>
+      </FK>
    </Table>
    <Table>
       <Name>Titre</Name>
@@ -179,9 +203,17 @@
          <Name>typeTitre</Name>
          <Type>VARCHAR2(50)</Type>
       </Column>
+      <Column>
+         <Name>typeTitre_1</Name>
+         <Type>VARCHAR2(50)</Type>
+      </Column>
       <PK>
          <Key>typeTitre</Key>
       </PK>
+      <FK>
+         <Key>typeTitre_1</Key>
+         <Reference>Titre(typeTitre)</Reference>
+      </FK>
    </Table>
    <Table>
       <Name>Croyance</Name>
@@ -373,11 +405,6 @@
          <Property>NOT NULL</Property>
       </Column>
       <Column>
-         <Name>idTenrac_1</Name>
-         <Type>NUMBER(10)</Type>
-         <Property>NOT NULL</Property>
-      </Column>
-      <Column>
          <Name>doctrine</Name>
          <Type>VARCHAR2(60)</Type>
          <Property>NOT NULL</Property>
@@ -426,10 +453,6 @@
       <PK>
          <Key>idTenrac</Key>
       </PK>
-      <FK>
-         <Key>idTenrac_1</Key>
-         <Reference>Tenrac(idTenrac)</Reference>
-      </FK>
       <FK>
          <Key>doctrine</Key>
          <Reference>Croyance(doctrine)</Reference>
