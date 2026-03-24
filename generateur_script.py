@@ -20,6 +20,14 @@ codes_villes = codes_villes.reset_index(drop=True)
 codes = codes_villes["Code_postal"]
 villes = codes_villes["Nom_de_la_commune"]
 
+#ingredients
+data_ing = pa.read_csv("./ingredients.csv", encoding = "UTF-8")
+ingredients = data_ing["Ingredient"]
+legumes = data_ing[data_ing["Categorie"]=="Légume"]["Ingredient"]
+print(legumes)
+
+
+
 def email_generator(nom, prenom):
     match randint(0, 2):
         case 0: prefixe = prenom.lower()
@@ -60,14 +68,18 @@ def random_rang_titre_dignite():
 
 open("./script.sql", 'w').close()
 file = open("./script.sql",'a')
+open("./data.csv", 'w').close()
+file_csv = open("./data.csv", 'a')
 
 
 # ADRESSE POSTALE
+file_csv.write(f"Code Postal, Ville \n")
 for i in range(len(codes)):
     file.write(f"INSERT INTO AdressePostale(codePostal,ville) VALUES('{codes[i]}','{villes[i]}'); \n")
-
+    file_csv.write(f"{codes[i]},{villes[i]} \n")
 
 # TENRAC
+file_csv.write(f"idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,typeDignite,typeGrade \n")
 for _ in range(100_000):
     id_ville = randint(0,len(villes)-1)
     rtd = random_rang_titre_dignite()
@@ -79,34 +91,51 @@ for _ in range(100_000):
         data_tenrac["grade"] = liste_grade[1][randint(0,len(liste_grade)-1)]
 
     file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}',{data_tenrac["rang"]},{data_tenrac["titre"]},'{data_tenrac["codePostal"]}','{data_tenrac["ville"]}',{data_tenrac["dignite"]},'{data_tenrac["grade"]}'); \n")
+    file_csv.write(f"{data_tenrac["id"]},{data_tenrac["nom"]},{data_tenrac["prenom"]},{email_generator(data_tenrac["nom"],data_tenrac["prenom"])},{data_tenrac["tel"]},{data_tenrac["adresse"]},{data_tenrac["sexe"]},{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["codePostal"]},{data_tenrac["ville"]},{data_tenrac["dignite"]},{data_tenrac["grade"]} \n")
 
 # GRADE
 # Hommes
+file_csv.write(f"typeGrade,superieurGrade \n")
 for i in range(len(liste_grade[0])-1) :
     if i == len(liste_grade[0]) -1:
         file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[0][i]},null)")
+        file_csv.write(f"{liste_grade[0][i]},null \n")
     else :
         file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[0][i]},{liste_grade[0][i+1]}); \n")
+        file_csv.write(f"{liste_grade[0][i]},{liste_grade[0][i+1]}) \n")
 # Femmes
 for i in range(len(liste_grade[1])-1) :
     if i == len(liste_grade[1]) -1:
         file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[1][i]},null)")
+        file_csv.write(f"{liste_grade[1][i]},null \n")
     else :
         file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[1][i]},{liste_grade[1][i+1]}); \n")
+        file_csv.write(f"{liste_grade[1][i]},{liste_grade[1][i+1]}) \n")
 
 
 # RANG
+file_csv.write(f"typeRang,superieurRang \n")
 file.write(f"INSERT INTO Rang(typeRang,superieurRang) VALUES ({liste_rang[0]},{liste_rang[1]}); \n")
 file.write(f"INSERT INTO Rang(typeRang,superieurRang) VALUES ({liste_rang[1]},null); \n")
+file_csv.write(f"{liste_rang[0]},{liste_rang[1]} \n")
+file_csv.write(f"{liste_rang[1]},null \n")
 
 # TITRE
+file_csv.write(f"typeTitre,superieurTitre \n")
 file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ({liste_titre[0]},{liste_titre[1]}); \n")
 file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ({liste_titre[1]},{liste_titre[2]}); \n")
 file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ({liste_titre[2]},null); \n")
+file_csv.write(f"{liste_titre[0]},{liste_titre[1]} \n")
+file_csv.write(f"{liste_titre[1]},{liste_titre[2]} \n")
+file_csv.write(f"{liste_titre[2]},null \n")
 
 # DIGNITE
+file_csv.write(f"typeDignite,superieurDignite \n")
 file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[0]},{liste_dignite[1]}); \n")
 file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[1]},{liste_dignite[2]}); \n")
 file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[2]},null); \n")
+file_csv.write(f"{liste_dignite[0]},{liste_dignite[1]} \n")
+file_csv.write(f"{liste_dignite[1]},{liste_dignite[2]} \n")
+file_csv.write(f"{liste_dignite[2]},null \n")
 
 print("- - - FINI - - -")
