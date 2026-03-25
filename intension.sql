@@ -27,7 +27,7 @@ CREATE TABLE AdressePostale(
 CREATE TABLE Ordre(
    numOrdre NUMBER(10),
    nomO VARCHAR2(50) NOT NULL,
-   chefO NUMBER(10) NOT NULL,
+   chefO NUMBER(10),
    --CONSTRAINT fk_chefO FOREIGN KEY(chefO) REFERENCES Tenrac(idTenrac),
    CONSTRAINT pk_Ordre PRIMARY KEY(numOrdre)
 );
@@ -42,7 +42,8 @@ CREATE TABLE Club(
    chefC VARCHAR2(50) NOT NULL,
    numOrdre NUMBER(10) NOT NULL,
    CONSTRAINT pk_Club PRIMARY KEY(numClub),
-   CONSTRAINT fk_Club_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre)
+   CONSTRAINT fk_Club_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre),
+   CONSTRAINT fk_Club_chefC FOREIGN KEY(chefC) REFERENCES Tenrac(idTenrac)
 );
 
 CREATE TABLE Organisme(

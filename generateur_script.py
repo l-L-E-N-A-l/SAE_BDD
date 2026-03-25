@@ -25,7 +25,6 @@ villes = codes_villes["Nom_de_la_commune"]
 # Ingredients
 data_ing = pa.read_csv("./csv_sources/ingredients.csv", encoding = "UTF-8")
 ingredients = data_ing["Ingredient"]
-legumes = data_ing[data_ing["Categorie"]=="Légume"]["Ingredient"]
 
 
 def email_generator(nom, prenom):
@@ -128,5 +127,20 @@ file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_di
 file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[1]},{liste_dignite[2]}); \n")
 file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[2]},null); \n")
 
+#INGREDIENTS
+
+id_current_ing = 0
+
+for i in range(len(ingredients)-1) :
+
+    if data_ing.iloc[[i]]["Categorie"].item() == "Legumineuse" :
+
+        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},{ingredients[i]}); \n")
+        file.write(f"INSERT INTO Legume (idIngredient,nomLeg) VALUES ({id_current_ing},{ingredients[i]}); \n")
+        id_current_ing += 1
+
+    else : 
+        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},{ingredients[i]}); \n") 
+        id_current_ing += 1
 
 print("- - - FINI - - -")
