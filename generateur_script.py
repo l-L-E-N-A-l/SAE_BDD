@@ -16,17 +16,26 @@ liste_titre = ["'PHILANTROPHE'","'PROTECTEUR'","'HONORABLE'"] # guillemet + apos
 liste_dignite = ["'MAITRE'","'GRAND CHANCELIER'","'GRAND MAITRE'"] # - - A 
 
 # Codes_postaux
-codes_villes = pa.read_csv("./csv_sources/codes_villes.csv", encoding="latin-1")
-codes_villes = codes_villes.drop_duplicates(subset=["Code_postal", "Nom_de_la_commune"])
-codes_villes = codes_villes.reset_index(drop=True)
-codes = codes_villes["Code_postal"]
-villes = codes_villes["Nom_de_la_commune"]
+data_villes = pa.read_csv("./csv_sources/codes_villes.csv", encoding="latin-1")
+data_villes = data_villes.drop_duplicates(subset=["Code_postal", "Nom_de_la_commune"])
+data_villes = data_villes.reset_index(drop=True)
+codes = data_villes["Code_postal"]
+villes = data_villes["Nom_de_la_commune"]
 
 # Ingredients
 data_ing = pa.read_csv("./csv_sources/ingredients.csv", encoding = "UTF-8")
 ingredients = data_ing["Ingredient"]
 legumes = data_ing[data_ing["Categorie"]=="Légume"]["Ingredient"]
 
+# Organismes
+data_org = pa.read_csv("./csv_sources/entreprises_fictives.csv",sep=";")
+data_org.columns = data_org.columns.str.replace(' ', '')
+org_ref = data_org["Identifiant"]
+org_siret = data_org["Siret"]
+org_raison = data_org["Raison_sociale"]
+for i in range(len(org_ref)):
+    org_siret[i] = org_siret[i].replace(" ", "")
+    org_raison[i] = unidecode(org_raison[i]).upper()
 
 def email_generator(nom, prenom):
     match randint(0, 2):
@@ -69,7 +78,7 @@ def random_rang_titre_dignite():
 open("./script.sql", 'w').close()
 file = open("./script.sql",'a')
 
-# Ouverture CSVs
+# Ouverture CSVs (Écriture)
 open("./csv_finaux/codes_postaux.csv", 'w').close()
 csv_codes_postaux = open("./csv_finaux/codes_postaux.csv", 'a')
 open("./csv_finaux/tenrac.csv", 'w').close()
@@ -127,6 +136,10 @@ file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ({liste_titre[2]
 file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[0]},{liste_dignite[1]}); \n")
 file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[1]},{liste_dignite[2]}); \n")
 file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[2]},null); \n")
+
+# ORGANISME
+for i in range(len(org_ref)):
+    file.write(f"INSERT INTO Organisme(referenceOrg,siret,raisonSociale) VALUES({org_ref[i]},'{org_siret[i]}','{org_raison[i]}'); \n")
 
 
 print("- - - FINI - - -")
