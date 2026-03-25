@@ -77,7 +77,6 @@ def random_rang_titre_dignite():
 
 
 
-
 # Fichier SQL
 open("./script.sql", 'w').close()
 file = open("./script.sql",'a')
@@ -171,14 +170,15 @@ for i in range(1, 10001):
 
 #LIEUPARTENAIRE
 
-lieu_partenaire.add((
+lieux_partenaire = {}
+lieux_partenaire.add((
     data_tenrac["adresse"],
     data_tenrac["codePostal"],
     data_tenrac["ville"]
 ))
 
 for i in range(1, 250):
-    for adresse, codePostal, ville in lieu_partenaire:
+    for adresse, codePostal, ville in lieux_partenaire:
         file.write(f"INSERT INTO LieuPartenaire(adressePart, codePostal, ville) VALUES ({adresse}, {codePostal}, {ville}); \n")
 
 
