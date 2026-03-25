@@ -120,7 +120,7 @@ CREATE TABLE Tenrac(
    doctrine VARCHAR2(60) NOT NULL,
    typeRang VARCHAR2(50),
    typeTitre VARCHAR2(50),
-   codePostale CHAR(5) NOT NULL,
+   codePostal CHAR(5) NOT NULL,
    ville VARCHAR2(50) NOT NULL,
    numOrdre NUMBER(10) NOT NULL,
    numClub NUMBER(10),
@@ -131,7 +131,7 @@ CREATE TABLE Tenrac(
    CONSTRAINT fk_doctrine FOREIGN KEY(doctrine) REFERENCES Croyance(doctrine),
    CONSTRAINT fk_typeRang FOREIGN KEY(typeRang) REFERENCES Rang(typeRang),
    CONSTRAINT fk_typeTitre FOREIGN KEY(typeTitre) REFERENCES Titre(typeTitre),
-   CONSTRAINT fk_tenrac_adressePostale FOREIGN KEY(codePostale, ville) REFERENCES AdressePostale(codePostale, ville),
+   CONSTRAINT fk_tenrac_adressePostale FOREIGN KEY(codePostal, ville) REFERENCES AdressePostale(codePostal, ville),
    CONSTRAINT fk_Tenrac_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre),
    CONSTRAINT fk_numClub FOREIGN KEY(numClub) REFERENCES Club(numClub),
    CONSTRAINT fk_reference FOREIGN KEY(referenceOrg) REFERENCES Organisme(referenceOrg),
@@ -201,10 +201,10 @@ CREATE TABLE Legume(
 
 CREATE TABLE LieuPartenaire(
    adressePart VARCHAR2(50),
-   codePostale CHAR(5) NOT NULL,
+   codePostal CHAR(5) NOT NULL,
    ville VARCHAR2(50) NOT NULL,
    CONSTRAINT pk_LieuPartenaire PRIMARY KEY(adressePart),
-   CONSTRAINT fk_LieuPartenaire_adressePostale FOREIGN KEY(codePostale,ville) REFERENCES AdressePostale(codePostale, ville)
+   CONSTRAINT fk_LieuPartenaire_adressePostale FOREIGN KEY(codePostal,ville) REFERENCES AdressePostale(codePostal, ville)
 );
 
 CREATE TABLE Modele(
