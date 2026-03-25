@@ -162,4 +162,26 @@ for i in range(len(ingredients)-1) :
     file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},{ingredients[i]}); \n") 
     id_current_ing += 1
 
+#GROUPE
+for i in range(1, 10001):
+        data_groupe = {"idGroupe": i, "nbMembre": randint(2, 1000) }
+        file.write(
+            f"INSERT INTO Groupe (idGroupe, nbMembre) VALUES ({data_groupe['idGroupe']}, {data_groupe['nbMembre']});\n")
+
+
+#LIEUPARTENAIRE
+
+lieu_partenaire.add((
+    data_tenrac["adresse"],
+    data_tenrac["codePostal"],
+    data_tenrac["ville"]
+))
+
+for i in range(1, 250):
+    for adresse, codePostal, ville in lieu_partenaire:
+        file.write(f"INSERT INTO LieuPartenaire(adressePart, codePostal, ville) VALUES ({adresse}, {codePostal}, {ville}); \n")
+
+
+
+
 print("- - - FINI - - -")
