@@ -1,98 +1,1140 @@
 Categorie,Ingredient
-Protéine - Viande,Blanc de poulet
-Protéine - Viande,Bœuf haché
-Protéine - Viande,Filet mignon de porc
-Protéine - Viande,Magret de canard
-Protéine - Viande,Gigot d'agneau
-Protéine - Viande,Veau (escalope)
-Protéine - Viande,Chorizo
-Protéine - Viande,Pancetta
-Protéine - Poisson,Pavé de saumon
-Protéine - Poisson,Dos de cabillaud
-Protéine - Poisson,Thon frais
-Protéine - Poisson,Truite fumée
-Protéine - Poisson,Sardines
-Protéine - Poisson,Dorade royale
-Protéine - Fruit de mer,Crevettes
-Protéine - Fruit de mer,Noix de Saint-Jacques
-Protéine - Fruit de mer,Moules
-Protéine - Fruit de mer,Calamar
-Protéine - Végétale,Tofu ferme
-Protéine - Végétale,Tempeh
-Protéine - Végétale,Seitan
-Protéine - Végétale,Lentilles corail
-Protéine - Végétale,Pois chiches
-Protéine - Végétale,Haricots rouges
-Protéine - Végétale,Fèves de soja (Edamame)
-Protéine - Autre,Œuf de poule
-Protéine - Autre,Œuf de caille
-Légume,Carotte
-Légume,Courgette
-Légume,Brocoli
-Légume,Tomate
-Légume,Oignon jaune
-Légume,Oignon rouge
-Légume,Gousse d'ail
-Légume,Poivron rouge
-Légume,Épinards frais
-Légume,Champignon de Paris
-Légume,Haricots verts
-Légume,Aubergine
-Légume,Poireau
-Légume,Chou-fleur
-Légume,Asperge verte
-Légume,Courge Butternut
-Fruit,Pomme
-Fruit,Banane
-Fruit,Citron jaune
-Fruit,Fraise
-Fruit,Orange
-Fruit,Avocat
-Fruit,Mangue
+Viande,Boeuf hache
+Viande,Entrecote de boeuf
+Viande,Faux-filet
+Viande,Cote de boeuf
+Viande,Roti de boeuf
+Viande,Bifteck
+Viande,Bavette de boeuf
+Viande,Paleron de boeuf
+Viande,Joue de boeuf
+Viande,Osso-buco de boeuf
+Viande,Poitrine de boeuf
+Viande,Queue de boeuf
+Viande,Foie de boeuf
+Viande,Langue de boeuf
+Viande,Coeur de boeuf
+Viande,Cotelette de porc
+Viande,Filet de porc
+Viande,Epaule de porc
+Viande,Jambon blanc
+Viande,Jambon cru
+Viande,Lardons
+Viande,Bacon
+Viande,Travers de porc
+Viande,Poitrine de porc
+Viande,Roti de porc
+Viande,Joue de porc
+Viande,Boudin noir
+Viande,Boudin blanc
+Viande,Saucisse de Toulouse
+Viande,Merguez
+Viande,Chipolata
+Viande,Chorizo
+Viande,Salami
+Viande,Pancetta
+Viande,Coppa
+Viande,Bresaola
+Viande,Mortadelle
+Viande,Saucisson sec
+Viande,Cotelette d'agneau
+Viande,Gigot d'agneau
+Viande,Epaule d'agneau
+Viande,Filet d'agneau
+Viande,Carre d'agneau
+Viande,Selle d'agneau
+Viande,Cervelle d'agneau
+Viande,Rognons d'agneau
+Viande,Foie d'agneau
+Viande,Escalope de veau
+Viande,Cote de veau
+Viande,Roti de veau
+Viande,Blanquette de veau
+Viande,Osso-buco de veau
+Viande,Foie de veau
+Viande,Ris de veau
+Viande,Rognons de veau
+Viande,Cervelle de veau
+Volaille,Blanc de poulet
+Volaille,Cuisse de poulet
+Volaille,Pilon de poulet
+Volaille,Aile de poulet
+Volaille,Poulet entier
+Volaille,Poulet fermier
+Volaille,Blanc de dinde
+Volaille,Cuisse de dinde
+Volaille,Escalope de dinde
+Volaille,Magret de canard
+Volaille,Confit de canard
+Volaille,Foie gras de canard
+Volaille,Gesier de canard
+Volaille,Aiguillette de canard
+Volaille,Cuisse de canard
+Volaille,Blanc de pintade
+Volaille,Cuisse de pintade
+Volaille,Caille entiere
+Volaille,Filet de pigeon
+Volaille,Oie entiere
+Volaille,Foie gras d'oie
+Volaille,Faisan
+Viande,Lapin entier
+Viande,Rable de lapin
+Viande,Cuisse de lapin
+Viande,Chevreuil
+Viande,Sanglier
+Viande,Cerf
+Viande,Lievre
+Viande,Perdrix
+Viande,Becasse
+Viande,Canard sauvage
+Volaille,Chapon
+Volaille,Poularde
+Volaille,Coquelet
+Volaille,Dinde entiere
+Viande,Emince de boeuf
+Viande,Steak tartare
+Viande,Carpaccio de boeuf
+Viande,Andouillette
+Viande,Andouille
+Viande,Knack
+Viande,Frankfurter
+Viande,Filet mignon de porc
+Viande,Longe de porc
+Viande,Palette de porc
+Viande,Jarret de porc
+Viande,Jarret de boeuf
+Poisson,Saumon entier
+Poisson,Filet de saumon
+Poisson,Pave de saumon
+Poisson,Saumon fume
+Poisson,Truite entiere
+Poisson,Filet de truite
+Poisson,Truite fumee
+Poisson,Truite saumonee
+Poisson,Cabillaud
+Poisson,Filet de cabillaud
+Poisson,Morue salee
+Poisson,Brandade de morue
+Poisson,Lieu noir
+Poisson,Lieu jaune
+Poisson,Colin
+Poisson,Merlu
+Poisson,Daurade royale
+Poisson,Bar (loup)
+Poisson,Filet de bar
+Poisson,Sole entiere
+Poisson,Filet de sole
+Poisson,Turbot
+Poisson,Filet de turbot
+Poisson,Barbue
+Poisson,Limande
+Poisson,Plie
+Poisson,Cardine
+Poisson,Hareng entier
+Poisson,Hareng fume
+Poisson,Hareng marine
+Poisson,Maquereau entier
+Poisson,Filet de maquereau
+Poisson,Maquereau fume
+Poisson,Sardine fraiche
+Poisson,Sardine en conserve
+Poisson,Anchois frais
+Poisson,Anchois en filet
+Poisson,Thon rouge
+Poisson,Thon en conserve
+Poisson,Thon blanc
+Poisson,Espadon
+Poisson,Marlin
+Poisson,Rouget barbet
+Poisson,Rouget grondin
+Poisson,Saint-Pierre
+Poisson,Vive
+Poisson,Grondin
+Poisson,Dorade grise
+Poisson,Pageot
+Poisson,Mulet
+Poisson,Loubine
+Poisson,Anguille
+Poisson,Anguille fumee
+Poisson,Lamproie
+Poisson,Brochet
+Poisson,Perche
+Poisson,Sandre
+Poisson,Carpe
+Poisson,Tanche
+Poisson,Breme
+Poisson,Gardon
+Poisson,Ablette
+Poisson,Fera
+Poisson,Omble chevalier
+Poisson,Lavaret
+Poisson,Silure
+Poisson,Fletan
+Poisson,Lingue
+Poisson,Eglefin
+Poisson,Tacaud
+Poisson,Merlan
+Poisson,Grondin perlon
+Poisson,Baudroie (lotte)
+Poisson,Queue de lotte
+Poisson,Congre
+Poisson,Rascasse
+Poisson,Chapon de mer
+Poisson,Scorpene
+Poisson,Merou
+Poisson,Dentex
+Poisson,Spare
+Poisson,Capelan
+Poisson,Sprat
+Poisson,Pilchard
+Poisson,Sebaste
+Poisson,Lingue bleue
+Poisson,Bogue
+Poisson,Saupe
+Poisson,Oblada
+Poisson,Sar
+Poisson,Pargo
+Poisson,Vivanneau
+Poisson,Capitaine
+Poisson,Tilapia
+Poisson,Pangasius
+Poisson,Bar du Chili
+Poisson,Mahi-mahi
+Poisson,Wahoo
+Poisson,Barracuda
+Poisson,Carangue
+Poisson,Bonite
+Poisson,Germon
+Poisson,Esturgeon
+Poisson,Caviar d'esturgeon
+Poisson,OEufs de saumon
+Poisson,Tarama
+Poisson,Bottarga
+Poisson,Truite arc-en-ciel
+Crustace,Crevette rose
+Crustace,Crevette grise
+Crustace,Gambas
+Crustace,Crevette tigree
+Crustace,Langoustine
+Crustace,Homard breton
+Crustace,Homard americain
+Crustace,Langouste
+Crustace,Tourteau
+Crustace,Araignee de mer
+Crustace,Crabe vert
+Crustace,Crabe des neiges
+Crustace,Crabe royal
+Crustace,Etrille
+Crustace,Bouquet (crevette)
+Mollusque,Huitre creuse
+Mollusque,Huitre plate
+Mollusque,Moule de bouchot
+Mollusque,Moule de Mediterranee
+Mollusque,Coquille Saint-Jacques
+Mollusque,Noix de Saint-Jacques
+Mollusque,Palourde
+Mollusque,Clam
+Mollusque,Praire
+Mollusque,Couteau (coquillage)
+Mollusque,Amande de mer
+Mollusque,Bigorneau
+Mollusque,Bulot
+Mollusque,Ormeau
+Mollusque,Coque
+Mollusque,Clovis
+Mollusque,Telline
+Mollusque,Petoncle
+Mollusque,Oursin
+Mollusque,Seiche
+Mollusque,Encornet (calmar)
+Mollusque,Poulpe
+Mollusque,Pieuvre
+Mollusque,Chipiron
+Mollusque,Seiche en sauce
+Mollusque,Escargot de Bourgogne
+Mollusque,Escargot petit-gris
+Crustace,Ecrevisse
+Crustace,Ecrevisse a pattes rouges
+Crustace,Bernard-l'ermite
+Crustace,Cigale de mer
+Crustace,Cigale de plage
+Crustace,Scampi
+Crustace,Crevette nordique
+Crustace,Pattes de crabe
+Mollusque,Buccin
+Mollusque,Patelle
+Mollusque,Vernis (coquillage)
+Mollusque,Pignon de mer
+Mollusque,Venus (coquillage)
+Crustace,Pousse-pied
+Crustace,Balane
+Crustace,Goose barnacle
+Mollusque,Violette de mer
+Mollusque,Bigorneaux cuits
+Legume,Tomate ronde
+Legume,Tomate cerise
+Legume,Tomate coeur de boeuf
+Legume,Tomate olivette
+Legume,Tomate ananas
+Legume,Tomate verte
+Legume,Poivron rouge
+Legume,Poivron vert
+Legume,Poivron jaune
+Legume,Poivron orange
+Legume,Piment rouge
+Legume,Piment vert
+Legume,Piment doux
+Legume,Piment d'Espelette
+Legume,Aubergine
+Legume,Courgette verte
+Legume,Courgette jaune
+Legume,Concombre
+Legume,Cornichon
+Legume,Melon (legume)
+Legume,Courge spaghetti
+Legume,Potiron
+Legume,Potimarron
+Legume,Butternut
+Legume,Giraumon
+Legume,Courge muscade
+Legume,Patidou
+Legume,Carotte
+Legume,Carotte violette
+Legume,Carotte jaune
+Legume,Navet
+Legume,Radis rose
+Legume,Radis noir
+Legume,Radis daikon
+Legume,Betterave rouge
+Legume,Betterave jaune
+Legume,Betterave chioggia
+Legume,Celeri-rave
+Legume,Celeri branche
+Legume,Panais
+Legume,Persil racine
+Legume,Salsifis
+Legume,Topinambour
+Legume,Rutabaga
+Legume,Chou-rave
+Legume,Chou blanc
+Legume,Chou rouge
+Legume,Chou vert
+Legume,Chou de Bruxelles
+Legume,Chou-fleur blanc
+Legume,Chou-fleur violet
+Legume,Brocoli
+Legume,Romanesco
+Legume,Chou-fleur jaune
+Legume,Chou kale
+Legume,Chou frise
+Legume,Chou noir de Toscane
+Legume,Choucroute
+Legume,Pak-choi
+Legume,Bok choy
+Legume,Fenouil
+Legume,Oignon blanc
+Legume,Oignon rouge
+Legume,Oignon jaune
+Legume,Oignon nouveau
+Legume,Echalote
+Legume,Ail blanc
+Legume,Ail rose
+Legume,Ail noir
+Legume,Ail des ours
+Legume,Ciboulette
+Legume,Poireau
+Legume,Poireau sauvage
+Legume,Asperge verte
+Legume,Asperge blanche
+Legume,Asperge violette
+Legume,Artichaut
+Legume,Fond d'artichaut
+Legume,Artichaut violet
+Legume,Laitue
+Legume,Scarole
+Legume,Chicoree frisee
+Legume,Endive
+Legume,Radicchio
+Legume,Roquette
+Legume,Cresson
+Legume,Mache
+Legume,Epinard
+Legume,Blette (cote de bette)
+Legume,Oseille
+Legume,Pourpier
+Legume,Pissenlit
+Legume,Mesclun
+Legume,Pousses d'epinard
+Legume,Micropousses
+Legume,Petits pois
+Legume,Pois mange-tout
+Legume,Pois gourmand
+Legume,Feve
+Legume,Haricot vert
+Legume,Haricot jaune (beurre)
+Legume,Haricot plat
+Legume,Haricot borlotti
+Legume,Haricot flageolet
+Legume,Haricot coco
+Legume,Edamame
+Legume,Mais en epi
+Legume,Mais en grains
+Legume,Mais baby
+Legume,Brocoli rave (rapini)
+Legume,Pousses de soja
+Legume,Bambou pousses
+Champignon,Champignon de Paris
+Champignon,Champignon shiitake
+Champignon,Champignon pleurote
+Champignon,Trompette de la mort
+Champignon,Chanterelle
+Champignon,Girolle
+Champignon,Cepe de Bordeaux
+Champignon,Morille
+Champignon,Truffe noire
+Champignon,Truffe blanche
+Champignon,Truffe d'ete
+Champignon,Champignon enoki
+Champignon,Champignon maitake
+Champignon,Champignon king oyster
+Champignon,Champignon cremini
+Champignon,Champignon portobello
+Champignon,Bolet
+Champignon,Lactaire
+Champignon,Coprin chevelu
+Champignon,Pied bleu
+Champignon,Champignon des pres
+Legume,Patate douce orange
+Legume,Patate douce violette
+Legume,Pomme de terre
+Legume,Pomme de terre Charlotte
+Legume,Pomme de terre Ratte
+Legume,Pomme de terre Agata
+Legume,Pomme de terre Bintje
+Legume,Pomme de terre vitelotte
+Legume,Pomme de terre Roseval
+Legume,Epinard geant
+Legume,Salade romaine
+Legume,Batavia
+Legume,Lolo rouge
+Legume,Lolo vert
+Legume,Feuille de chene
+Legume,Mizuna
+Legume,Tatsoi
+Legume,Shiso vert
+Legume,Shiso rouge
+Legume,Ortie
+Legume,Angelique
+Legume,Cardoon
+Legume,Crosne
+Legume,Scorsonere
+Legume,Christophine (chayote)
+Legume,Igname
+Legume,Manioc
+Legume,Taro
+Legume,Yuca
+Legume,Plantain
+Legume,Gombo
+Legume,Okra
+Legume,Potiron de Nice
+Legume,Courge longue de Nice
+Legume,Courgette ronde
+Legume,Aubergine japonaise
+Legume,Aubergine thaie
+Legume,Aubergine blanche
+Legume,Raifort
+Legume,Wasabi
+Legume,Gingembre
+Legume,Curcuma frais
+Legume,Galanga
+Legume,Citronnelle
+Legume,Cresson de fontaine
+Legume,Fougere (crosse)
+Legume,Pousse d'asperge
+Legume,Brocoli tenderstem
+Legume,Chou chinois
+Legume,Chou nappa
+Legume,Daikon marine
+Legume,Mizeria (concombre marine)
+Legume,Oignon confit
+Legume,Tomate confite
+Legume,Tomate sechee
+Legume,Poivron grille
+Legume,Aubergine grillee
+Legume,Epinard surgele
+Legume,Haricot vert surgele
+Legume,Mais surgele
+Legume,Chou-fleur surgele
+Legume,Pois casse
+Fruit,Pomme golden
+Fruit,Pomme gala
+Fruit,Pomme fuji
+Fruit,Pomme granny smith
+Fruit,Pomme pink lady
+Fruit,Pomme reinette
+Fruit,Pomme boskoop
+Fruit,Pomme belle de boskoop
+Fruit,Poire williams
+Fruit,Poire conference
+Fruit,Poire comice
+Fruit,Poire louise bonne
+Fruit,Poire nashi
+Fruit,Poire abate fetel
+Fruit,Coing
+Fruit,Prune quetsche
+Fruit,Prune mirabelle
+Fruit,Prune reine claude
+Fruit,Prune d'Ente
+Fruit,Pruneau d'Agen
+Fruit,Abricot
+Fruit,Peche blanche
+Fruit,Peche jaune
+Fruit,Nectarine
+Fruit,Brugnon
+Fruit,Cerise bigarreau
+Fruit,Cerise guigne
+Fruit,Griotte
+Fruit,Cerise amarena
+Fruit,Fraise gariguette
+Fruit,Fraise mara des bois
+Fruit,Fraise ciflorette
+Fruit,Fraise charlotte
 Fruit,Framboise
+Fruit,Mure sauvage
 Fruit,Myrtille
-Fruit,Poire
-Féculent / Glucide,Pâtes (Penne)
-Féculent / Glucide,Riz basmati
-Féculent / Glucide,Riz arborio (Risotto)
-Féculent / Glucide,Pomme de terre
-Féculent / Glucide,Patate douce
-Féculent / Glucide,Quinoa
-Féculent / Glucide,Semoule de blé
-Féculent / Glucide,Boulgour
-Féculent / Glucide,Pain de campagne
-Féculent / Glucide,Sarrasin
-Féculent / Glucide,Polenta
-Fromage,Mozzarella di Bufala
-Fromage,Parmesan (Grana Padano)
-Fromage,Emmental râpé
-Fromage,Fromage de chèvre frais
-Fromage,Feta
-Fromage,Cheddar vieux
+Fruit,Cassis
+Fruit,Groseille rouge
+Fruit,Groseille a maquereau
+Fruit,Airelle
+Fruit,Canneberge (cranberry)
+Fruit,Physalis
+Fruit,Goji
+Fruit,Acai
+Fruit,Baie d'aronie
+Fruit,Baie de sureau
+Fruit,Baie de goji sechee
+Fruit,Raisin blanc muscat
+Fruit,Raisin rouge
+Fruit,Raisin noir
+Fruit,Raisin chasselas
+Fruit,Raisin sec
+Fruit,Raisin sultanine
+Fruit,Figue fraiche
+Fruit,Figue seche
+Fruit,Datte medjool
+Fruit,Datte deglet nour
+Fruit,Orange sanguine
+Fruit,Orange navel
+Fruit,Orange valencia
+Fruit,Clementine
+Fruit,Mandarine
+Fruit,Tangerine
+Fruit,Satsuma
+Fruit,Pamplemousse rose
+Fruit,Pamplemousse jaune
+Fruit,Citron jaune
+Fruit,Citron vert (lime)
+Fruit,Citron caviar
+Fruit,Bergamote
+Fruit,Yuzu
+Fruit,Kumquat
+Fruit,Cedrat
+Fruit,Combava
+Fruit,Main de Bouddha
+Fruit,Ananas victoria
+Fruit,Ananas lisse cayenne
+Fruit,Ananas seche
+Fruit,Mangue alphonso
+Fruit,Mangue kent
+Fruit,Mangue ataulfo
+Fruit,Papaye
+Fruit,Goyave
+Fruit,Maracuja (fruit de la passion)
+Fruit,Carambole
+Fruit,Pitaya (fruit du dragon)
+Fruit,Ramboutan
+Fruit,Litchi
+Fruit,Longane
+Fruit,Jaboticaba
+Fruit,Durian
+Fruit,Jacquier
+Fruit,Mangoustan
+Fruit,Sapotille
+Fruit,Corossol (soursop)
+Fruit,Cherimole
+Fruit,Mais sucre (fruit)
+Fruit,Kiwi vert
+Fruit,Kiwi jaune
+Fruit,Kiwi baby
+Fruit,Grenade
+Fruit,Grenade arilles
+Fruit,Melon charentais
+Fruit,Melon cantaloup
+Fruit,Melon honeydew
+Fruit,Pasteque
+Fruit,Pasteque mini
+Fruit,Avocat hass
+Fruit,Avocat fuerte
+Fruit,Banane plantain
+Fruit,Banane
+Fruit,Banane sechee
+Fruit,Noix de coco fraiche
+Fruit,Noix de coco sechee
+Fruit,Tamarinde
+Fruit,Tamarin doux
+Fruit,Barbadine
+Fruit,Pomme kaki
+Fruit,Nefle du Japon
+Fruit,Nefle d'Europe
+Fruit,Cornouille
+Fruit,Sorbe
+Fruit,Arbouse
+Fruit,Mirabelle de Lorraine
+Fruit,Peche de vigne
+Fruit,Brugnon blanc
+Feculent,Riz basmati
+Feculent,Riz jasmin
+Feculent,Riz rond
+Feculent,Riz sauvage
+Feculent,Riz complet
+Feculent,Riz noir (venere)
+Feculent,Riz rouge
+Feculent,Riz gluant
+Feculent,Riz arborio (risotto)
+Feculent,Riz carnaroli
+Feculent,Riz parboiled
+Feculent,Riz thai
+Feculent,Riz basmati brun
+Feculent,Quinoa blanc
+Feculent,Quinoa rouge
+Feculent,Quinoa noir
+Feculent,Sarrasin
+Feculent,Millet
+Feculent,Sorgho
+Feculent,Amarante
+Feculent,Teff
+Feculent,Fonio
+Feculent,Semoule de ble dur
+Feculent,Couscous fin
+Feculent,Couscous moyen
+Feculent,Couscous grains entiers
+Feculent,Boulgour
+Feculent,Boulgour fin
+Feculent,Orge perle
+Feculent,Orge monde
+Feculent,Epeautre decortique
+Feculent,Petit epeautre
+Feculent,Kamut (ble khorasan)
+Feculent,Engrain
+Feculent,Freekeh
+Feculent,Ble entier
+Feculent,Avoine (flocons)
+Feculent,Son d'avoine
+Feculent,Avoine entiere
+Feculent,Seigle entier
+Feculent,Flocons de seigle
+Feculent,Mais (farine)
+Feculent,Polenta
+Feculent,Maizena (amidon)
+Feculent,Tapioca
+Feculent,Amidon de riz
+Feculent,Arrow-root
+Feculent,Fecule de pomme de terre
+Feculent,Pates spaghetti
+Feculent,Pates penne
+Feculent,Pates rigatoni
+Feculent,Pates fusilli
+Feculent,Pates farfalle
+Feculent,Pates tagliatelles
+Feculent,Pates linguines
+Feculent,Pates capellini
+Feculent,Pates conchiglie
+Feculent,Pates orzo
+Feculent,Pates lasagne
+Feculent,Gnocchi
+Feculent,Pates fraiches
+Feculent,Pates au riz
+Feculent,Nouilles soba
+Feculent,Nouilles udon
+Feculent,Nouilles ramen
+Feculent,Nouilles de riz
+Feculent,Nouilles somen
+Feculent,Vermicelles de soja
+Feculent,Nouilles shirataki
+Feculent,Pain blanc
+Feculent,Pain complet
+Feculent,Pain au seigle
+Feculent,Pain de mie
+Feculent,Pain aux cereales
+Feculent,Pain baguette
+Feculent,Pain ciabatta
+Feculent,Pain naan
+Feculent,Pain pita
+Feculent,Pain tortilla
+Feculent,Pain chapati
+Feculent,Pain brioche
+Feculent,Pain de campagne
+Feculent,Croissant
+Feculent,Biscottes
+Feculent,Pain grille
+Feculent,Crackers
+Feculent,Gressins
+Feculent,Galettes de riz
+Feculent,Flocons de mais
+Feculent,Muesli
+Feculent,Granola
+Feculent,Porridge d'avoine
+Feculent,Farine de ble T45
+Feculent,Farine de ble T55
+Feculent,Farine de ble T80
+Feculent,Farine de ble T110
+Feculent,Farine de sarrasin
+Feculent,Farine de riz
+Feculent,Farine de pois chiche
+Feculent,Farine de chataigne
+Feculent,Farine de soja
+Feculent,Farine de mais
+Feculent,Farine d'amarante
+Legumineuse,Lentille verte du Puy
+Legumineuse,Lentille verte
+Legumineuse,Lentille rouge
+Legumineuse,Lentille beluga (noire)
+Legumineuse,Lentille corail
+Legumineuse,Pois chiche
+Legumineuse,Pois chiche en conserve
+Legumineuse,Pois casse vert
+Legumineuse,Pois casse jaune
+Legumineuse,Pois chiche grille
+Legumineuse,Haricot blanc
+Legumineuse,Haricot rouge
+Legumineuse,Haricot noir
+Legumineuse,Haricot de Soissons
+Legumineuse,Haricot tarbais
+Legumineuse,Haricot borlotti sec
+Legumineuse,Haricot azuki
+Legumineuse,Haricot mungo
+Legumineuse,Haricot de Lima
+Legumineuse,Feve seche
+Legumineuse,Soja jaune
+Legumineuse,Soja noir
+Legumineuse,Tempeh
+Legumineuse,Tofu ferme
+Legumineuse,Tofu soyeux
+Legumineuse,Tofu fume
+Legumineuse,Tofu nature
+Legumineuse,Miso blanc
+Legumineuse,Miso rouge
+Legumineuse,Miso dashi
+Legumineuse,Natto
+Legumineuse,Humus (houmous)
+Legumineuse,Dhal de lentilles
+Legumineuse,Pois pigeon
+Legumineuse,Haricot moth
+Legumineuse,Haricot du Cap
+Legumineuse,Lentille jaune
+Legumineuse,Pois cajan
+Legumineuse,Haricot de flageolet vert
+Legumineuse,Haricot cannellini
+Legumineuse,Haricot navy bean
+Legumineuse,Haricot great northern
+Legumineuse,Haricot pinto
+Legumineuse,Haricot rose
+Legumineuse,Lupin (graine)
+Legumineuse,Farine de lupin
+Legumineuse,Pois doux
+Legumineuse,Soja edamame frais
+Legumineuse,Pois chiche roti
+Legumineuse,Haricot de Vendee
+Legumineuse,Haricot coco de Paimpol
+Legumineuse,Haricot blanc geant
+Legumineuse,Lentille orange
+Legumineuse,Lentille francaise
+Legumineuse,Haricot mung
+Legumineuse,Haricot tepari
+Legumineuse,Pois a vache
+Legumineuse,Guar (graine)
+Legumineuse,Fenugrec (graine)
+Legumineuse,Vesces (graine)
+Fromage,Camembert de Normandie
+Fromage,Brie de Meaux
+Fromage,Brie de Melun
+Fromage,Coulommiers
+Fromage,Chaource
+Fromage,Neufchatel
+Fromage,Brillat-Savarin
+Fromage,Explorateur
+Fromage,Delice de Bourgogne
+Fromage,Epoisses
+Fromage,Langres
+Fromage,Munster
+Fromage,Livarot
+Fromage,Pont-l'Eveque
+Fromage,Maroilles
+Fromage,Vacherin Mont-d'Or
+Fromage,Taleggio
+Fromage,Reblochon
+Fromage,Raclette de Savoie
+Fromage,Beaufort
+Fromage,Comte
+Fromage,Emmental
+Fromage,Gruyere suisse
+Fromage,Appenzell
+Fromage,Fribourg (Vacherin)
+Fromage,Gouda jeune
+Fromage,Gouda vieux
+Fromage,Edam
+Fromage,Mimolette
+Fromage,Cantal
+Fromage,Laguiole
+Fromage,Salers
+Fromage,Ossau-Iraty
+Fromage,Tomme de Savoie
+Fromage,Tomme de brebis
+Fromage,Tomme grise
 Fromage,Roquefort
+Fromage,Bleu d'Auvergne
+Fromage,Bleu de Bresse
+Fromage,Bleu de Gex
+Fromage,Fourme d'Ambert
+Fromage,Gorgonzola
+Fromage,Stilton
+Fromage,Saint-Agur
+Fromage,Bleu des Causses
+Fromage,Crottin de Chavignol
+Fromage,Selles-sur-Cher
+Fromage,Valencay
+Fromage,Sainte-Maure de Touraine
+Fromage,Chevre frais
+Fromage,Buche de chevre
+Fromage,Mozzarella di bufala
+Fromage,Mozzarella fior di latte
+Fromage,Burrata
 Fromage,Ricotta
 Fromage,Mascarpone
+Fromage,Parmesan (Parmigiano)
+Fromage,Grana Padano
+Fromage,Pecorino romano
+Fromage,Pecorino sardo
+Fromage,Provolone
+Fromage,Fontina
+Fromage,Asiago
+Fromage,Scamorza fumee
+Fromage,Feta
+Fromage,Halloumi
+Fromage,Manchego
+Fromage,Idiazabal
+Fromage,Roncal
+Fromage,Zamorano
+Fromage,Tetilla
+Fromage,Queso fresco
+Fromage,Fromage blanc
+Fromage,Petit-suisse
+Fromage,Cottage cheese
+Fromage,Fromage de tete
+Fromage,Fromage de brebis basque
+Fromage,Quark
+Fromage,Labneh
+Fromage,Paneer
+Fromage,Cheddar
+Fromage,Cheddar vieilli
+Fromage,Lancashire
 Produit laitier,Lait entier
+Produit laitier,Lait demi-ecreme
+Produit laitier,Lait ecreme
+Produit laitier,Lait de brebis
+Produit laitier,Lait de chevre
+Produit laitier,Lait de coco
+Produit laitier,Lait d'amande
+Produit laitier,Lait d'avoine
+Produit laitier,Lait de soja
+Produit laitier,Lait condense sucre
+Produit laitier,Lait condense non sucre
+Produit laitier,Creme fraiche epaisse
+Produit laitier,Creme fraiche liquide
+Produit laitier,Creme legere
+Produit laitier,Creme de soja
+Produit laitier,Creme d'avoine
+Produit laitier,Beurre doux
+Produit laitier,Beurre demi-sel
+Produit laitier,Beurre clarifie (ghee)
+Produit laitier,Beurre de cacao
+Produit laitier,Margarine
+Produit laitier,Yaourt nature
 Produit laitier,Yaourt grec
-Produit laitier,Crème liquide
-Matière grasse,Huile d'olive
-Matière grasse,Beurre doux
-Matière grasse,Huile de sésame
-Herbe / Épice,Basilic frais
-Herbe / Épice,Coriandre
-Herbe / Épice,Persil plat
-Herbe / Épice,Thym
-Herbe / Épice,Curry en poudre
-Herbe / Épice,Paprika fumé
-Herbe / Épice,Cumin
-Herbe / Épice,Cannelle
-Noix / Graine,Amandes effilées
-Noix / Graine,Noix de Grenoble
-Noix / Graine,Pignons de pin
-Noix / Graine,Graines de courge
-Condiment,Sauce soja salée
-Condiment,Moutarde de Dijon
+Produit laitier,Yaourt de brebis
+Produit laitier,Yaourt de chevre
+Produit laitier,Yaourt aux fruits
+Produit laitier,Kefir de lait
+Produit laitier,Kefir de fruits
+Produit laitier,Creme sure (sour cream)
+Produit laitier,Creme fraiche d'Isigny
+Produit laitier,Creme chantilly
+Produit laitier,Lait fermente
+Produit laitier,Babeurre (buttermilk)
+Produit laitier,Lactoserum (petit-lait)
+Produit laitier,Lait ribot
+OEuf,OEuf de poule entier
+OEuf,Blanc d'oeuf
+OEuf,Jaune d'oeuf
+OEuf,OEuf de caille
+OEuf,OEuf de canard
+OEuf,OEuf de pintade
+OEuf,OEuf de dinde
+OEuf,OEuf d'autruche
+OEuf,OEuf de pluvier
+OEuf,OEuf dur
+OEuf,OEuf poche
+OEuf,OEuf cocotte
+OEuf,OEuf a la coque
+OEuf,OEuf Mollet
+OEuf,OEuf brouille
+Noix & Graine,Noix de Grenoble
+Noix & Graine,Noix de Pecan
+Noix & Graine,Noix du Bresil
+Noix & Graine,Noix de cajou
+Noix & Graine,Noix de macadamia
+Noix & Graine,Noix de tigre
+Noix & Graine,Amande effilee
+Noix & Graine,Amande entiere
+Noix & Graine,Amande en poudre
+Noix & Graine,Noisette entiere
+Noix & Graine,Noisette en poudre
+Noix & Graine,Pistache
+Noix & Graine,Pignon de pin
+Noix & Graine,Cacahuete
+Noix & Graine,Cacahuete grillee
+Noix & Graine,Cacahuete salee
+Noix & Graine,Graine de courge
+Noix & Graine,Graine de tournesol
+Noix & Graine,Graine de sesame blanc
+Noix & Graine,Graine de sesame noir
+Noix & Graine,Graine de lin brun
+Noix & Graine,Graine de lin dore
+Noix & Graine,Graine de chia
+Noix & Graine,Graine de chanvre
+Noix & Graine,Graine de pavot
+Noix & Graine,Graine de moutarde noire
+Noix & Graine,Graine de moutarde jaune
+Noix & Graine,Graine de fenugrec
+Noix & Graine,Graine de cumin
+Noix & Graine,Graine de carvi
+Noix & Graine,Graine de coriandre
+Noix & Graine,Graine de fenouil
+Noix & Graine,Graine d'anis
+Noix & Graine,Graine de nigelle
+Noix & Graine,Graine de chardon-Marie
+Noix & Graine,Tahini (pate de sesame)
+Noix & Graine,Beurre de cacahuete
+Noix & Graine,Beurre d'amande
+Noix & Graine,Beurre de noix de cajou
+Noix & Graine,Beurre de noisette
+Noix & Graine,Pralin
+Noix & Graine,Amande caramelisee
+Noix & Graine,Noix caramelisee
+Noix & Graine,Mix de graines
+Noix & Graine,Noix de coco rapee
+Noix & Graine,Noix de coco en copeaux
+Noix & Graine,Kola (noix)
+Noix & Graine,Noix de ginkgo
+Noix & Graine,Noix de litchi sechee
+Noix & Graine,Pois chiche roti (snack)
+Noix & Graine,Noisette torrefiee
+Noix & Graine,Pistache grillee salee
+Noix & Graine,Pecan caramelisee
+Noix & Graine,Pistache en poudre
+Noix & Graine,Farine d'amande
+Noix & Graine,Noix du Bresil emincee
+Noix & Graine,Amande fleur
+Noix & Graine,Graines de sesame grillees
+Noix & Graine,Noisette grillee
+Noix & Graine,Graine de cardamome
+Herbe & Epice,Basilic frais
+Herbe & Epice,Basilic seche
+Herbe & Epice,Persil plat frais
+Herbe & Epice,Persil frise frais
+Herbe & Epice,Persil seche
+Herbe & Epice,Coriandre fraiche
+Herbe & Epice,Coriandre moulue
+Herbe & Epice,Menthe fraiche
+Herbe & Epice,Menthe sechee
+Herbe & Epice,Thym frais
+Herbe & Epice,Thym seche
+Herbe & Epice,Romarin frais
+Herbe & Epice,Romarin seche
+Herbe & Epice,Laurier feuille
+Herbe & Epice,Sauge fraiche
+Herbe & Epice,Sauge sechee
+Herbe & Epice,Origan frais
+Herbe & Epice,Origan seche
+Herbe & Epice,Estragon frais
+Herbe & Epice,Estragon seche
+Herbe & Epice,Cerfeuil
+Herbe & Epice,Aneth frais
+Herbe & Epice,Aneth seche
+Herbe & Epice,Fenouil herbes
+Herbe & Epice,Liveche
+Herbe & Epice,Sarriette
+Herbe & Epice,Melisse
+Herbe & Epice,Verveine
+Herbe & Epice,Poivre noir moulu
+Herbe & Epice,Poivre blanc moulu
+Herbe & Epice,Poivre rouge de Kampot
+Herbe & Epice,Poivre vert en saumure
+Herbe & Epice,Poivre de Sichuan
+Herbe & Epice,Poivre long
+Herbe & Epice,Poivre de Jamaique (allspice)
+Herbe & Epice,Cumin moulu
+Herbe & Epice,Curcuma moulu
+Herbe & Epice,Paprika doux
+Herbe & Epice,Paprika fume
+Herbe & Epice,Paprika fort
+Herbe & Epice,Piment de Cayenne
+Herbe & Epice,Curry en poudre
+Herbe & Epice,Garam masala
+Herbe & Epice,Ras el hanout
+Herbe & Epice,Harissa
+Herbe & Epice,Za'atar
+Herbe & Epice,Sumac
+Herbe & Epice,Cannelle moulue
+Herbe & Epice,Baton de cannelle
+Herbe & Epice,Cardamome moulue
+Herbe & Epice,Muscade moulue
+Herbe & Epice,Clou de girofle
+Herbe & Epice,Anis etoile (badiane)
+Herbe & Epice,Vanille gousse
+Herbe & Epice,Vanille en poudre
+Herbe & Epice,Extrait de vanille
+Herbe & Epice,Safran
+Herbe & Epice,Fenugrec moulu
+Herbe & Epice,Graines de moutarde
+Herbe & Epice,Moutarde de Dijon
+Herbe & Epice,Moutarde a l'ancienne
+Herbe & Epice,Moutarde forte
+Herbe & Epice,Moutarde douce
+Herbe & Epice,Wasabi en poudre
+Herbe & Epice,Raifort rape
+Herbe & Epice,Tamarin (pate)
+Herbe & Epice,Galanga en poudre
+Herbe & Epice,Citronnelle sechee
+Herbe & Epice,Kaffir lime (feuilles)
+Herbe & Epice,Pandan (feuilles)
+Herbe & Epice,Macis
+Herbe & Epice,Anis vert
+Herbe & Epice,Carvi moulu
+Herbe & Epice,Fenouil moulu
+Herbe & Epice,Nigelle (graines)
+Herbe & Epice,Fleur de sel
+Herbe & Epice,Sel fume
+Herbe & Epice,Sel de Guerande
+Herbe & Epice,Sel de l'Himalaya
+Herbe & Epice,Sel noir Kala Namak
+Herbe & Epice,Sumac moulu
+Corps gras,Huile d'olive vierge extra
+Corps gras,Huile d'olive fruite vert
+Corps gras,Huile de tournesol
+Corps gras,Huile de colza
+Corps gras,Huile de noix
+Corps gras,Huile de noisette
+Corps gras,Huile de sesame
+Corps gras,Huile de sesame grille
+Corps gras,Huile de coco
+Corps gras,Huile de palme
+Corps gras,Huile de pepins de raisin
+Corps gras,Huile de lin
+Corps gras,Huile d'avocat
+Corps gras,Huile de noix de macadamia
+Corps gras,Huile de chanvre
+Corps gras,Saindoux
+Corps gras,Graisse de canard
+Corps gras,Graisse d'oie
+Corps gras,Graisse de coco
+Corps gras,Suif de boeuf
+Condiment,Vinaigre de vin rouge
+Condiment,Vinaigre de vin blanc
 Condiment,Vinaigre balsamique
-Condiment,Miel d'acacia
-Condiment,Pâte de curry rouge
-Condiment,Câpres
+Condiment,Vinaigre de cidre
+Condiment,Vinaigre de riz
+Condiment,Vinaigre de Xeres
+Condiment,Vinaigre de framboise
+Condiment,Sauce soja
+Condiment,Tamari (sauce soja)
+Condiment,Sauce worcestershire
+Condiment,Sauce tabasco
+Condiment,Sauce sriracha
+Condiment,Sauce fish (nuoc-mam)
+Condiment,Sauce hoisin
+Condiment,Sauce teriyaki
+Condiment,Sauce tonkatsu
+Condiment,Sauce yakiniku
+Condiment,Sauce oyster (huitre)
+Condiment,Ketchup
+Condiment,Mayonnaise
+Condiment,Aioli
+Condiment,Tartare sauce
+Condiment,Creme de raifort
+Condiment,Chimichurri
+Condiment,Pesto au basilic
+Condiment,Pesto rosso
+Condiment,Tapenade noire
+Condiment,Tapenade verte
+Condiment,Rouille
+Condiment,Anchoiade
+Condiment,Brandade
+Condiment,Raito
+Condiment,Capres
+Condiment,Capres en saumure
+Condiment,Cornichons
+Condiment,Olives noires
+Condiment,Olives vertes
+Condiment,Olives kalamata
+Condiment,Pickles mixtes
+Condiment,Kimchi
+Sucre,Sucre blanc cristallise
+Sucre,Sucre en poudre (semoule)
+Sucre,Sucre glace
+Sucre,Sucre roux cassonade
+Sucre,Sucre de canne complet (muscovado)
+Sucre,Sucre de coco
+Sucre,Sucre de palme
+Sucre,Sucre de bouleau (xylitol)
+Sucre,Erythritol
+Sucre,Stevia
+Sucre,Miel d'acacia
+Sucre,Miel de lavande
+Sucre,Miel de chataignier
+Sucre,Miel de thym
+Sucre,Miel de manuka
+Sucre,Sirop d'erable
+Sucre,Sirop d'agave
+Sucre,Sirop de glucose
+Sucre,Melasse
+Sucre,Confiture de fraises
+Sucre,Confiture d'abricots
+Sucre,Confiture de framboises
+Sucre,Marmelade d'oranges
+Sucre,Gelee de coings
+Sucre,Gelee de groseilles
+Sucre,Pate a tartiner noisette
+Sucre,Caramel liquide
+Sucre,Caramel au beurre sale
+Sucre,Pralinoise
+Sucre,Chocolat noir 70%
+Sucre,Chocolat au lait
+Sucre,Chocolat blanc
+Sucre,Chocolat noir 85%
+Sucre,Chocolat rubis
+Sucre,Cacao en poudre non sucre
+Sucre,Cacao en poudre sucre
+Sucre,Pate de cacao
+Sucre,Gianduja
+Sucre,Massepain
+Sucre,Pate de pistache
+Sucre,Pate de noisette
+Sucre,Guimauve
+Sucre,Gelatine en feuilles
+Sucre,Agar-agar
+Sucre,Pectine
+Sucre,Levure chimique
+Sucre,Bicarbonate de soude
+Sucre,Levure de boulanger
+Sucre,Fecule de mais
