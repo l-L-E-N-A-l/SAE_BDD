@@ -56,9 +56,9 @@ CREATE TABLE Titre(
 );
 
 CREATE TABLE AdressePostale(
-   codePostale CHAR(5),
+   codePostal CHAR(5),
    ville VARCHAR2(50),
-   CONSTRAINT pk_Adresse_Postale PRIMARY KEY(codePostale, ville)
+   CONSTRAINT pk_Adresse_Postale PRIMARY KEY(codePostal, ville)
 );
 
 CREATE TABLE Ordre(
