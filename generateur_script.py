@@ -5,15 +5,18 @@ import pandas as pa
 
 fake = Faker(locale="fr_CA")
 
-# Prenoms / noms
-liste_prenom = ([unidecode(fake.unique.first_name_male()).upper() for _ in range(70)],[unidecode(fake.unique.first_name_female()).upper() for _ in range(70)]) # 0 = homme , 1 = femme
-liste_nom = [unidecode(fake.unique.last_name()).upper() for _ in range(250)]
-
+### STOCK DE VALEURS ###
 # Labels
 liste_grade = (["AFFILIE", "SYMPATISANT", "ADHERANT", "CHEVALIER", "GRAND CHEVALIER", "COMMANDEUR" , "GRAND CROIX"],["AFFILIEE", "SYMPATISANTE", "ADHERANTE", "DAME", "HAUTE DAME", "COMMANDERESSE" , "GRANDE-CROIX"])
 liste_rang = ["NOVICE","COMPAGNON"]
 liste_titre = ["PHILANTROPHE","PROTECTEUR","HONORABLE"]
 liste_dignite = ["MAITRE","GRAND CHANCELIER","GRAND MAITRE"]
+
+# Id_Tenrac
+id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(100_000)]
+
+# Id_Structures
+id_structure = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1_000)]
 
 # Codes_postaux
 data_villes = pa.read_csv("./csv_sources/codes_villes.csv", encoding="latin-1")
@@ -35,6 +38,8 @@ org_raison = data_org["Raison_sociale"]
 for i in range(len(org_ref)):
     org_siret[i] = org_siret[i].replace(" ", "")
     org_raison[i] = unidecode(org_raison[i]).upper()
+
+### FONCTIONS ###
 
 def email_generator(nom, prenom):
     match randint(0, 2):
@@ -84,6 +89,8 @@ open("./csv_finaux/tenrac.csv", 'w').close()
 csv_tenrac = open("./csv_finaux/tenrac.csv", 'a')
 
 
+### INSERTIONS ###
+
 # ADRESSE POSTALE
 csv_codes_postaux.write(f"Code Postal, Ville \n")
 for i in range(len(codes)):
@@ -92,30 +99,33 @@ for i in range(len(codes)):
 
 # TENRAC
 csv_tenrac.write(f"idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade \n")
-for _ in range(100_000):
+for i in range(100_000):
     id_ville = randint(0,len(villes)-1)
     rtd = random_rang_titre_dignite()
-    data_tenrac = {"id":fake.unique.random_int(min=0,max=1_000_000_000), "nom":liste_nom[randint(0,len(liste_nom)-1)], "prenom":liste_prenom[0][randint(0,len(liste_prenom[0])-1)], "tel":"06"+str(fake.unique.random_int(0,99_999_999)), "adresse":unidecode(fake.street_address()), "sexe":'M', "rang":rtd[0], "titre":rtd[1], "codePostal":codes[id_ville], "ville":villes[id_ville],"referenceOrg" : choice(org_ref), "dignite":rtd[2], "grade":liste_grade[0][randint(0,len(liste_grade[0])-1)]}
-    i = randint(0,1)
-    if i==1 : 
+    data_tenrac = {"id":id_tenrac[i], "nom":unidecode(fake.last_name()).upper(), "prenom":unidecode(fake.first_name_male()).upper(), "tel":"06"+str(fake.unique.random_int(0,99_999_999)), "adresse":unidecode(fake.street_address()), "sexe":'M', "rang":rtd[0], "titre":rtd[1], "codePostal":codes[id_ville], "ville":villes[id_ville],"referenceOrg" : choice(org_ref), "dignite":rtd[2], "grade":choice(liste_grade[0])}
+    if randint(0,1)==1 : 
         data_tenrac["sexe"] = 'F'
-        data_tenrac["prenom"] = liste_prenom[1][randint(0,len(liste_prenom[0])-1)]
-        data_tenrac["grade"] = liste_grade[1][randint(0,len(liste_grade)-1)]
+        data_tenrac["prenom"] = unidecode(fake.first_name_female()).upper()
+        data_tenrac["grade"] = choice(liste_grade[1])
 
     file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}','{data_tenrac["rang"]}','{data_tenrac["titre"]}','{data_tenrac["codePostal"]}','{data_tenrac["ville"]}','{data_tenrac['referenceOrg']}','{data_tenrac["dignite"]}','{data_tenrac["grade"]}'); \n".replace("'null'","null")) # .replace(...) -> on remplace les chaines "null" par des vrais null
     csv_tenrac.write(f"{data_tenrac["id"]},{data_tenrac["nom"]},{data_tenrac["prenom"]},{email_generator(data_tenrac["nom"],data_tenrac["prenom"])},{data_tenrac["tel"]},{data_tenrac["adresse"]},{data_tenrac["sexe"]},{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["codePostal"]},{data_tenrac["ville"]},{data_tenrac['referenceOrg']},{data_tenrac["dignite"]},{data_tenrac["grade"]} \n")
+
+# STRUCTURE
+for i in range(1_000):
+    file.write(f"INSERT INTO Structure(idStructure,chef) VALUES({id_structure[i]},'{id_tenrac[i]}'); \n")
 
 # GRADE
 # Hommes
 for i in range(len(liste_grade[0])-1) :
     if i == len(liste_grade[0]) -1:
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[0][i]},null)")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[0][i]},null); \n")
     else :
         file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[0][i]},{liste_grade[0][i+1]}); \n")
 # Femmes
 for i in range(len(liste_grade[1])-1) :
     if i == len(liste_grade[1]) -1:
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[1][i]},null)")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[1][i]},null); \n")
     else :
         file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[1][i]},{liste_grade[1][i+1]}); \n")
 
@@ -147,12 +157,9 @@ for i in range(len(ingredients)-1) :
 
     if data_ing.iloc[[i]]["Categorie"].item() == "Legumineuse" :
 
-        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},{ingredients[i]}); \n")
         file.write(f"INSERT INTO Legume (idIngredient,nomLeg) VALUES ({id_current_ing},{ingredients[i]}); \n")
-        id_current_ing += 1
 
-    else : 
-        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},{ingredients[i]}); \n") 
-        id_current_ing += 1
+    file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},{ingredients[i]}); \n") 
+    id_current_ing += 1
 
 print("- - - FINI - - -")

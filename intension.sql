@@ -62,25 +62,23 @@ CONSTRAINT pk_Adresse_Postale PRIMARY KEY(codePostal, ville)
 );
 
 CREATE TABLE Ordre(
-numOrdre NUMBER(10),
+idOrdre NUMBER(10),
 nomO VARCHAR2(50) NOT NULL,
-chefO NUMBER(10) NOT NULL,
---CONSTRAINT fk_chefO FOREIGN KEY(chefO) REFERENCES Tenrac(idTenrac),
-CONSTRAINT pk_Ordre PRIMARY KEY(numOrdre)
+PRIMARY KEY(idOrdre),
+FOREIGN KEY(idOrdre) REFERENCES Structure(idStructure)
 );
-/** probleme avec reference circulaire (on enleve fk_chef0 et on ajoute Alter table Ordre... a la fin) 
-ALTER TABLE Ordre
-ADD CONSTRAINT fk_chefO FOREIGN KEY (chefO) REFERENCES Tenrac(idTenrac);
-*/
+
+
 
 CREATE TABLE Club(
-numClub NUMBER(10),
-nomT VARCHAR2(50) NOT NULL,
-chefC VARCHAR2(50) NOT NULL,
-numOrdre NUMBER(10) NOT NULL,
-CONSTRAINT pk_Club PRIMARY KEY(numClub),
-CONSTRAINT fk_Club_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre)
+idClub NUMBER(10),
+nomC VARCHAR2(50) NOT NULL,
+idOrdre NUMBER(10) NOT NULL,
+PRIMARY KEY(idClub),
+FOREIGN KEY(idClub) REFERENCES Structure(idStructure),
+FOREIGN KEY(idOrdre) REFERENCES Ordre(idOrdre)
 );
+
 
 CREATE TABLE Organisme(
 referenceOrg NUMBER(10),
@@ -147,6 +145,13 @@ OR
 'DAME', 'HAUTE DAME', 'COMMANDERESSE', 'GRANDE-CROIX'
 ))
 )
+);
+
+CREATE TABLE Structure(
+   idStructure NUMBER(10),
+   chef NUMBER(10) NOT NULL,
+   PRIMARY KEY(idStructure),
+   FOREIGN KEY(chef) REFERENCES Tenrac(idTenrac)
 );
 
 CREATE TABLE Repas(
