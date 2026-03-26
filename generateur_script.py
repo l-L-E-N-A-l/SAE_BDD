@@ -225,12 +225,12 @@ for _ in range(10000):
 # TYPEMACHINE
 
 for i in range(len(data_typeMachine)):
-    file.write(f"INSERT INTO TypeMachine (nomTypeM) VALUES ({nomTypeM[i]});\n")
+    file.write(f"INSERT INTO TypeMachine (nomTypeM) VALUES ('{nomTypeM[i]}');\n")
 
 # TYPEENTRETIEN
 
 for i in range(len(data_entretien)):
-    file.write(f"INSERT INTO TypeEntretien (typeEnt, periodicite) VALUES ({liste_typeEntretien[i]}, {liste_periodicite[i]});\n")
+    file.write(f"INSERT INTO TypeEntretien (typeEnt, periodicite) VALUES ('{liste_typeEntretien[i]}','{liste_periodicite[i]}');\n")
 
 #SAUCES
 
