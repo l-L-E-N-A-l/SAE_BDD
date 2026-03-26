@@ -19,6 +19,7 @@ liste_dignite = ["MAITRE","GRAND CHANCELIER","GRAND MAITRE"]
 # Id_Tenrac
 id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(NB_TENRAC)]
 tenrac_org = {}
+id_tenrac_grade = []
 
 # Id_Structures
 id_structure = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1_000)]
@@ -51,6 +52,7 @@ sauces = data_sauces["Nom"]
 data_plats = pa.read_csv("./csv_sources/plats.csv", encoding = "UTF-8")
 data_plats = data_plats.drop_duplicates(subset=["Nom"])
 plats = data_plats["Nom"]
+ids_plat = []
 
 # Croyances
 data_croyances = pa.read_csv("./csv_sources/croyances.csv", encoding="UTF-8")
@@ -170,20 +172,20 @@ csv_nomMachines = open("nomMachines.csv", 'a')
 # Hommes
 for i in range(len(liste_grade[0])-1) :
     if i == len(liste_grade[0]) -1:
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[0][i]}',null); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES('{liste_grade[0][i]}',null); \n")
     else :
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[0][i]}','{liste_grade[0][i+1]}'); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES('{liste_grade[0][i]}','{liste_grade[0][i+1]}'); \n")
 # Femmes
 for i in range(len(liste_grade[1])-1) :
     if i == len(liste_grade[1]) -1:
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[1][i]}',null); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES('{liste_grade[1][i]}',null); \n")
     else :
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[1][i]}','{liste_grade[1][i+1]}'); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES('{liste_grade[1][i]}','{liste_grade[1][i+1]}'); \n")
 
 # DIGNITE
-file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_dignite[0]}','{liste_dignite[1]}'); \n")
-file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_dignite[1]}','{liste_dignite[2]}'); \n")
-file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_dignite[2]}',null); \n")
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES('{liste_dignite[0]}','{liste_dignite[1]}'); \n")
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES('{liste_dignite[1]}','{liste_dignite[2]}'); \n")
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES('{liste_dignite[2]}',null); \n")
 
 # ORGANISME
 for i in range(len(org_ref)):
@@ -211,7 +213,7 @@ id_current_sauce = 0
 
 for i in range(len(sauces)-1) : 
 
-    file.write(f"INSERT INTO Sauce(idSauce,nomSauce) VALUES ({id_current_sauce},'{sauces[i].upper()}'); \n")
+    file.write(f"INSERT INTO Sauce(idSauce,nomSauce) VALUES({id_current_sauce},'{sauces[i].upper()}'); \n")
     id_current_sauce += 1
 
 
@@ -224,25 +226,33 @@ for i in range(len(ingredients)-1) :
 
     if data_ing.iloc[[i]]["Categorie"].item() == "Legume" :
         
-        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n") 
-        file.write(f"INSERT INTO Legume (idIngredient,nomLeg) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n")
+        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES({id_current_ing},'{ingredients[i].upper()}'); \n") 
+        file.write(f"INSERT INTO Legume(idIngredient,nomLeg) VALUES({id_current_ing},'{ingredients[i].upper()}'); \n")
         id_current_ing += 1
         id_legumes.append(id_current_ing)
     else :
-        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n") 
+        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES({id_current_ing},'{ingredients[i].upper()}'); \n") 
         id_current_ing += 1
 
 # GROUPE
-ids_groupe = []
-for _ in range(10000):
-        data_groupe = {"idGroupe": fake.unique.random_int(min=1_000_000_000,max=9_999_999_999), "nbMembre": randint(2, 1000) }
-        file.write(f"INSERT INTO Groupe (idGroupe, nbMembre) VALUES ({data_groupe['idGroupe']}, {data_groupe['nbMembre']});\n")
-        ids_groupe.append(data_groupe["idGroupe"])
+ids_groupe = {}
+for _ in range(100):
+    data_groupe = {"idGroupe": fake.unique.random_int(min=1_000_000_000,max=9_999_999_999), "nbMembre": randint(2, 1000) }
+    file.write(f"INSERT INTO Groupe(idGroupe, nbMembre) VALUES({data_groupe['idGroupe']},{data_groupe['nbMembre']});\n")
+    ids_groupe[data_groupe["idGroupe"]] = data_groupe["nbMembre"]
         
+# APPARTIENT
+temp_id_tenrac = 0
+for id in ids_groupe.keys():
+    for _ in range(ids_groupe[id]):
+        file.write(f"INSERT INTO Appartient(idTenrac,idGroupe) VALUES({id_tenrac[temp_id_tenrac]},{id}); \n")
+        temp_id_tenrac += 1
+
+
 # TYPEMACHINE
 
 for i in range(len(data_typeMachine)):
-    file.write(f"INSERT INTO TypeMachine (nomTypeM) VALUES ('{nomTypeM[i]}');\n")
+    file.write(f"INSERT INTO TypeMachine(nomTypeM) VALUES('{nomTypeM[i]}');\n")
 
 # ADRESSE POSTALE
 
@@ -254,7 +264,7 @@ for i in range(len(codes)):
 # TYPEENTRETIEN
 
 for i in range(len(data_entretien)):
-    file.write(f"INSERT INTO TypeEntretien (typeEnt, periodicite) VALUES ('{liste_typeEntretien[i]}','{liste_periodicite[i]}');\n")
+    file.write(f"INSERT INTO TypeEntretien(typeEnt, periodicite) VALUES('{liste_typeEntretien[i]}','{liste_periodicite[i]}');\n")
 
 # RANG
 
@@ -291,6 +301,16 @@ for i in range(len(id_legumes)-1) :
         csv_contient_allergene.write(f"{id_legumes[i]},{i+j} \n")
         ids_allergies.append(i+j)
 
+# STRUCTURE
+for i in range(1_000):
+    file.write(f"INSERT INTO Structure(idStructure,chef) VALUES({id_structure[i]},{id_tenrac[i]}); \n")
+
+# ORDRES / CLUBS
+for i in range(999):
+    if i <= 100: file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
+    else: file.write(f"INSERT INTO Club(idClub,nomC,idOrdre) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}',{id_structure[i//10]}); \n")
+
+
 # TENRAC
 csv_tenrac.write(f"idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade \n")
 for i in range(NB_TENRAC):
@@ -302,6 +322,7 @@ for i in range(NB_TENRAC):
     file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}','{data_tenrac["doctrine"]}','{data_tenrac["rang"]}','{data_tenrac["titre"]}','{data_tenrac["codePostal"]}','{data_tenrac["ville"]}','{data_tenrac['referenceOrg']}','{data_tenrac["dignite"]}','{data_tenrac["grade"]}'); \n".replace("'null'","null")) # .replace(...) -> on remplace les chaines "null" par des vrais null
     csv_tenrac.write(f"{data_tenrac["id"]},{data_tenrac["nom"]},{data_tenrac["prenom"]},{email_generator(data_tenrac["nom"],data_tenrac["prenom"])},{data_tenrac["tel"]},{data_tenrac["adresse"]},{data_tenrac["sexe"]},{data_tenrac["doctrine"]},{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["codePostal"]},{data_tenrac["ville"]},{data_tenrac['referenceOrg']},{data_tenrac["dignite"]},{data_tenrac["grade"]} \n")
     tenrac_org[data_tenrac["id"]] = data_tenrac["referenceOrg"]
+    if data_tenrac["grade"] in ("CHEVALIER", "GRAND CHEVALIER", "COMMANDEUR" , "GRAND CROIX", "DAME", "HAUTE DAME", "COMMANDERESSE" , "GRANDE-CROIX") : id_tenrac_grade.append(data_tenrac["id"])
 
 # LIEU PARTENAIRE
 lieux_partenaire = {}
@@ -320,40 +341,26 @@ for i in range(10000) :
 referenceMod = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1000)]
     
 for i in range(len(referenceMod)):
-    file.write(f"INSERT INTO Modele (referenceMod) VALUES ({referenceMod[i]});\n")
+    file.write(f"INSERT INTO Modele(referenceMod) VALUES ({referenceMod[i]});\n")
 
-# STRUCTURE
-for i in range(1_000):
-    file.write(f"INSERT INTO Structure(idStructure,chef) VALUES({id_structure[i]},{id_tenrac[i]}); \n")
-
-# ORDRES / CLUBS
-for i in range(999):
-    if i <= 100: file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
-    else: file.write(f"INSERT INTO Club(idClub,nomC,idOrdre) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}',{id_structure[i//10]}); \n")
 
 #PLATS
 
 id_current_plat = 0
 
 for i in range(len(plats)-1) :
-
     id_legume = 0
-
     for j in range(len(id_legumes)-1) :
-
         if ingredients[id_legumes[j]] in plats[i] :
-
             id_legume = id_legumes[j]
     
     if id_legume != 0 :
-        
         file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{unidecode(plats[i])}',{i}); \n")
         id_current_plat += 1
-
     else :
-
         file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{unidecode(plats[i])}',NULL); \n")
         id_current_plat += 1
+    ids_plat.append(id_current_plat)
 
 #REUNION
 
@@ -365,7 +372,7 @@ for i in range(20000) :
 
     repas = ids_repas[randint(0, len(ids_repas)-1)]
     lieu = lieux_partenaire[randint(0, len(lieux_partenaire)-1)]
-    groupe = ids_groupe[randint(0, len(ids_groupe)-1)]
+    groupe = choice(list(ids_groupe.keys()))
     date = fake.date_time()
     nom = "Reunion du "+str(date)
     reunions[i] = (repas,lieu[0],lieu[1],lieu[2],groupe,date,nom)
@@ -374,12 +381,14 @@ for i in range(20000) :
     csv_reunions.write(f"{repas},{lieu[0]},{lieu[1]},{lieu[2]},{groupe},{date},{nom} \n")
                
 
-    
+# REGISTRE
+for i in range(100):
+    file.write(f"INSERT INTO Registre(idClub,idOrdre,dateOuverture,dateFermeture) VALUES({choice(id_structure[100:])},{id_structure[i]},TO_DATE('202{randint(0,6)}-0{randint(1,9)}-0{randint(1,9)}','YYYY-MM-DD'),TO_DATE('202{randint(0,6)}-0{randint(1,9)}-0{randint(1,9)}','YYYY-MM-DD')); \n")
 
 
 # CARTE
 for id in id_tenrac:
-    file.write(f"INSERT INTO Carte(numOrdre,numClub,idTenrac,referenceOrg,idCarte) VALUES({choice(id_structure[:100])},{choice(id_structure[100:])},{id},{tenrac_org[id]},{fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)}); \n")
+    file.write(f"INSERT INTO Carte(idOrdre,idClub,idTenrac,referenceOrg,idCarte) VALUES({choice(id_structure[:100])},{choice(id_structure[100:])},{id},{tenrac_org[id]},{fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)}); \n")
 
 # MACHINE
 
@@ -415,45 +424,34 @@ csv_compo_plat.write(f"idPlat,idSauce,idIngredient \n")
 
 
 for i in range(len(ingredients)-1) :
-
     insertion = ['NULL','NULL',i]
-
     if data_ing.iloc[[i]]["Categorie"].item() != "Legume" :
-
         for j in range(len(plats)-1) :
-
             if ingredient_compose(ingredients[i],plats[j]) :
-
-                insertion[0] = j
-                   
+                insertion[0] = j 
         for k in range(len(sauces)-1) :
-
             if ingredient_compose(ingredients[i], sauces[k]) :
-                
                 insertion[1] = k
-
         if insertion == ['NULL','NULL',i] :
-            
             continue
-
         else :
-            
             file.write(f"INSERT INTO Compose(idPlat,idSauce,idIngredient) VALUES({insertion[0]},{insertion[1]},{insertion[2]}); \n")
             csv_compo_plat.write(f"{insertion[0]},{insertion[1]},{insertion[2]} \n")
 
+# PRESIDE
+
+for i in reunions.keys():
+    file.write(f"INSERT INTO Preside_EstPreside(idTenrac,idRepas,adressePart,idGroupe,idReu) VALUES({choice(id_tenrac_grade)},{reunions[i][0]},{reunions[i][3]},{reunions[i][4]},'{reunions[i][5]}'; \n")
+
 #ASSAISONNEMENT
 def assaisone(plat, sauce) :
-    
     return sauce.lower() in plat.lower()
 
 csv_assaisonnement.write(f"idPlat,idSauce")
 
 for i in range(len(plats)-1) :
-
     for j in range(len(sauces)-1):
-
         if assaisone(plats[i], sauces[j]) :
-
             file.write(f"INSERT INTO Assaisone(idPlat,idSauce) VALUES({i},{j}); \n")
             csv_assaisonnement.write(f"{i},{j} \n")
 
