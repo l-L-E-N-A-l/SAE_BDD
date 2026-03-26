@@ -17,8 +17,6 @@ id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(100_
 
 # Id_Structures
 id_structure = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1_000)]
-data_structure = pa.read_csv("./csv_sources/structure_tenrac.csv")
-nom_structure = data_structure["nom"].values
 
 # Codes_postaux
 data_villes = pa.read_csv("./csv_sources/codes_villes.csv", encoding="latin-1")
@@ -78,7 +76,20 @@ def random_rang_titre_dignite():
 
     return [rang, titre, dignite]
 
+def random_grade(sexe):
+    g = randint(0, 27)
 
+    liste = liste_grade[1] if sexe == 'F' else liste_grade[0]
+
+    grade = (liste[6] if g == 27 else
+             liste[5] if g >= 25 else
+             liste[4] if g >= 22 else
+             liste[3] if g >= 17 else
+             liste[2] if g >= 12 else
+             liste[1] if g >= 6  else
+             liste[0])
+
+    return grade
 
 # Fichier SQL
 open("./script.sql", 'w').close()
@@ -104,11 +115,8 @@ csv_tenrac.write(f"idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typ
 for i in range(100_000):
     id_ville = randint(0,len(villes)-1)
     rtd = random_rang_titre_dignite()
-    data_tenrac = {"id":id_tenrac[i], "nom":unidecode(fake.last_name()).upper(), "prenom":unidecode(fake.first_name_male()).upper(), "tel":"06"+str(fake.unique.random_int(0,99_999_999)), "adresse":unidecode(fake.street_address()), "sexe":'M', "rang":rtd[0], "titre":rtd[1], "codePostal":codes[id_ville], "ville":villes[id_ville],"referenceOrg" : choice(org_ref), "dignite":rtd[2], "grade":choice(liste_grade[0])}
-    if randint(0,1)==1 : 
-        data_tenrac["sexe"] = 'F'
-        data_tenrac["prenom"] = unidecode(fake.first_name_female()).upper()
-        data_tenrac["grade"] = choice(liste_grade[1])
+    sexe = 'F' if randint(0, 1) == 1 else 'M'
+    data_tenrac = {"id":id_tenrac[i], "nom":unidecode(fake.last_name()).upper(), "prenom":unidecode(fake.first_name_female() if sexe == 'F' else fake.first_name_male()).upper(), "tel":"06"+str(fake.unique.random_int(0,99_999_999)), "adresse":unidecode(fake.street_address()), "sexe":sexe, "rang":rtd[0], "titre":rtd[1], "codePostal":codes[id_ville], "ville":villes[id_ville],"referenceOrg" : choice(org_ref), "dignite":rtd[2], "grade":random_grade(sexe)}
 
     file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}','{data_tenrac["rang"]}','{data_tenrac["titre"]}','{data_tenrac["codePostal"]}','{data_tenrac["ville"]}','{data_tenrac['referenceOrg']}','{data_tenrac["dignite"]}','{data_tenrac["grade"]}'); \n".replace("'null'","null")) # .replace(...) -> on remplace les chaines "null" par des vrais null
     csv_tenrac.write(f"{data_tenrac["id"]},{data_tenrac["nom"]},{data_tenrac["prenom"]},{email_generator(data_tenrac["nom"],data_tenrac["prenom"])},{data_tenrac["tel"]},{data_tenrac["adresse"]},{data_tenrac["sexe"]},{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["codePostal"]},{data_tenrac["ville"]},{data_tenrac['referenceOrg']},{data_tenrac["dignite"]},{data_tenrac["grade"]} \n")
@@ -118,40 +126,36 @@ for i in range(100_000):
 for i in range(1_000):
     file.write(f"INSERT INTO Structure(idStructure,chef) VALUES({id_structure[i]},'{id_tenrac[i]}'); \n")
 
-# ORDRES 
-for i in range(100):
-    file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
-
 # GRADE
 # Hommes
 for i in range(len(liste_grade[0])-1) :
     if i == len(liste_grade[0]) -1:
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[0][i]}',null); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[0][i]},null); \n")
     else :
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[0][i]}','{liste_grade[0][i+1]}'); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[0][i]},{liste_grade[0][i+1]}); \n")
 # Femmes
 for i in range(len(liste_grade[1])-1) :
     if i == len(liste_grade[1]) -1:
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[1][i]}',null); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[1][i]},null); \n")
     else :
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[1][i]}','{liste_grade[1][i+1]}'); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ({liste_grade[1][i]},{liste_grade[1][i+1]}); \n")
 
 
 # RANG
-file.write(f"INSERT INTO Rang(typeRang,superieurRang) VALUES ('{liste_rang[0]}','{liste_rang[1]}'); \n")
-file.write(f"INSERT INTO Rang(typeRang,superieurRang) VALUES ('{liste_rang[1]}',null); \n")
+file.write(f"INSERT INTO Rang(typeRang,superieurRang) VALUES ({liste_rang[0]},{liste_rang[1]}); \n")
+file.write(f"INSERT INTO Rang(typeRang,superieurRang) VALUES ({liste_rang[1]},null); \n")
 
 
 # TITRE
-file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ('{liste_titre[0]}','{liste_titre[1]}'); \n")
-file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ('{liste_titre[1]}','{liste_titre[2]}'); \n")
-file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ('{liste_titre[2]}',null); \n")
+file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ({liste_titre[0]},{liste_titre[1]}); \n")
+file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ({liste_titre[1]},{liste_titre[2]}); \n")
+file.write(f"INSERT INTO Titre(typeTitre,superieurTitre) VALUES ({liste_titre[2]},null); \n")
 
 
 # DIGNITE
-file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_dignite[0]}','{liste_dignite[1]}'); \n")
-file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_dignite[1]}','{liste_dignite[2]}'); \n")
-file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_dignite[2]}',null); \n")
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[0]},{liste_dignite[1]}); \n")
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[1]},{liste_dignite[2]}); \n")
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ({liste_dignite[2]},null); \n")
 
 # ORGANISME
 for i in range(len(org_ref)):
@@ -164,9 +168,9 @@ for i in range(len(ingredients)-1) :
 
     if data_ing.iloc[[i]]["Categorie"].item() == "Legumineuse" :
 
-        file.write(f"INSERT INTO Legume (idIngredient,nomLeg) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n")
+        file.write(f"INSERT INTO Legume (idIngredient,nomLeg) VALUES ({id_current_ing},{ingredients[i]}); \n")
 
-    file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n") 
+    file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},{ingredients[i]}); \n") 
     id_current_ing += 1
 
 #GROUPE
