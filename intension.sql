@@ -56,7 +56,7 @@ CONSTRAINT fk_superieurTitre FOREIGN KEY(superieurTitre) REFERENCES Titre(typeTi
 );
 
 CREATE TABLE AdressePostale(
-codePostal CHAR(5),
+codePostal VARCHAR2(5),
 ville VARCHAR2(50),
 CONSTRAINT pk_Adresse_Postale PRIMARY KEY(codePostal, ville)
 );
@@ -117,7 +117,7 @@ sexe VARCHAR2(1) NOT NULL,
 doctrine VARCHAR2(60) NOT NULL,
 typeRang VARCHAR2(50),
 typeTitre VARCHAR2(50),
-codePostal CHAR(5) NOT NULL,
+codePostal VARCHAR2(5) NOT NULL,
 ville VARCHAR2(50) NOT NULL,
 idOrdre NUMBER(10) NOT NULL,
 idClub NUMBER(10),
@@ -205,7 +205,7 @@ CONSTRAINT pk_Legume PRIMARY KEY(idIngredient)
 
 CREATE TABLE LieuPartenaire(
 adressePart VARCHAR2(50),
-codePostal CHAR(5) NOT NULL,
+codePostal VARCHAR2(5) NOT NULL,
 ville VARCHAR2(50) NOT NULL,
 CONSTRAINT pk_LieuPartenaire PRIMARY KEY(adressePart,codePostal,ville),
 CONSTRAINT fk_LieuPartenaire_adressePostale FOREIGN KEY(codePostal,ville) REFERENCES AdressePostale(codePostal, ville)
@@ -253,7 +253,7 @@ CONSTRAINT fk_Plat_Legume FOREIGN KEY(idIngredient) REFERENCES Legume(idIngredie
 
 CREATE TABLE Reunion(
    idRepas NUMBER(10),
-   codePostal CHAR(5),
+   codePostal VARCHAR2(5),
    ville VARCHAR2(50),
    adressePart VARCHAR2(50),
    idGroupe NUMBER(10),
@@ -432,9 +432,13 @@ CONSTRAINT fk_Heurte_Croyance FOREIGN KEY(doctrine) REFERENCES Croyance(doctrine
 
 CREATE TABLE Partenariat(
 idOrdre NUMBER(10),
+codePostal VARCHAR2(5) NOT NULL,
+ville VARCHAR2(50) NOT NULL,
 adressePart VARCHAR2(50),
-CONSTRAINT pk_Partenariat PRIMARY KEY(idOrdre, adressePart),
+CONSTRAINT pk_Partenariat PRIMARY KEY(idOrdre,codePostal,ville,adressePart),
 CONSTRAINT fk_Partenariat_Ordre FOREIGN KEY(idOrdre) REFERENCES Ordre(idOrdre),
+CONSTRAINT fk_Partenariat_codePostal FOREIGN KEY(codePostal) REFERENCES LieuPartenaire(codePostal),
+CONSTRAINT fk_Partenariat_ville FOREIGN KEY(ville) REFERENCES LieuPartenaire(ville),
 CONSTRAINT fk_Partenariat_LieuPartenaire FOREIGN KEY(adressePart) REFERENCES LieuPartenaire(adressePart)
 );
 

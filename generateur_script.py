@@ -327,7 +327,7 @@ for i in range(10000) :
     id_ville = randint(0,len(villes)-1)
     adresse = unidecode(fake.street_address())
     lieux_partenaire[i] = (codes[id_ville],villes[id_ville],adresse)
-    file.write(f"INSERT INTO LieuPartenaire(adressePart,codePostal,ville) VALUES('{adresse.upper()}',{codes[id_ville]},'{villes[id_ville].upper()}'); \n")
+    file.write(f"INSERT INTO LieuPartenaire(adressePart,codePostal,ville) VALUES('{adresse.upper()}','{codes[id_ville]}','{villes[id_ville].upper()}'); \n")
     csv_lieu_partenaire.write(f"{adresse},{codes[id_ville]},{villes[id_ville]} \n")
 
 # MODELE
@@ -463,6 +463,11 @@ for i in range(len(ids_tenrac_allergiques)-1) :
     tenrac = ids_tenrac_allergiques[i]
     file.write(f"INSERT INTO Allergie(idTenrac,idAller) VALUES({tenrac},{allergie}); \n")
     csv_allergiques.write(f"{tenrac},{allergie} \n")
+
+# PARTENARIAT 
+
+for i in range(10000):
+    file.write(f"INSERT INTO Partenariat(idOrdre,codePostal,ville,adressePart) VALUES({choice(id_structure)},'{lieux_partenaire[i][0]}','{lieux_partenaire[i][1]}','{lieux_partenaire[i][2]}'); \n")
 
 # HEURTE (Croyance <-> Legume)
 for doctrine in doctrines_rejette:
