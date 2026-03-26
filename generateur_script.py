@@ -3,6 +3,8 @@ from unidecode import *
 from random import randint , choice
 import pandas as pa
 
+NB_TENRAC = 100_000
+
 fake = Faker(locale="fr_CA")
 
 ### STOCK DE VALEURS ###
@@ -13,7 +15,7 @@ liste_titre = ["PHILANTROPHE","PROTECTEUR","HONORABLE"]
 liste_dignite = ["MAITRE","GRAND CHANCELIER","GRAND MAITRE"]
 
 # Id_Tenrac
-id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(100_000)]
+id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(NB_TENRAC)]
 
 # Id_Structures
 id_structure = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1_000)]
@@ -46,6 +48,15 @@ sauces = data_sauces["Nom"]
 data_plats = pa.read_csv("./csv_sources/plats.csv", encoding = "UTF-8")
 data_plats = data_plats.drop_duplicates(subset=["Nom"])
 plats = data_plats["Nom"]
+
+# Croyances
+data_croyances = pa.read_csv("./csv_sources/croyances.csv", encoding="UTF-8")
+data_croyances = data_croyances.drop_duplicates(subset=["doctrine"])
+data_croyances = data_croyances.reset_index(drop=True)
+liste_croyance = data_croyances["doctrine"]
+
+# Doctrines qui rejettent les légumes
+doctrines_rejette = ["Herbophobie Sacree", "Ordre de la Courgette Interdite", "Secte du Poireau Maudit", "Mouvement Anti-Chlorophylle", "Dogme de la Tomate Heretique", "Schisme du Radis Noir", "Alliance des Legumophobes Devots"]
 
 # Organismes
 data_org = pa.read_csv("./csv_sources/entreprises_fictives.csv",sep=";")
@@ -144,7 +155,7 @@ for i in range(len(codes)):
 
 # TENRAC
 csv_tenrac.write(f"idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade \n")
-for i in range(100_000):
+for i in range(NB_TENRAC):
     id_ville = randint(0,len(villes)-1)
     rtd = random_rang_titre_dignite()
     sexe = 'F' if randint(0, 3) == 0 else 'M'
@@ -315,6 +326,21 @@ for i in range(len(plats)-1) :
 
             file.write(f"INSERT INTO Assaisone(idPlat,idSauce) VALUES({i},{j}); \n")
             csv_assaisonnement.write(f"{i},{j} \n")
+
+# CROYANCE
+for i in range(len(liste_croyance)-1):
+    file.write(f"INSERT INTO Croyance(doctrine) VALUES('{liste_croyance[i]}'); \n")
+
+# HEURTE (Croyance <-> Legume)
+for doctrine in doctrines_rejette:
+    for id_leg in id_legumes:
+        if randint(0,1):
+            file.write(f"INSERT INTO Heurte(doctrine,idIngredient) VALUES('{doctrine}',{id_leg}); \n")
+
+# CROIT (Tenrac <-> Croyance)
+for i in range(NB_TENRAC):
+    file.write(f"INSERT INTO Croit(idTenrac,doctrine) VALUES({id_tenrac[i]},'{liste_croyance[randint(0,len(liste_croyance)-2)]}'); \n")
+
 
 print("- - - FINI - - -")
 
