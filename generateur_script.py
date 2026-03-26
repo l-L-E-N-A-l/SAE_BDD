@@ -30,7 +30,22 @@ lieux_partenaire = {}
 
 # Ingredients
 data_ing = pa.read_csv("./csv_sources/ingredients.csv", encoding = "UTF-8")
+data_ing = data_ing.drop_duplicates(subset=["Ingredient"])
+data_ing = data_ing.reset_index(drop=True)
 ingredients = data_ing["Ingredient"]
+
+#Sauces
+
+data_sauces = pa.read_csv("./csv_sources/sauces.csv", encoding = "UTF-8")
+data_sauces = data_sauces.drop_duplicates(subset=["Nom"])
+data_sauces = data_sauces.reset_index(drop=True)
+sauces = data_sauces["Nom"]
+
+#Plats
+
+data_plats = pa.read_csv("./csv_sources/plats.csv", encoding = "UTF-8")
+data_plats = data_plats.drop_duplicates(subset=["Nom"])
+plats = data_plats["Nom"]
 
 # Organismes
 data_org = pa.read_csv("./csv_sources/entreprises_fictives.csv",sep=";")
@@ -102,6 +117,10 @@ open("./csv_finaux/codes_postaux.csv", 'w').close()
 csv_codes_postaux = open("./csv_finaux/codes_postaux.csv", 'a')
 open("./csv_finaux/tenrac.csv", 'w').close()
 csv_tenrac = open("./csv_finaux/tenrac.csv", 'a')
+open("./csv_finaux/csv_composition_plats", 'w').close()
+csv_compo_plat = open("./csv_finaux/csv_compositions_plats", 'a')
+open("./csv_finaux/inclusion_legume.csv", 'w').close()
+csv_inclusion_legume = open("./csv_finaux/inclusion_legume.csv", 'a')
 
 
 ### INSERTIONS ###
@@ -117,7 +136,7 @@ csv_tenrac.write(f"idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typ
 for i in range(100_000):
     id_ville = randint(0,len(villes)-1)
     rtd = random_rang_titre_dignite()
-    sexe = 'F' if randint(0, 1) == 1 else 'M'
+    sexe = 'F' if randint(0, 3) == 0 else 'M'
     data_tenrac = {"id":id_tenrac[i], "nom":unidecode(fake.last_name()).upper(), "prenom":unidecode(fake.first_name_female() if sexe == 'F' else fake.first_name_male()).upper(), "tel":"06"+str(fake.unique.random_int(0,99_999_999)), "adresse":unidecode(fake.street_address()), "sexe":sexe, "rang":rtd[0], "titre":rtd[1], "codePostal":codes[id_ville], "ville":villes[id_ville],"referenceOrg" : choice(org_ref), "dignite":rtd[2], "grade":random_grade(sexe)}
 
     file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}','{data_tenrac["rang"]}','{data_tenrac["titre"]}','{data_tenrac["codePostal"]}','{data_tenrac["ville"]}','{data_tenrac['referenceOrg']}','{data_tenrac["dignite"]}','{data_tenrac["grade"]}'); \n".replace("'null'","null")) # .replace(...) -> on remplace les chaines "null" par des vrais null
@@ -135,6 +154,7 @@ for i in range(999):
 
 
 # GRADE
+
 # Hommes
 for i in range(len(liste_grade[0])-1) :
     if i == len(liste_grade[0]) -1:
@@ -171,28 +191,90 @@ for i in range(len(org_ref)):
 
 #INGREDIENTS
 id_current_ing = 0
+id_legumes = []
 
 for i in range(len(ingredients)-1) :
 
-    if data_ing.iloc[[i]]["Categorie"].item() == "Legumineuse" :
-
+    if data_ing.iloc[[i]]["Categorie"].item() == "Legume" :
+        
+        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n") 
         file.write(f"INSERT INTO Legume (idIngredient,nomLeg) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n")
-
-    file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n") 
-    id_current_ing += 1
+        id_current_ing += 1
+        id_legumes.append(id_current_ing)
+    else :
+        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n") 
+        id_current_ing += 1
 
 #GROUPE
 for _ in range(10000):
         data_groupe = {"idGroupe": fake.unique.random_int(min=1_000_000_000,max=9_999_999_999), "nbMembre": randint(2, 1000) }
         file.write(
             f"INSERT INTO Groupe (idGroupe, nbMembre) VALUES ({data_groupe['idGroupe']}, {data_groupe['nbMembre']});\n")
+#SAUCES
+
+id_current_sauce = 0
+
+for i in range(len(sauces)-1) : 
+
+    file.write(f"INSERT INTO Sauce(idSauce,nomSauce) VALUES ({id_current_sauce},'{sauces[i]}'); \n")
+    id_current_sauce += 1
+
+#PlATS
+
+id_current_plat = 0
+
+for i in range(len(plats)-1) :
+
+    id_legume = 0
+
+    for j in range(len(id_legumes)-1) :
+        if ingredients[id_legumes[j]] in plats[i] :
+
+            id_legume = id_legumes[j]
+    
+    if id_legume != 0 :
+        
+        file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{plats[i]}',{i}); \n")
+        id_current_plat += 1
+
+    else :
+
+        file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{plats[i]}',NULL); \n")
+        id_current_plat += 1
+    
+
+def ingredient_compose(ingredient, plat_sauce) :
+
+    return ingredient.lower() in plat_sauce.lower() 
+
+csv_compo_plat.write(f"idPlat,idSauce,idIngredient \n")
 
 
-#LIEUPARTENAIRE
-for i in range(250):
-    file.write(f"INSERT INTO LieuPartenaire(adressePart, codePostal, ville) VALUES ('{lieux_partenaire[i][0]}',' {lieux_partenaire[i][1]}',' {lieux_partenaire[i][2]}'); \n")
+for i in range(len(ingredients)-1) :
 
+    insertion = ['NULL','NULL',i]
 
+    if data_ing.iloc[[i]]["Categorie"].item() != "Legume" :
 
+        for j in range(len(plats)-1) :
+
+            if ingredient_compose(ingredients[i],plats[j]) :
+
+                insertion[0] = j
+                   
+        for k in range(len(sauces)-1) :
+
+            if ingredient_compose(ingredients[i], sauces[k]) :
+                
+                insertion[1] = k
+
+        if insertion == ['NULL','NULL',i] :
+            
+            continue
+
+        else :
+            
+            file.write(f"INSERT INTO Compose(idPlat,idSauce,idIngredient) VALUES({insertion[0]},{insertion[1]},{insertion[2]}); \n")
+            csv_compo_plat.write(f"{insertion[0]},{insertion[1]},{insertion[2]} \n")
 
 print("- - - FINI - - -")
