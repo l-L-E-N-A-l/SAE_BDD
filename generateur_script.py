@@ -168,8 +168,8 @@ for i in range(len(ingredients)-1) :
     id_current_ing += 1
 
 #GROUPE
-for i in range(1, 10001):
-        data_groupe = {"idGroupe": i, "nbMembre": randint(2, 1000) }
+for _ in range(10000):
+        data_groupe = {"idGroupe": fake.unique.random_int(min=1_000_000_000,max=9_999_999_999), "nbMembre": randint(2, 1000) }
         file.write(
             f"INSERT INTO Groupe (idGroupe, nbMembre) VALUES ({data_groupe['idGroupe']}, {data_groupe['nbMembre']});\n")
 
