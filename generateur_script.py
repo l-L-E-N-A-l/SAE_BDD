@@ -57,6 +57,15 @@ for i in range(len(org_ref)):
     org_siret[i] = org_siret[i].replace(" ", "")
     org_raison[i] = unidecode(org_raison[i]).upper()
 
+# Machine
+data_typeMachine = pa.read_csv("./csv_sources/typeMachine.csv") 
+nomTypeM = data_typeMachine["nomTypeM"].values
+
+# TypeEntretien
+data_entretien = pa.read_csv("./csv_sources/entretiens.csv")
+liste_typeEntretien = data_entretien["typeEntretien"]
+liste_periodicite = data_entretien["periodicite"]
+
 ### FONCTIONS ###
 
 def email_generator(nom, prenom):
@@ -189,7 +198,7 @@ file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_d
 for i in range(len(org_ref)):
     file.write(f"INSERT INTO Organisme(referenceOrg,siret,raisonSociale) VALUES({org_ref[i]},'{org_siret[i]}','{org_raison[i]}'); \n")
 
-#INGREDIENTS
+# INGREDIENTS
 id_current_ing = 0
 id_legumes = []
 
@@ -205,7 +214,7 @@ for i in range(len(ingredients)-1) :
         file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n") 
         id_current_ing += 1
 
-#GROUPE
+# GROUPE
 for _ in range(10000):
         data_groupe = {"idGroupe": fake.unique.random_int(min=1_000_000_000,max=9_999_999_999), "nbMembre": randint(2, 1000) }
         file.write(
