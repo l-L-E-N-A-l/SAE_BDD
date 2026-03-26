@@ -26,6 +26,7 @@ data_villes = data_villes.drop_duplicates(subset=["Code_postal", "Nom_de_la_comm
 data_villes = data_villes.reset_index(drop=True)
 codes = data_villes["Code_postal"]
 villes = data_villes["Nom_de_la_commune"]
+lieux_partenaire = {}
 
 # Ingredients
 data_ing = pa.read_csv("./csv_sources/ingredients.csv", encoding = "UTF-8")
@@ -111,6 +112,7 @@ for i in range(100_000):
 
     file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}','{data_tenrac["rang"]}','{data_tenrac["titre"]}','{data_tenrac["codePostal"]}','{data_tenrac["ville"]}','{data_tenrac['referenceOrg']}','{data_tenrac["dignite"]}','{data_tenrac["grade"]}'); \n".replace("'null'","null")) # .replace(...) -> on remplace les chaines "null" par des vrais null
     csv_tenrac.write(f"{data_tenrac["id"]},{data_tenrac["nom"]},{data_tenrac["prenom"]},{email_generator(data_tenrac["nom"],data_tenrac["prenom"])},{data_tenrac["tel"]},{data_tenrac["adresse"]},{data_tenrac["sexe"]},{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["codePostal"]},{data_tenrac["ville"]},{data_tenrac['referenceOrg']},{data_tenrac["dignite"]},{data_tenrac["grade"]} \n")
+    lieux_partenaire[i] = (data_tenrac["adresse"],data_tenrac["codePostal"],data_tenrac["ville"])
 
 # STRUCTURE
 for i in range(1_000):
@@ -175,18 +177,9 @@ for _ in range(10000):
 
 
 #LIEUPARTENAIRE
-'''
-lieux_partenaire = {}
-lieux_partenaire.add((
-    data_tenrac["adresse"],
-    data_tenrac["codePostal"],
-    data_tenrac["ville"]
-))
+for i in range(250):
+    file.write(f"INSERT INTO LieuPartenaire(adressePart, codePostal, ville) VALUES ('{lieux_partenaire[i][0]}',' {lieux_partenaire[i][1]}',' {lieux_partenaire[i][2]}'); \n")
 
-for i in range(1, 250):
-    for adresse, codePostal, ville in lieux_partenaire:
-        file.write(f"INSERT INTO LieuPartenaire(adressePart, codePostal, ville) VALUES ({adresse}, {codePostal}, {ville}); \n")
-'''
 
 
 
