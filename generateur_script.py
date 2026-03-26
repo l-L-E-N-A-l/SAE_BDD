@@ -17,10 +17,7 @@ id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(100_
 
 # Id_Structures
 id_structure = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1_000)]
-
 data_structure = pa.read_csv("./csv_sources/structure_tenrac.csv")
-
-
 nom_structure = data_structure["nom"].values
 
 # Codes_postaux
@@ -129,15 +126,12 @@ for i in range(100_000):
 
 # STRUCTURE
 for i in range(1_000):
-    file.write(f"INSERT INTO Structure(idStructure,chef) VALUES({id_structure[i]},'{id_tenrac[i]}'); \n")
-# ORDRES 
+    file.write(f"INSERT INTO Structure(idStructure,chef) VALUES({id_structure[i]},{id_tenrac[i]}); \n")
 
-
-
-for i in range(100):
-
-
-    file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
+# ORDRES / CLUBS
+for i in range(999):
+    if i <= 100: file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
+    else: file.write(f"INSERT INTO Club(idClub,nomC,idOrdre) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}',{id_structure[i//10]}); \n")
 
 
 # GRADE
