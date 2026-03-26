@@ -49,6 +49,7 @@ sauces = data_sauces["Nom"]
 data_plats = pa.read_csv("./csv_sources/plats.csv", encoding = "UTF-8")
 data_plats = data_plats.drop_duplicates(subset=["Nom"])
 plats = data_plats["Nom"]
+ids_plat = []
 
 # Croyances
 data_croyances = pa.read_csv("./csv_sources/croyances.csv", encoding="UTF-8")
@@ -164,20 +165,20 @@ csv_reunions = open("./csv_finaux/reunions.csv", 'a')
 # Hommes
 for i in range(len(liste_grade[0])-1) :
     if i == len(liste_grade[0]) -1:
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[0][i]}',null); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES('{liste_grade[0][i]}',null); \n")
     else :
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[0][i]}','{liste_grade[0][i+1]}'); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES('{liste_grade[0][i]}','{liste_grade[0][i+1]}'); \n")
 # Femmes
 for i in range(len(liste_grade[1])-1) :
     if i == len(liste_grade[1]) -1:
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[1][i]}',null); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES('{liste_grade[1][i]}',null); \n")
     else :
-        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES ('{liste_grade[1][i]}','{liste_grade[1][i+1]}'); \n")
+        file.write(f"INSERT INTO Grade(typeGrade,superieurGrade) VALUES('{liste_grade[1][i]}','{liste_grade[1][i+1]}'); \n")
 
 # DIGNITE
-file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_dignite[0]}','{liste_dignite[1]}'); \n")
-file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_dignite[1]}','{liste_dignite[2]}'); \n")
-file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_dignite[2]}',null); \n")
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES('{liste_dignite[0]}','{liste_dignite[1]}'); \n")
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES('{liste_dignite[1]}','{liste_dignite[2]}'); \n")
+file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES('{liste_dignite[2]}',null); \n")
 
 # ORGANISME
 for i in range(len(org_ref)):
@@ -205,7 +206,7 @@ id_current_sauce = 0
 
 for i in range(len(sauces)-1) : 
 
-    file.write(f"INSERT INTO Sauce(idSauce,nomSauce) VALUES ({id_current_sauce},'{sauces[i].upper()}'); \n")
+    file.write(f"INSERT INTO Sauce(idSauce,nomSauce) VALUES({id_current_sauce},'{sauces[i].upper()}'); \n")
     id_current_sauce += 1
 
 
@@ -223,7 +224,7 @@ for i in range(len(ingredients)-1) :
         id_current_ing += 1
         id_legumes.append(id_current_ing)
     else :
-        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n") 
+        file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES({id_current_ing},'{ingredients[i].upper()}'); \n") 
         id_current_ing += 1
 
 # GROUPE
@@ -244,7 +245,7 @@ for id in ids_groupe.keys():
 # TYPEMACHINE
 
 for i in range(len(data_typeMachine)):
-    file.write(f"INSERT INTO TypeMachine (nomTypeM) VALUES ('{nomTypeM[i]}');\n")
+    file.write(f"INSERT INTO TypeMachine(nomTypeM) VALUES('{nomTypeM[i]}');\n")
 
 # ADRESSE POSTALE
 
@@ -256,7 +257,7 @@ for i in range(len(codes)):
 # TYPEENTRETIEN
 
 for i in range(len(data_entretien)):
-    file.write(f"INSERT INTO TypeEntretien (typeEnt, periodicite) VALUES ('{liste_typeEntretien[i]}','{liste_periodicite[i]}');\n")
+    file.write(f"INSERT INTO TypeEntretien(typeEnt, periodicite) VALUES('{liste_typeEntretien[i]}','{liste_periodicite[i]}');\n")
 
 # RANG
 
@@ -332,7 +333,7 @@ for i in range(10000) :
 referenceMod = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1000)]
     
 for i in range(len(referenceMod)):
-    file.write(f"INSERT INTO Modele (referenceMod) VALUES ({referenceMod[i]});\n")
+    file.write(f"INSERT INTO Modele(referenceMod) VALUES ({referenceMod[i]});\n")
 
 
 #PLATS
@@ -351,6 +352,7 @@ for i in range(len(plats)-1) :
     else :
         file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{unidecode(plats[i])}',NULL); \n")
         id_current_plat += 1
+    ids_plat.append(id_current_plat)
 
 #REUNION
 
@@ -396,7 +398,14 @@ for _ in range(5000):
     file.write(
         f"INSERT INTO Modele (referenceMod) VALUES ('machine raclette {ref}');\n")
 ''' 
+# MENU 
+for id in ids_repas:
+    for _ in range(randint(1,4)):
+        file.write(f"INSERT INTO Menu(idRepas,idPlat) VALUES({id},{choice(ids_plat)}); \n")
 
+
+
+# COMPOSE
 def ingredient_compose(ingredient, plat_sauce) :
 
     return ingredient.lower() in plat_sauce.lower() 
