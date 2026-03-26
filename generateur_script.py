@@ -2,6 +2,8 @@ from faker import *
 from unidecode import *
 from random import randint , choice, sample
 import pandas as pa
+import string
+
 
 NB_TENRAC = 100_000
 
@@ -158,6 +160,10 @@ open("./csv_finaux/lieu_partenaire.csv", 'w').close()
 csv_lieu_partenaire = open("./csv_finaux/lieu_partenaire.csv", 'a')
 open("./csv_finaux/reunions.csv", 'w').close()
 csv_reunions = open("./csv_finaux/reunions.csv", 'a')
+
+open("./csv_sources/nomMachines.csv", 'w').close()
+csv_nomMachines = open("nomMachines.csv", 'a')
+
 
 ### INSERTIONS ###
 
@@ -386,28 +392,28 @@ for id in id_tenrac:
 
 # MACHINE
 
-'''
+#Machine = (#(#nomTypeM, referenceMod), nomM VARCHAR2(50));
+
+nombreDeMachines = 5000
 def random_ref(length=5):
-    return ''.join(random.choices(string.ascii_lowercase, k=length))
+    return ''.join(random.choices(string.ascii_uppercase, k=length))
 
-genere_refs = set()
+set_refs = set()
+csv_nomMachines.write("nomRef\n")
 
-for _ in range(5000):
+for _ in range(nombreDeMachines):
     ref = random_ref()
     
-    while ref in genere_refs:
+    while ref in set_refs:
         ref = random_ref()
-    genere_refs.add(ref)
+    set_refs.add(ref)
+    nomRef = f"machine raclette {ref}"
+    
+    csv_nomMachines.write(f"{nomRef}\n")
 
-    file.write(
-        f"INSERT INTO Modele (referenceMod) VALUES ('machine raclette {ref}');\n")
-''' 
-# MENU 
-for id in ids_repas:
-    for _ in range(randint(1,4)):
-        file.write(f"INSERT INTO Menu(idRepas,idPlat) VALUES({id},{choice(ids_plat)}); \n")
+for _ in nombreDeMachines:
 
-
+    file.write(f"INSERT INTO Machine(nomTypeM, referenceMod, nomM) VALUES({nomTypeM},{referenceMod},'MACHINE RACLETTE {nomRef}');\n") ##missing attributs de reference de foreign key
 
 # COMPOSE
 def ingredient_compose(ingredient, plat_sauce) :
