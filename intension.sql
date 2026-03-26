@@ -207,7 +207,7 @@ CREATE TABLE LieuPartenaire(
 adressePart VARCHAR2(50),
 codePostal CHAR(5) NOT NULL,
 ville VARCHAR2(50) NOT NULL,
-CONSTRAINT pk_LieuPartenaire PRIMARY KEY(adressePart),
+CONSTRAINT pk_LieuPartenaire PRIMARY KEY(adressePart,codePostal,ville),
 CONSTRAINT fk_LieuPartenaire_adressePostale FOREIGN KEY(codePostal,ville) REFERENCES AdressePostale(codePostal, ville)
 );
 
