@@ -16,6 +16,7 @@ liste_dignite = ["MAITRE","GRAND CHANCELIER","GRAND MAITRE"]
 
 # Id_Tenrac
 id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(NB_TENRAC)]
+tenrac_org = {}
 
 # Id_Structures
 id_structure = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1_000)]
