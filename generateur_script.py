@@ -232,6 +232,32 @@ for i in range(len(data_typeMachine)):
 for i in range(len(data_entretien)):
     file.write(f"INSERT INTO TypeEntretien (typeEnt, periodicite) VALUES ('{liste_typeEntretien[i]}','{liste_periodicite[i]}');\n")
 
+# MODELE
+
+referenceMod = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1000)]
+    
+for i in range(len(referenceMod)):
+    file.write(f"INSERT INTO Modele (referenceMod) VALUES ({referenceMod[i]});\n")
+
+# MACHINE
+
+'''
+def random_ref(length=5):
+    return ''.join(random.choices(string.ascii_lowercase, k=length))
+
+genere_refs = set()
+
+for _ in range(5000):
+    ref = random_ref()
+    
+    while ref in genere_refs:
+        ref = random_ref()
+    genere_refs.add(ref)
+
+    file.write(
+        f"INSERT INTO Modele (referenceMod) VALUES ('machine raclette {ref}');\n")
+'''
+
 #SAUCES
 
 id_current_sauce = 0
