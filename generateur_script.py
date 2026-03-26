@@ -14,6 +14,7 @@ liste_dignite = ["MAITRE","GRAND CHANCELIER","GRAND MAITRE"]
 
 # Id_Tenrac
 id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(100_000)]
+tenrac_org = {}
 
 # Id_Structures
 id_structure = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1_000)]
@@ -151,6 +152,7 @@ for i in range(100_000):
     file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}','{data_tenrac["rang"]}','{data_tenrac["titre"]}','{data_tenrac["codePostal"]}','{data_tenrac["ville"]}','{data_tenrac['referenceOrg']}','{data_tenrac["dignite"]}','{data_tenrac["grade"]}'); \n".replace("'null'","null")) # .replace(...) -> on remplace les chaines "null" par des vrais null
     csv_tenrac.write(f"{data_tenrac["id"]},{data_tenrac["nom"]},{data_tenrac["prenom"]},{email_generator(data_tenrac["nom"],data_tenrac["prenom"])},{data_tenrac["tel"]},{data_tenrac["adresse"]},{data_tenrac["sexe"]},{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["codePostal"]},{data_tenrac["ville"]},{data_tenrac['referenceOrg']},{data_tenrac["dignite"]},{data_tenrac["grade"]} \n")
     lieux_partenaire[i] = (data_tenrac["adresse"],data_tenrac["codePostal"],data_tenrac["ville"])
+    tenrac_org[data_tenrac["id"]] = data_tenrac["referenceOrg"]
 
 # STRUCTURE
 for i in range(1_000):
@@ -198,6 +200,10 @@ file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_d
 for i in range(len(org_ref)):
     file.write(f"INSERT INTO Organisme(referenceOrg,siret,raisonSociale) VALUES({org_ref[i]},'{org_siret[i]}','{org_raison[i]}'); \n")
 
+# CARTE
+for id in id_tenrac:
+    file.write(f"INSERT INTO Carte(numOrdre,numClub,idTenrac,referenceOrg,idCarte) VALUES({choice(id_structure[:100])},{choice(id_structure[100:])},{id},{tenrac_org[id]},{fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)}); \n")
+
 # INGREDIENTS
 id_current_ing = 0
 id_legumes = []
@@ -228,7 +234,7 @@ for i in range(len(sauces)-1) :
     file.write(f"INSERT INTO Sauce(idSauce,nomSauce) VALUES ({id_current_sauce},'{sauces[i]}'); \n")
     id_current_sauce += 1
 
-#PlATS
+#PLATS
 
 id_current_plat = 0
 
