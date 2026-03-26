@@ -243,12 +243,12 @@ for i in range(len(plats)-1) :
     
     if id_legume != 0 :
         
-        file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{plats[i]}',{i}); \n")
+        file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{unidecode(plats[i])}',{i}); \n")
         id_current_plat += 1
 
     else :
 
-        file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{plats[i]}',NULL); \n")
+        file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{unidecode(plats[i])}',NULL); \n")
         id_current_plat += 1
     
 
