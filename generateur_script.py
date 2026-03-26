@@ -219,6 +219,17 @@ for _ in range(10000):
         data_groupe = {"idGroupe": fake.unique.random_int(min=1_000_000_000,max=9_999_999_999), "nbMembre": randint(2, 1000) }
         file.write(
             f"INSERT INTO Groupe (idGroupe, nbMembre) VALUES ({data_groupe['idGroupe']}, {data_groupe['nbMembre']});\n")
+        
+# TYPEMACHINE
+
+for i in range(len(data_typeMachine)):
+    file.write(f"INSERT INTO TypeMachine (nomTypeM) VALUES ({nomTypeM[i]});\n")
+
+# TYPEENTRETIEN
+
+for i in range(len(data_entretien)):
+    file.write(f"INSERT INTO TypeEntretien (typeEnt, periodicite) VALUES ({liste_typeEntretien[i]}, {liste_periodicite[i]});\n")
+
 #SAUCES
 
 id_current_sauce = 0
