@@ -73,10 +73,10 @@ FOREIGN KEY(idOrdre) REFERENCES Structure(idStructure)
 CREATE TABLE Club(
 idClub NUMBER(10),
 nomC VARCHAR2(50) NOT NULL,
-idOrdre NUMBER(10) NOT NULL,
+idOrdrePere NUMBER(10) NOT NULL,
 PRIMARY KEY(idClub),
 FOREIGN KEY(idClub) REFERENCES Structure(idStructure),
-FOREIGN KEY(idOrdre) REFERENCES Ordre(idOrdre)
+FOREIGN KEY(idOrdrePere) REFERENCES Ordre(idOrdre)
 );
 
 

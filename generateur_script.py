@@ -17,10 +17,7 @@ id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(100_
 
 # Id_Structures
 id_structure = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1_000)]
-
 data_structure = pa.read_csv("./csv_sources/structure_tenrac.csv")
-
-
 nom_structure = data_structure["nom"].values
 
 # Codes_postaux
@@ -59,6 +56,15 @@ org_raison = data_org["Raison_sociale"]
 for i in range(len(org_ref)):
     org_siret[i] = org_siret[i].replace(" ", "")
     org_raison[i] = unidecode(org_raison[i]).upper()
+
+# Machine
+data_typeMachine = pa.read_csv("./csv_sources/typeMachine.csv") 
+nomTypeM = data_typeMachine["nomTypeM"].values
+
+# TypeEntretien
+data_entretien = pa.read_csv("./csv_sources/entretiens.csv")
+liste_typeEntretien = data_entretien["typeEntretien"]
+liste_periodicite = data_entretien["periodicite"]
 
 ### FONCTIONS ###
 
@@ -150,15 +156,12 @@ for i in range(100_000):
 
 # STRUCTURE
 for i in range(1_000):
-    file.write(f"INSERT INTO Structure(idStructure,chef) VALUES({id_structure[i]},'{id_tenrac[i]}'); \n")
-# ORDRES 
+    file.write(f"INSERT INTO Structure(idStructure,chef) VALUES({id_structure[i]},{id_tenrac[i]}); \n")
 
-
-
-for i in range(100):
-
-
-    file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
+# ORDRES / CLUBS
+for i in range(999):
+    if i <= 100: file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
+    else: file.write(f"INSERT INTO Club(idClub,nomC,idOrdre) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}',{id_structure[i//10]}); \n")
 
 
 # GRADE
@@ -197,7 +200,7 @@ file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_d
 for i in range(len(org_ref)):
     file.write(f"INSERT INTO Organisme(referenceOrg,siret,raisonSociale) VALUES({org_ref[i]},'{org_siret[i]}','{org_raison[i]}'); \n")
 
-#INGREDIENTS
+# INGREDIENTS
 id_current_ing = 0
 id_legumes = []
 
@@ -213,7 +216,7 @@ for i in range(len(ingredients)-1) :
         file.write(f"INSERT INTO Ingredient(idIngredient,nomIngr) VALUES ({id_current_ing},'{ingredients[i].upper()}'); \n") 
         id_current_ing += 1
 
-#GROUPE
+# GROUPE
 for _ in range(10000):
         data_groupe = {"idGroupe": fake.unique.random_int(min=1_000_000_000,max=9_999_999_999), "nbMembre": randint(2, 1000) }
         file.write(
@@ -243,12 +246,12 @@ for i in range(len(plats)-1) :
     
     if id_legume != 0 :
         
-        file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{plats[i].upper()}',{i}); \n")
+        file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{unidecode(plats[i])}',{i}); \n")
         id_current_plat += 1
 
     else :
 
-        file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{plats[i].upper()}',NULL); \n")
+        file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{unidecode(plats[i])}',NULL); \n")
         id_current_plat += 1
     
 
