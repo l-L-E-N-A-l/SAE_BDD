@@ -17,6 +17,7 @@ liste_dignite = ["MAITRE","GRAND CHANCELIER","GRAND MAITRE"]
 # Id_Tenrac
 id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(NB_TENRAC)]
 tenrac_org = {}
+id_tenrac_grade = []
 
 # Id_Structures
 id_structure = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1_000)]
@@ -315,6 +316,7 @@ for i in range(NB_TENRAC):
     file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}','{data_tenrac["doctrine"]}','{data_tenrac["rang"]}','{data_tenrac["titre"]}','{data_tenrac["codePostal"]}','{data_tenrac["ville"]}','{data_tenrac['referenceOrg']}','{data_tenrac["dignite"]}','{data_tenrac["grade"]}'); \n".replace("'null'","null")) # .replace(...) -> on remplace les chaines "null" par des vrais null
     csv_tenrac.write(f"{data_tenrac["id"]},{data_tenrac["nom"]},{data_tenrac["prenom"]},{email_generator(data_tenrac["nom"],data_tenrac["prenom"])},{data_tenrac["tel"]},{data_tenrac["adresse"]},{data_tenrac["sexe"]},{data_tenrac["doctrine"]},{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["codePostal"]},{data_tenrac["ville"]},{data_tenrac['referenceOrg']},{data_tenrac["dignite"]},{data_tenrac["grade"]} \n")
     tenrac_org[data_tenrac["id"]] = data_tenrac["referenceOrg"]
+    if data_tenrac["grade"] in ("CHEVALIER", "GRAND CHEVALIER", "COMMANDEUR" , "GRAND CROIX", "DAME", "HAUTE DAME", "COMMANDERESSE" , "GRANDE-CROIX") : id_tenrac_grade.append(data_tenrac["id"])
 
 # LIEU PARTENAIRE
 lieux_partenaire = {}
@@ -429,6 +431,11 @@ for i in range(len(ingredients)-1) :
         else :
             file.write(f"INSERT INTO Compose(idPlat,idSauce,idIngredient) VALUES({insertion[0]},{insertion[1]},{insertion[2]}); \n")
             csv_compo_plat.write(f"{insertion[0]},{insertion[1]},{insertion[2]} \n")
+
+# PRESIDE
+
+for i in reunions.keys():
+    file.write(f"INSERT INTO Preside_EstPreside(idTenrac,idRepas,adressePart,idGroupe,idReu) VALUES({choice(id_tenrac_grade)},{reunions[i][0]},{reunions[i][3]},{reunions[i][4]},'{reunions[i][5]}'; \n")
 
 #ASSAISONNEMENT
 def assaisone(plat, sauce) :
