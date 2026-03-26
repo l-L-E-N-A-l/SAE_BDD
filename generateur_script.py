@@ -154,6 +154,8 @@ open("./csv_finaux/repas.csv", 'w').close()
 csv_repas = open("./csv_finaux/repas.csv", 'a')
 open("./csv_finaux/lieu_partenaire.csv", 'w').close()
 csv_lieu_partenaire = open("./csv_finaux/lieu_partenaire.csv", 'a')
+open("./csv_finaux/reunions.csv", 'w').close()
+csv_reunions = open("./csv_finaux/reunions.csv", 'a')
 
 ### INSERTIONS ###
 
@@ -225,11 +227,11 @@ for i in range(len(ingredients)-1) :
         id_current_ing += 1
 
 # GROUPE
-
+ids_groupe = []
 for _ in range(10000):
         data_groupe = {"idGroupe": fake.unique.random_int(min=1_000_000_000,max=9_999_999_999), "nbMembre": randint(2, 1000) }
-        file.write(
-            f"INSERT INTO Groupe (idGroupe, nbMembre) VALUES ({data_groupe['idGroupe']}, {data_groupe['nbMembre']});\n")
+        file.write(f"INSERT INTO Groupe (idGroupe, nbMembre) VALUES ({data_groupe['idGroupe']}, {data_groupe['nbMembre']});\n")
+        ids_groupe.append(data_groupe["idGroupe"])
         
 # TYPEMACHINE
 
@@ -303,10 +305,16 @@ for i in range(10000) :
 
     id_ville = randint(0,len(villes)-1)
     adresse = unidecode(fake.street_address())
-    lieux_partenaire[i] = [codes[id_ville],villes[id_ville],adresse]
+    lieux_partenaire[i] = (codes[id_ville],villes[id_ville],adresse)
     file.write(f"INSERT INTO LieuPartenaire(adressePart,codePostal,ville) VALUES('{adresse.upper()}',{codes[id_ville]},'{villes[id_ville].upper()}'); \n")
     csv_lieu_partenaire.write(f"{adresse},{codes[id_ville]},{villes[id_ville]} \n")
 
+# MODELE
+
+referenceMod = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1000)]
+    
+for i in range(len(referenceMod)):
+    file.write(f"INSERT INTO Modele (referenceMod) VALUES ({referenceMod[i]});\n")
 
 # STRUCTURE
 for i in range(1_000):
@@ -316,37 +324,6 @@ for i in range(1_000):
 for i in range(999):
     if i <= 100: file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
     else: file.write(f"INSERT INTO Club(idClub,nomC,idOrdre) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}',{id_structure[i//10]}); \n")
-
-
-# CARTE
-for id in id_tenrac:
-    file.write(f"INSERT INTO Carte(numOrdre,numClub,idTenrac,referenceOrg,idCarte) VALUES({choice(id_structure[:100])},{choice(id_structure[100:])},{id},{tenrac_org[id]},{fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)}); \n")
-
-# MODELE
-
-referenceMod = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1000)]
-    
-for i in range(len(referenceMod)):
-    file.write(f"INSERT INTO Modele (referenceMod) VALUES ({referenceMod[i]});\n")
-
-# MACHINE
-
-'''
-def random_ref(length=5):
-    return ''.join(random.choices(string.ascii_lowercase, k=length))
-
-genere_refs = set()
-
-for _ in range(5000):
-    ref = random_ref()
-    
-    while ref in genere_refs:
-        ref = random_ref()
-    genere_refs.add(ref)
-
-    file.write(
-        f"INSERT INTO Modele (referenceMod) VALUES ('machine raclette {ref}');\n")
-'''
 
 #PLATS
 
@@ -371,7 +348,51 @@ for i in range(len(plats)-1) :
 
         file.write(f"INSERT INTO Plat(idPlat,nomPlat,idIngredient) VALUES ({id_current_plat},'{unidecode(plats[i])}',NULL); \n")
         id_current_plat += 1
+
+#REUNION
+
+reunions = {}
+
+csv_reunions.write(f"idRepas,codePostal,ville,AdressePart,idGroupe,dateReu,nomReu \n")
+
+for i in range(20000) :
+
+    repas = ids_repas[randint(0, len(ids_repas)-1)]
+    lieu = lieux_partenaire[randint(0, len(lieux_partenaire)-1)]
+    groupe = ids_groupe[randint(0, len(ids_groupe)-1)]
+    date = fake.date_time()
+    nom = "Reunion du "+str(date)
+    reunions[i] = (repas,lieu[0],lieu[1],lieu[2],groupe,date,nom)
+
+    file.write(f"INSERT INTO Reunion(idRepas,codePostal,ville,AdressePart,idGroupe,dateReu,nomReu) VALUES({repas},'{lieu[0]}','{lieu[1].upper()}','{lieu[2].upper()}',{groupe},'{date}','{nom.upper()}'); \n")
+    csv_reunions.write(f"{repas},{lieu[0]},{lieu[1]},{lieu[2]},{groupe},{date},{nom} \n")
+               
+
     
+
+
+# CARTE
+for id in id_tenrac:
+    file.write(f"INSERT INTO Carte(numOrdre,numClub,idTenrac,referenceOrg,idCarte) VALUES({choice(id_structure[:100])},{choice(id_structure[100:])},{id},{tenrac_org[id]},{fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)}); \n")
+
+# MACHINE
+
+'''
+def random_ref(length=5):
+    return ''.join(random.choices(string.ascii_lowercase, k=length))
+
+genere_refs = set()
+
+for _ in range(5000):
+    ref = random_ref()
+    
+    while ref in genere_refs:
+        ref = random_ref()
+    genere_refs.add(ref)
+
+    file.write(
+        f"INSERT INTO Modele (referenceMod) VALUES ('machine raclette {ref}');\n")
+''' 
 
 def ingredient_compose(ingredient, plat_sauce) :
 

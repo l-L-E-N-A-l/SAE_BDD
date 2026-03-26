@@ -252,16 +252,19 @@ CONSTRAINT fk_Plat_Legume FOREIGN KEY(idIngredient) REFERENCES Legume(idIngredie
 );
 
 CREATE TABLE Reunion(
-idRepas NUMBER(10),
-adressePart VARCHAR2(50),
-idGroupe NUMBER(10),
-dateReu TIMESTAMP,
-nomReu VARCHAR2(50) NOT NULL,
-CONSTRAINT pk_Reunion PRIMARY KEY(idRepas, adressePart, idGroupe, dateReu),
-CONSTRAINT fk_Reunion_Repas FOREIGN KEY(idRepas) REFERENCES Repas(idRepas),
-CONSTRAINT fk_Reunion_LieuPartenaire FOREIGN KEY(adressePart) REFERENCES LieuPartenaire(adressePart),
-CONSTRAINT fk_Reunion_Groupe FOREIGN KEY(idGroupe) REFERENCES Groupe(idGroupe)
+   idRepas NUMBER(10),
+   codePostal CHAR(5),
+   ville VARCHAR2(50),
+   adressePart VARCHAR2(50),
+   idGroupe NUMBER(10),
+   dateReu TIMESTAMP WITH TIME ZONE,
+   nomReu VARCHAR2(50) NOT NULL,
+   PRIMARY KEY(idRepas, codePostal, ville, adressePart, idGroupe, dateReu),
+   FOREIGN KEY(idRepas) REFERENCES Repas(idRepas),
+   FOREIGN KEY(codePostal, ville, adressePart) REFERENCES LieuPartenaire(codePostal, ville, adressePart),
+   FOREIGN KEY(idGroupe) REFERENCES Groupe(idGroupe)
 );
+
 
 CREATE TABLE Machine(
 nomTypeM VARCHAR2(50),
