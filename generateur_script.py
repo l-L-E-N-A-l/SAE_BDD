@@ -373,12 +373,14 @@ for i in range(20000) :
     csv_reunions.write(f"{repas},{lieu[0]},{lieu[1]},{lieu[2]},{groupe},{date},{nom} \n")
                
 
-    
+# REGISTRE
+for i in range(100):
+    file.write(f"INSERT INTO Registre(idClub,idOrdre,dateOuverture,dateFermeture) VALUES({choice(id_structure[100:])},{id_structure[i]},TO_DATE('202{randint(0,6)}-0{randint(1,9)}-0{randint(1,9)}','YYYY-MM-DD'),TO_DATE('202{randint(0,6)}-0{randint(1,9)}-0{randint(1,9)}','YYYY-MM-DD')); \n")
 
 
 # CARTE
 for id in id_tenrac:
-    file.write(f"INSERT INTO Carte(numOrdre,numClub,idTenrac,referenceOrg,idCarte) VALUES({choice(id_structure[:100])},{choice(id_structure[100:])},{id},{tenrac_org[id]},{fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)}); \n")
+    file.write(f"INSERT INTO Carte(idOrdre,idClub,idTenrac,referenceOrg,idCarte) VALUES({choice(id_structure[:100])},{choice(id_structure[100:])},{id},{tenrac_org[id]},{fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)}); \n")
 
 # MACHINE
 

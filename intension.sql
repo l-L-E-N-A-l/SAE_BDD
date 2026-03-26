@@ -119,8 +119,8 @@ typeRang VARCHAR2(50),
 typeTitre VARCHAR2(50),
 codePostal CHAR(5) NOT NULL,
 ville VARCHAR2(50) NOT NULL,
-numOrdre NUMBER(10) NOT NULL,
-numClub NUMBER(10),
+idOrdre NUMBER(10) NOT NULL,
+idClub NUMBER(10),
 referenceOrg NUMBER(10) NOT NULL,
 typeDignite VARCHAR2(50),
 typeGrade VARCHAR2(50) NOT NULL,
@@ -129,8 +129,8 @@ CONSTRAINT fk_doctrine FOREIGN KEY(doctrine) REFERENCES Croyance(doctrine),
 CONSTRAINT fk_typeRang FOREIGN KEY(typeRang) REFERENCES Rang(typeRang),
 CONSTRAINT fk_typeTitre FOREIGN KEY(typeTitre) REFERENCES Titre(typeTitre),
 CONSTRAINT fk_tenrac_adressePostale FOREIGN KEY(codePostal, ville) REFERENCES AdressePostale(codePostal, ville),
-CONSTRAINT fk_Tenrac_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre),
-CONSTRAINT fk_numClub FOREIGN KEY(numClub) REFERENCES Club(numClub),
+CONSTRAINT fk_Tenrac_idOrdre FOREIGN KEY(idOrdre) REFERENCES Ordre(idOrdre),
+CONSTRAINT fk_idClub FOREIGN KEY(idClub) REFERENCES Club(idClub),
 CONSTRAINT fk_reference FOREIGN KEY(referenceOrg) REFERENCES Organisme(referenceOrg),
 CONSTRAINT fk_typeDignite FOREIGN KEY(typeDignite) REFERENCES Dignite(typeDignite),
 CONSTRAINT fk_typeGrade FOREIGN KEY(typeGrade) REFERENCES Grade(typeGrade),
@@ -221,24 +221,24 @@ CONSTRAINT fk_type FOREIGN KEY(typeEnt) REFERENCES TypeEntretien(typeEnt)
 );
 
 CREATE TABLE Registre(
-numClub NUMBER(10),
-numOrdre NUMBER(10),
+idClub NUMBER(10),
+idOrdre NUMBER(10),
 dateOuverture DATE NOT NULL,
 dateFermeture DATE,
-CONSTRAINT pk_Registre PRIMARY KEY(numClub, numOrdre),
-CONSTRAINT fk_Registre_numClub FOREIGN KEY(numClub) REFERENCES Club(numClub),
-CONSTRAINT fk_Registre_numOrdre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre)
+CONSTRAINT pk_Registre PRIMARY KEY(idClub, idOrdre),
+CONSTRAINT fk_Registre_idClub FOREIGN KEY(idClub) REFERENCES Club(idClub),
+CONSTRAINT fk_Registre_idOrdre FOREIGN KEY(idOrdre) REFERENCES Ordre(idOrdre)
 );
 
 CREATE TABLE Carte(
-numOrdre NUMBER(10),
-numClub NUMBER(10),
+idOrdre NUMBER(10),
+idClub NUMBER(10),
 idTenrac NUMBER(10),
 referenceOrg NUMBER(10),
 idCarte NUMBER(10),
-CONSTRAINT pk_Carte PRIMARY KEY(numOrdre, numClub, idTenrac, referenceOrg, idCarte),
-CONSTRAINT fk_Carte_Ordre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre),
-CONSTRAINT fk_Carte_Club FOREIGN KEY(numClub) REFERENCES Club(numClub),
+CONSTRAINT pk_Carte PRIMARY KEY(idOrdre, idClub, idTenrac, referenceOrg, idCarte),
+CONSTRAINT fk_Carte_Ordre FOREIGN KEY(idOrdre) REFERENCES Ordre(idOrdre),
+CONSTRAINT fk_Carte_Club FOREIGN KEY(idClub) REFERENCES Club(idClub),
 CONSTRAINT fk_Carte_Tenrac FOREIGN KEY(idTenrac) REFERENCES Tenrac(idTenrac),
 CONSTRAINT fk_Carte_Organisme FOREIGN KEY(referenceOrg) REFERENCES Organisme(referenceOrg)
 );
@@ -278,15 +278,15 @@ CREATE TABLE Entretien(
 typeEnt VARCHAR2(50),
 idTenrac NUMBER(10),
 dateEntre TIMESTAMP,
-numClub NUMBER(10) NOT NULL,
-numOrdre NUMBER(10) NOT NULL,
+idClub NUMBER(10) NOT NULL,
+idOrdre NUMBER(10) NOT NULL,
 nomTypeM VARCHAR2(50) NOT NULL,
 referenceMod NUMBER(10) NOT NULL,
 nomM VARCHAR2(50) NOT NULL,
 CONSTRAINT pk_Entretien PRIMARY KEY(typeEnt, idTenrac, dateEntre),
 CONSTRAINT fk_Entretien_TypeEntretien FOREIGN KEY(typeEnt) REFERENCES TypeEntretien(typeEnt),
 CONSTRAINT fk_Entretien_Tenrac FOREIGN KEY(idTenrac) REFERENCES Tenrac(idTenrac),
-CONSTRAINT fk_Entretien_Registre FOREIGN KEY(numClub, numOrdre) REFERENCES Registre(numClub, numOrdre),
+CONSTRAINT fk_Entretien_Registre FOREIGN KEY(idClub, idOrdre) REFERENCES Registre(idClub, idOrdre),
 CONSTRAINT fk_Entretien_Machine FOREIGN KEY(nomTypeM, referenceMod, nomM) REFERENCES Machine(nomTypeM, referenceMod, nomM)
 );
 
@@ -431,10 +431,10 @@ CONSTRAINT fk_Heurte_Croyance FOREIGN KEY(doctrine) REFERENCES Croyance(doctrine
 );
 
 CREATE TABLE Partenariat(
-numOrdre NUMBER(10),
+idOrdre NUMBER(10),
 adressePart VARCHAR2(50),
-CONSTRAINT pk_Partenariat PRIMARY KEY(numOrdre, adressePart),
-CONSTRAINT fk_Partenariat_Ordre FOREIGN KEY(numOrdre) REFERENCES Ordre(numOrdre),
+CONSTRAINT pk_Partenariat PRIMARY KEY(idOrdre, adressePart),
+CONSTRAINT fk_Partenariat_Ordre FOREIGN KEY(idOrdre) REFERENCES Ordre(idOrdre),
 CONSTRAINT fk_Partenariat_LieuPartenaire FOREIGN KEY(adressePart) REFERENCES LieuPartenaire(adressePart)
 );
 
