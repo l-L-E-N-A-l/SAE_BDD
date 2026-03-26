@@ -139,7 +139,7 @@ csv_tenrac.write(f"idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typ
 for i in range(100_000):
     id_ville = randint(0,len(villes)-1)
     rtd = random_rang_titre_dignite()
-    sexe = 'F' if randint(0, 1) == 1 else 'M'
+    sexe = 'F' if randint(0, 3) == 0 else 'M'
     data_tenrac = {"id":id_tenrac[i], "nom":unidecode(fake.last_name()).upper(), "prenom":unidecode(fake.first_name_female() if sexe == 'F' else fake.first_name_male()).upper(), "tel":"06"+str(fake.unique.random_int(0,99_999_999)), "adresse":unidecode(fake.street_address()), "sexe":sexe, "rang":rtd[0], "titre":rtd[1], "codePostal":codes[id_ville], "ville":villes[id_ville],"referenceOrg" : choice(org_ref), "dignite":rtd[2], "grade":random_grade(sexe)}
 
     file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}','{data_tenrac["rang"]}','{data_tenrac["titre"]}','{data_tenrac["codePostal"]}','{data_tenrac["ville"]}','{data_tenrac['referenceOrg']}','{data_tenrac["dignite"]}','{data_tenrac["grade"]}'); \n".replace("'null'","null")) # .replace(...) -> on remplace les chaines "null" par des vrais null
