@@ -1,0 +1,3 @@
+data_tenrac = (nom,prenom,sexe,grade)
+
+prenom : généré en fonction du sexe , choisi aléatoirement
