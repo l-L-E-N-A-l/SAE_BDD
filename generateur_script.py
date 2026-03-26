@@ -130,6 +130,8 @@ open("./csv_finaux/csv_composition_plats", 'w').close()
 csv_compo_plat = open("./csv_finaux/csv_compositions_plats", 'a')
 open("./csv_finaux/inclusion_legume.csv", 'w').close()
 csv_inclusion_legume = open("./csv_finaux/inclusion_legume.csv", 'a')
+open("./csv_finaux/assaisonnement.csv", 'w').close()
+csv_assaisonnement = open("./csv_finaux/assaisonnement.csv", 'a')
 
 
 ### INSERTIONS ###
@@ -236,7 +238,7 @@ id_current_sauce = 0
 
 for i in range(len(sauces)-1) : 
 
-    file.write(f"INSERT INTO Sauce(idSauce,nomSauce) VALUES ({id_current_sauce},'{sauces[i]}'); \n")
+    file.write(f"INSERT INTO Sauce(idSauce,nomSauce) VALUES ({id_current_sauce},'{sauces[i].upper()}'); \n")
     id_current_sauce += 1
 
 #PlATS
@@ -248,6 +250,7 @@ for i in range(len(plats)-1) :
     id_legume = 0
 
     for j in range(len(id_legumes)-1) :
+
         if ingredients[id_legumes[j]] in plats[i] :
 
             id_legume = id_legumes[j]
@@ -297,4 +300,21 @@ for i in range(len(ingredients)-1) :
             file.write(f"INSERT INTO Compose(idPlat,idSauce,idIngredient) VALUES({insertion[0]},{insertion[1]},{insertion[2]}); \n")
             csv_compo_plat.write(f"{insertion[0]},{insertion[1]},{insertion[2]} \n")
 
+#ASSAISONNEMENT
+def assaisone(plat, sauce) :
+    
+    return sauce.lower() in plat.lower()
+
+csv_assaisonnement.write(f"idPlat,idSauce")
+
+for i in range(len(plats)-1) :
+
+    for j in range(len(sauces)-1):
+
+        if assaisone(plats[i], sauces[j]) :
+
+            file.write(f"INSERT INTO Assaisone(idPlat,idSauce) VALUES({i},{j}); \n")
+            csv_assaisonnement.write(f"{i},{j} \n")
+
 print("- - - FINI - - -")
+

@@ -39566,6 +39566,8 @@ idPlat,idSauce,idIngredient
 1931,NULL,184 
 1927,NULL,185 
 1958,NULL,186 
+<<<<<<< HEAD
+=======
 idPlat,idSauce,idIngredient 
 1476,NULL,0 
 1990,NULL,1 
@@ -40316,6 +40318,7 @@ idPlat,idSauce,idIngredient
 1931,NULL,184 
 1927,NULL,185 
 1958,NULL,186 
+>>>>>>> 5396325d0628e5b47c9f1eda783d03ab7f7828bb
 1987,764,561 
 1780,650,562 
 1763,623,563 
@@ -40690,6 +40693,8 @@ idPlat,idSauce,idIngredient
 1840,814,1086 
 1983,697,1087 
 1900,524,1088 
+<<<<<<< HEAD
+=======
 idPlat,idSauce,idIngredient 
 1476,NULL,0 
 1990,NULL,1 
@@ -41241,3 +41246,4 @@ NULL,837,1022
 1840,814,1086 
 1983,697,1087 
 1900,524,1088 
+>>>>>>> 5396325d0628e5b47c9f1eda783d03ab7f7828bb
