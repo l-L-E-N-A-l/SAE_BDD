@@ -3,6 +3,8 @@ from unidecode import *
 from random import randint , choice
 import pandas as pa
 
+NB_TENRAC = 100_000
+
 fake = Faker(locale="fr_CA")
 
 ### STOCK DE VALEURS ###
@@ -13,7 +15,8 @@ liste_titre = ["PHILANTROPHE","PROTECTEUR","HONORABLE"]
 liste_dignite = ["MAITRE","GRAND CHANCELIER","GRAND MAITRE"]
 
 # Id_Tenrac
-id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(100_000)]
+id_tenrac = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(NB_TENRAC)]
+tenrac_org = {}
 
 # Id_Structures
 id_structure = [fake.unique.random_int(min=0,max=1_000_000_000) for _ in range(1_000)]
@@ -46,6 +49,15 @@ sauces = data_sauces["Nom"]
 data_plats = pa.read_csv("./csv_sources/plats.csv", encoding = "UTF-8")
 data_plats = data_plats.drop_duplicates(subset=["Nom"])
 plats = data_plats["Nom"]
+
+# Croyances
+data_croyances = pa.read_csv("./csv_sources/croyances.csv", encoding="UTF-8")
+data_croyances = data_croyances.drop_duplicates(subset=["doctrine"])
+data_croyances = data_croyances.reset_index(drop=True)
+liste_croyance = data_croyances["doctrine"]
+
+# Doctrines qui rejettent les légumes
+doctrines_rejette = ["Herbophobie Sacree", "Ordre de la Courgette Interdite", "Secte du Poireau Maudit", "Mouvement Anti-Chlorophylle", "Dogme de la Tomate Heretique", "Schisme du Radis Noir", "Alliance des Legumophobes Devots"]
 
 # Organismes
 data_org = pa.read_csv("./csv_sources/entreprises_fictives.csv",sep=";")
@@ -147,7 +159,7 @@ for i in range(len(codes)):
 
 # TENRAC
 csv_tenrac.write(f"idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade \n")
-for i in range(100_000):
+for i in range(NB_TENRAC):
     id_ville = randint(0,len(villes)-1)
     rtd = random_rang_titre_dignite()
     sexe = 'F' if randint(0, 3) == 0 else 'M'
@@ -156,6 +168,7 @@ for i in range(100_000):
     file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}','{data_tenrac["rang"]}','{data_tenrac["titre"]}','{data_tenrac["codePostal"]}','{data_tenrac["ville"]}','{data_tenrac['referenceOrg']}','{data_tenrac["dignite"]}','{data_tenrac["grade"]}'); \n".replace("'null'","null")) # .replace(...) -> on remplace les chaines "null" par des vrais null
     csv_tenrac.write(f"{data_tenrac["id"]},{data_tenrac["nom"]},{data_tenrac["prenom"]},{email_generator(data_tenrac["nom"],data_tenrac["prenom"])},{data_tenrac["tel"]},{data_tenrac["adresse"]},{data_tenrac["sexe"]},{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["codePostal"]},{data_tenrac["ville"]},{data_tenrac['referenceOrg']},{data_tenrac["dignite"]},{data_tenrac["grade"]} \n")
     lieux_partenaire[i] = (data_tenrac["adresse"],data_tenrac["codePostal"],data_tenrac["ville"])
+    tenrac_org[data_tenrac["id"]] = data_tenrac["referenceOrg"]
 
 # STRUCTURE
 for i in range(1_000):
@@ -203,6 +216,10 @@ file.write(f"INSERT INTO Dignite(typeDignite,superieurDignite) VALUES ('{liste_d
 for i in range(len(org_ref)):
     file.write(f"INSERT INTO Organisme(referenceOrg,siret,raisonSociale) VALUES({org_ref[i]},'{org_siret[i]}','{org_raison[i]}'); \n")
 
+# CARTE
+for id in id_tenrac:
+    file.write(f"INSERT INTO Carte(numOrdre,numClub,idTenrac,referenceOrg,idCarte) VALUES({choice(id_structure[:100])},{choice(id_structure[100:])},{id},{tenrac_org[id]},{fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)}); \n")
+
 # INGREDIENTS
 id_current_ing = 0
 id_legumes = []
@@ -224,6 +241,17 @@ for _ in range(10000):
         data_groupe = {"idGroupe": fake.unique.random_int(min=1_000_000_000,max=9_999_999_999), "nbMembre": randint(2, 1000) }
         file.write(
             f"INSERT INTO Groupe (idGroupe, nbMembre) VALUES ({data_groupe['idGroupe']}, {data_groupe['nbMembre']});\n")
+        
+# TYPEMACHINE
+
+for i in range(len(data_typeMachine)):
+    file.write(f"INSERT INTO TypeMachine (nomTypeM) VALUES ('{nomTypeM[i]}');\n")
+
+# TYPEENTRETIEN
+
+for i in range(len(data_entretien)):
+    file.write(f"INSERT INTO TypeEntretien (typeEnt, periodicite) VALUES ('{liste_typeEntretien[i]}','{liste_periodicite[i]}');\n")
+
 #SAUCES
 
 id_current_sauce = 0
@@ -233,7 +261,7 @@ for i in range(len(sauces)-1) :
     file.write(f"INSERT INTO Sauce(idSauce,nomSauce) VALUES ({id_current_sauce},'{sauces[i].upper()}'); \n")
     id_current_sauce += 1
 
-#PlATS
+#PLATS
 
 id_current_plat = 0
 
@@ -322,6 +350,21 @@ for i in range(len(id_legumes)-1) :
         file.write(f"INSERT INTO Contient(idIngredient,idAller) VALUES({id_legumes[i]},{i+j}); \n")
         csv_allergene.write(f"{i+j},'{types_react[j].upper()} {ingredients[id_legumes[i]].upper()}' \n")
         csv_contient_allergene.write(f"{id_legumes[i]},{i+j} \n")
+
+# CROYANCE
+for i in range(len(liste_croyance)-1):
+    file.write(f"INSERT INTO Croyance(doctrine) VALUES('{liste_croyance[i]}'); \n")
+
+# HEURTE (Croyance <-> Legume)
+for doctrine in doctrines_rejette:
+    for id_leg in id_legumes:
+        if randint(0,1):
+            file.write(f"INSERT INTO Heurte(doctrine,idIngredient) VALUES('{doctrine}',{id_leg}); \n")
+
+# CROIT (Tenrac <-> Croyance)
+for i in range(NB_TENRAC):
+    file.write(f"INSERT INTO Croit(idTenrac,doctrine) VALUES({id_tenrac[i]},'{liste_croyance[randint(0,len(liste_croyance)-2)]}'); \n")
+
 
 print("- - - FINI - - -")
 
