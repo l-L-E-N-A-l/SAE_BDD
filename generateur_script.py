@@ -132,7 +132,10 @@ open("./csv_finaux/inclusion_legume.csv", 'w').close()
 csv_inclusion_legume = open("./csv_finaux/inclusion_legume.csv", 'a')
 open("./csv_finaux/assaisonnement.csv", 'w').close()
 csv_assaisonnement = open("./csv_finaux/assaisonnement.csv", 'a')
-
+open("./csv_finaux/allergenes.csv", 'w').close()
+csv_allergene = open("./csv_finaux/allergenes.csv", 'a')
+open("./csv_finaux/contient_allergene.csv", 'w').close()
+csv_contient_allergene = open("./csv_finaux/contient_allergene.csv", 'a')
 
 ### INSERTIONS ###
 
@@ -305,5 +308,22 @@ for i in range(len(plats)-1) :
             file.write(f"INSERT INTO Assaisone(idPlat,idSauce) VALUES({i},{j}); \n")
             csv_assaisonnement.write(f"{i},{j} \n")
 
+#ALLERGENE
+types_react = ["Reaction cutanee a", "Gonflement a cause de", "Traumatisme gustatif du", "Mort causee par", "Vomissements causes par"]
+
+csv_allergene.write(f"idAller,nomAller")
+csv_contient_allergene.write(f"idIngredient,idAller")
+
+for i in range(len(id_legumes)-1) :
+
+    for j in range(len(types_react)-1) :
+
+        file.write(f"INSERT INTO Allergene(idAller,nomAller) VALUES({i+j},'{types_react[j].upper()} {ingredients[id_legumes[i]].upper()}'); \n")
+        file.write(f"INSERT INTO Contient(idIngredient,idAller) VALUES({id_legumes[i]},{i+j}); \n")
+        csv_allergene.write(f"{i+j},'{types_react[j].upper()} {ingredients[id_legumes[i]].upper()}' \n")
+        csv_contient_allergene.write(f"{id_legumes[i]},{i+j} \n")
+
 print("- - - FINI - - -")
+
+
 
