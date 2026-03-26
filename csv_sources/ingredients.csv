@@ -37,15 +37,15 @@ Viande,Coppa
 Viande,Bresaola
 Viande,Mortadelle
 Viande,Saucisson sec
-Viande,Cotelette d'agneau
-Viande,Gigot d'agneau
-Viande,Epaule d'agneau
-Viande,Filet d'agneau
-Viande,Carre d'agneau
-Viande,Selle d'agneau
-Viande,Cervelle d'agneau
-Viande,Rognons d'agneau
-Viande,Foie d'agneau
+Viande,Cotelette d agneau
+Viande,Gigot d agneau
+Viande,Epaule d agneau
+Viande,Filet d agneau
+Viande,Carre d agneau
+Viande,Selle d agneau
+Viande,Cervelle d agneau
+Viande,Rognons d agneau
+Viande,Foie d agneau
 Viande,Escalope de veau
 Viande,Cote de veau
 Viande,Roti de veau
@@ -75,7 +75,7 @@ Volaille,Cuisse de pintade
 Volaille,Caille entiere
 Volaille,Filet de pigeon
 Volaille,Oie entiere
-Volaille,Foie gras d'oie
+Volaille,Foie gras d oie
 Volaille,Faisan
 Viande,Lapin entier
 Viande,Rable de lapin
@@ -206,7 +206,7 @@ Poisson,Carangue
 Poisson,Bonite
 Poisson,Germon
 Poisson,Esturgeon
-Poisson,Caviar d'esturgeon
+Poisson,Caviar d esturgeon
 Poisson,OEufs de saumon
 Poisson,Tarama
 Poisson,Bottarga
@@ -255,7 +255,7 @@ Mollusque,Escargot de Bourgogne
 Mollusque,Escargot petit-gris
 Crustace,Ecrevisse
 Crustace,Ecrevisse a pattes rouges
-Crustace,Bernard-l'ermite
+Crustace,Bernard-l ermite
 Crustace,Cigale de mer
 Crustace,Cigale de plage
 Crustace,Scampi
@@ -284,7 +284,7 @@ Legume,Poivron orange
 Legume,Piment rouge
 Legume,Piment vert
 Legume,Piment doux
-Legume,Piment d'Espelette
+Legume,Piment d Espelette
 Legume,Aubergine
 Legume,Courgette verte
 Legume,Courgette jaune
@@ -348,7 +348,7 @@ Legume,Asperge verte
 Legume,Asperge blanche
 Legume,Asperge violette
 Legume,Artichaut
-Legume,Fond d'artichaut
+Legume,Fond d artichaut
 Legume,Artichaut violet
 Legume,Laitue
 Legume,Scarole
@@ -364,7 +364,7 @@ Legume,Oseille
 Legume,Pourpier
 Legume,Pissenlit
 Legume,Mesclun
-Legume,Pousses d'epinard
+Legume,Pousses d epinard
 Legume,Micropousses
 Legume,Petits pois
 Legume,Pois mange-tout
@@ -393,7 +393,7 @@ Champignon,Cepe de Bordeaux
 Champignon,Morille
 Champignon,Truffe noire
 Champignon,Truffe blanche
-Champignon,Truffe d'ete
+Champignon,Truffe d ete
 Champignon,Champignon enoki
 Champignon,Champignon maitake
 Champignon,Champignon king oyster
@@ -450,7 +450,7 @@ Legume,Galanga
 Legume,Citronnelle
 Legume,Cresson de fontaine
 Legume,Fougere (crosse)
-Legume,Pousse d'asperge
+Legume,Pousse d asperge
 Legume,Brocoli tenderstem
 Legume,Chou chinois
 Legume,Chou nappa
@@ -484,8 +484,8 @@ Fruit,Coing
 Fruit,Prune quetsche
 Fruit,Prune mirabelle
 Fruit,Prune reine claude
-Fruit,Prune d'Ente
-Fruit,Pruneau d'Agen
+Fruit,Prune d Ente
+Fruit,Pruneau d Agen
 Fruit,Abricot
 Fruit,Peche blanche
 Fruit,Peche jaune
@@ -510,7 +510,7 @@ Fruit,Canneberge (cranberry)
 Fruit,Physalis
 Fruit,Goji
 Fruit,Acai
-Fruit,Baie d'aronie
+Fruit,Baie d aronie
 Fruit,Baie de sureau
 Fruit,Baie de goji sechee
 Fruit,Raisin blanc muscat
@@ -585,7 +585,7 @@ Fruit,Tamarin doux
 Fruit,Barbadine
 Fruit,Pomme kaki
 Fruit,Nefle du Japon
-Fruit,Nefle d'Europe
+Fruit,Nefle d Europe
 Fruit,Cornouille
 Fruit,Sorbe
 Fruit,Arbouse
@@ -629,7 +629,7 @@ Feculent,Engrain
 Feculent,Freekeh
 Feculent,Ble entier
 Feculent,Avoine (flocons)
-Feculent,Son d'avoine
+Feculent,Son d avoine
 Feculent,Avoine entiere
 Feculent,Seigle entier
 Feculent,Flocons de seigle
@@ -683,7 +683,7 @@ Feculent,Galettes de riz
 Feculent,Flocons de mais
 Feculent,Muesli
 Feculent,Granola
-Feculent,Porridge d'avoine
+Feculent,Porridge d avoine
 Feculent,Farine de ble T45
 Feculent,Farine de ble T55
 Feculent,Farine de ble T80
@@ -694,7 +694,7 @@ Feculent,Farine de pois chiche
 Feculent,Farine de chataigne
 Feculent,Farine de soja
 Feculent,Farine de mais
-Feculent,Farine d'amarante
+Feculent,Farine d amarante
 Legumineuse,Lentille verte du Puy
 Legumineuse,Lentille verte
 Legumineuse,Lentille rouge
@@ -768,9 +768,9 @@ Fromage,Epoisses
 Fromage,Langres
 Fromage,Munster
 Fromage,Livarot
-Fromage,Pont-l'Eveque
+Fromage,Pont-l Eveque
 Fromage,Maroilles
-Fromage,Vacherin Mont-d'Or
+Fromage,Vacherin Mont-d Or
 Fromage,Taleggio
 Fromage,Reblochon
 Fromage,Raclette de Savoie
@@ -792,10 +792,10 @@ Fromage,Tomme de Savoie
 Fromage,Tomme de brebis
 Fromage,Tomme grise
 Fromage,Roquefort
-Fromage,Bleu d'Auvergne
+Fromage,Bleu d Auvergne
 Fromage,Bleu de Bresse
 Fromage,Bleu de Gex
-Fromage,Fourme d'Ambert
+Fromage,Fourme d Ambert
 Fromage,Gorgonzola
 Fromage,Stilton
 Fromage,Saint-Agur
@@ -844,8 +844,8 @@ Produit laitier,Lait ecreme
 Produit laitier,Lait de brebis
 Produit laitier,Lait de chevre
 Produit laitier,Lait de coco
-Produit laitier,Lait d'amande
-Produit laitier,Lait d'avoine
+Produit laitier,Lait d amande
+Produit laitier,Lait d avoine
 Produit laitier,Lait de soja
 Produit laitier,Lait condense sucre
 Produit laitier,Lait condense non sucre
@@ -853,7 +853,7 @@ Produit laitier,Creme fraiche epaisse
 Produit laitier,Creme fraiche liquide
 Produit laitier,Creme legere
 Produit laitier,Creme de soja
-Produit laitier,Creme d'avoine
+Produit laitier,Creme d avoine
 Produit laitier,Beurre doux
 Produit laitier,Beurre demi-sel
 Produit laitier,Beurre clarifie (ghee)
@@ -867,20 +867,20 @@ Produit laitier,Yaourt aux fruits
 Produit laitier,Kefir de lait
 Produit laitier,Kefir de fruits
 Produit laitier,Creme sure (sour cream)
-Produit laitier,Creme fraiche d'Isigny
+Produit laitier,Creme fraiche d Isigny
 Produit laitier,Creme chantilly
 Produit laitier,Lait fermente
 Produit laitier,Babeurre (buttermilk)
 Produit laitier,Lactoserum (petit-lait)
 Produit laitier,Lait ribot
 OEuf,OEuf de poule entier
-OEuf,Blanc d'oeuf
-OEuf,Jaune d'oeuf
+OEuf,Blanc d oeuf
+OEuf,Jaune d oeuf
 OEuf,OEuf de caille
 OEuf,OEuf de canard
 OEuf,OEuf de pintade
 OEuf,OEuf de dinde
-OEuf,OEuf d'autruche
+OEuf,OEuf d autruche
 OEuf,OEuf de pluvier
 OEuf,OEuf dur
 OEuf,OEuf poche
@@ -920,12 +920,12 @@ Noix & Graine,Graine de cumin
 Noix & Graine,Graine de carvi
 Noix & Graine,Graine de coriandre
 Noix & Graine,Graine de fenouil
-Noix & Graine,Graine d'anis
+Noix & Graine,Graine d anis
 Noix & Graine,Graine de nigelle
 Noix & Graine,Graine de chardon-Marie
 Noix & Graine,Tahini (pate de sesame)
 Noix & Graine,Beurre de cacahuete
-Noix & Graine,Beurre d'amande
+Noix & Graine,Beurre d amande
 Noix & Graine,Beurre de noix de cajou
 Noix & Graine,Beurre de noisette
 Noix & Graine,Pralin
@@ -942,7 +942,7 @@ Noix & Graine,Noisette torrefiee
 Noix & Graine,Pistache grillee salee
 Noix & Graine,Pecan caramelisee
 Noix & Graine,Pistache en poudre
-Noix & Graine,Farine d'amande
+Noix & Graine,Farine d amande
 Noix & Graine,Noix du Bresil emincee
 Noix & Graine,Amande fleur
 Noix & Graine,Graines de sesame grillees
@@ -993,7 +993,7 @@ Herbe & Epice,Curry en poudre
 Herbe & Epice,Garam masala
 Herbe & Epice,Ras el hanout
 Herbe & Epice,Harissa
-Herbe & Epice,Za'atar
+Herbe & Epice,Za atar
 Herbe & Epice,Sumac
 Herbe & Epice,Cannelle moulue
 Herbe & Epice,Baton de cannelle
@@ -1008,7 +1008,7 @@ Herbe & Epice,Safran
 Herbe & Epice,Fenugrec moulu
 Herbe & Epice,Graines de moutarde
 Herbe & Epice,Moutarde de Dijon
-Herbe & Epice,Moutarde a l'ancienne
+Herbe & Epice,Moutarde a l ancienne
 Herbe & Epice,Moutarde forte
 Herbe & Epice,Moutarde douce
 Herbe & Epice,Wasabi en poudre
@@ -1026,11 +1026,11 @@ Herbe & Epice,Nigelle (graines)
 Herbe & Epice,Fleur de sel
 Herbe & Epice,Sel fume
 Herbe & Epice,Sel de Guerande
-Herbe & Epice,Sel de l'Himalaya
+Herbe & Epice,Sel de l Himalaya
 Herbe & Epice,Sel noir Kala Namak
 Herbe & Epice,Sumac moulu
-Corps gras,Huile d'olive vierge extra
-Corps gras,Huile d'olive fruite vert
+Corps gras,Huile d olive vierge extra
+Corps gras,Huile d olive fruite vert
 Corps gras,Huile de tournesol
 Corps gras,Huile de colza
 Corps gras,Huile de noix
@@ -1041,12 +1041,12 @@ Corps gras,Huile de coco
 Corps gras,Huile de palme
 Corps gras,Huile de pepins de raisin
 Corps gras,Huile de lin
-Corps gras,Huile d'avocat
+Corps gras,Huile d avocat
 Corps gras,Huile de noix de macadamia
 Corps gras,Huile de chanvre
 Corps gras,Saindoux
 Corps gras,Graisse de canard
-Corps gras,Graisse d'oie
+Corps gras,Graisse d oie
 Corps gras,Graisse de coco
 Corps gras,Suif de boeuf
 Condiment,Vinaigre de vin rouge
@@ -1099,19 +1099,19 @@ Sucre,Sucre de palme
 Sucre,Sucre de bouleau (xylitol)
 Sucre,Erythritol
 Sucre,Stevia
-Sucre,Miel d'acacia
+Sucre,Miel d acacia
 Sucre,Miel de lavande
 Sucre,Miel de chataignier
 Sucre,Miel de thym
 Sucre,Miel de manuka
-Sucre,Sirop d'erable
-Sucre,Sirop d'agave
+Sucre,Sirop d erable
+Sucre,Sirop d agave
 Sucre,Sirop de glucose
 Sucre,Melasse
 Sucre,Confiture de fraises
-Sucre,Confiture d'abricots
+Sucre,Confiture d abricots
 Sucre,Confiture de framboises
-Sucre,Marmelade d'oranges
+Sucre,Marmelade d oranges
 Sucre,Gelee de coings
 Sucre,Gelee de groseilles
 Sucre,Pate a tartiner noisette
