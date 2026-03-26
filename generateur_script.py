@@ -395,25 +395,18 @@ for id in id_tenrac:
 #Machine = (#(#nomTypeM, referenceMod), nomM VARCHAR2(50));
 
 nombreDeMachines = 5000
-def random_ref(length=5):
-    return ''.join(random.choices(string.ascii_uppercase, k=length))
+def random_ref():
+    r = ""
+    for _ in range(5) : r += choice(["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"])
+    return r
 
 set_refs = set()
 csv_nomMachines.write("nomRef\n")
 
 for _ in range(nombreDeMachines):
-    ref = random_ref()
-    
-    while ref in set_refs:
-        ref = random_ref()
-    set_refs.add(ref)
-    nomRef = f"machine raclette {ref}"
-    
-    csv_nomMachines.write(f"{nomRef}\n")
-
-for _ in nombreDeMachines:
-
-    file.write(f"INSERT INTO Machine(nomTypeM, referenceMod, nomM) VALUES({nomTypeM},{referenceMod},'MACHINE RACLETTE {nomRef}');\n") ##missing attributs de reference de foreign key
+    ref = random_ref()    
+    csv_nomMachines.write(f"MACHINE RACLETTE {ref}\n")
+    file.write(f"INSERT INTO Machine(nomTypeM, referenceMod, nomM) VALUES('{unidecode(choice(nomTypeM)).upper()}',{choice(referenceMod)},'MACHINE RACLETTE {ref}');\n")
 
 # COMPOSE
 def ingredient_compose(ingredient, plat_sauce) :
