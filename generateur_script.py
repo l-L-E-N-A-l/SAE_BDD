@@ -305,16 +305,6 @@ for i in range(len(id_legumes)-1) :
         csv_contient_allergene.write(f"{id_legumes[i]},{i+j} \n")
         ids_allergies.append(i+j)
 
-# STRUCTURE
-for i in range(1_000):
-    file.write(f"INSERT INTO Structure(idStructure,chef) VALUES({id_structure[i]},{id_tenrac[i]}); \n")
-
-# ORDRES / CLUBS
-for i in range(999):
-    if i <= 100: file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
-    else: file.write(f"INSERT INTO Club(idClub,nomC,idOrdre) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}',{id_structure[i//10]}); \n")
-
-
 # TENRAC
 csv_tenrac.write(f"idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade \n")
 for i in range(NB_TENRAC):
@@ -327,6 +317,15 @@ for i in range(NB_TENRAC):
     csv_tenrac.write(f"{data_tenrac["id"]},{data_tenrac["nom"]},{data_tenrac["prenom"]},{email_generator(data_tenrac["nom"],data_tenrac["prenom"])},{data_tenrac["tel"]},{data_tenrac["adresse"]},{data_tenrac["sexe"]},{data_tenrac["doctrine"]},{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["codePostal"]},{data_tenrac["ville"]},{data_tenrac['referenceOrg']},{data_tenrac["dignite"]},{data_tenrac["grade"]} \n")
     tenrac_org[data_tenrac["id"]] = data_tenrac["referenceOrg"]
     if data_tenrac["grade"] in ("CHEVALIER", "GRAND CHEVALIER", "COMMANDEUR" , "GRAND CROIX", "DAME", "HAUTE DAME", "COMMANDERESSE" , "GRANDE-CROIX") : id_tenrac_grade.append(data_tenrac["id"])
+
+# STRUCTURE
+for i in range(1_000):
+    file.write(f"INSERT INTO Structure(idStructure,chef) VALUES({id_structure[i]},{id_tenrac[i]}); \n")
+
+# ORDRES / CLUBS
+for i in range(999):
+    if i <= 100: file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
+    else: file.write(f"INSERT INTO Club(idClub,nomC,idOrdre) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}',{id_structure[i//10]}); \n")
 
 # LIEU PARTENAIRE
 lieux_partenaire = {}

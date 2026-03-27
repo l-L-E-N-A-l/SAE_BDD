@@ -61,23 +61,6 @@ ville VARCHAR2(50),
 CONSTRAINT pk_Adresse_Postale PRIMARY KEY(codePostal, ville)
 );
 
-CREATE TABLE Ordre(
-idOrdre NUMBER(10),
-nomO VARCHAR2(50) NOT NULL,
-PRIMARY KEY(idOrdre),
-FOREIGN KEY(idOrdre) REFERENCES Structure(idStructure)
-);
-
-
-
-CREATE TABLE Club(
-idClub NUMBER(10),
-nomC VARCHAR2(50) NOT NULL,
-idOrdrePere NUMBER(10) NOT NULL,
-PRIMARY KEY(idClub),
-FOREIGN KEY(idClub) REFERENCES Structure(idStructure),
-FOREIGN KEY(idOrdrePere) REFERENCES Ordre(idOrdre)
-);
 
 
 CREATE TABLE Organisme(
@@ -152,6 +135,22 @@ CREATE TABLE Structure(
    chef NUMBER(10) NOT NULL,
    PRIMARY KEY(idStructure),
    FOREIGN KEY(chef) REFERENCES Tenrac(idTenrac)
+);
+
+CREATE TABLE Ordre(
+idOrdre NUMBER(10),
+nomO VARCHAR2(50) NOT NULL,
+PRIMARY KEY(idOrdre),
+FOREIGN KEY(idOrdre) REFERENCES Structure(idStructure)
+);
+
+CREATE TABLE Club(
+idClub NUMBER(10),
+nomC VARCHAR2(50) NOT NULL,
+idOrdre NUMBER(10) NOT NULL,
+PRIMARY KEY(idClub),
+FOREIGN KEY(idClub) REFERENCES Structure(idStructure),
+FOREIGN KEY(idOrdre) REFERENCES Ordre(idOrdre)
 );
 
 CREATE TABLE Repas(
@@ -261,7 +260,7 @@ CREATE TABLE Reunion(
    nomReu VARCHAR2(50) NOT NULL,
    PRIMARY KEY(idRepas, codePostal, ville, adressePart, idGroupe, dateReu),
    FOREIGN KEY(idRepas) REFERENCES Repas(idRepas),
-   FOREIGN KEY(codePostal, ville, adressePart) REFERENCES LieuPartenaire(codePostal, ville, adressePart),
+   FOREIGN KEY(adressePart, codePostal, ville) REFERENCES LieuPartenaire(adressePart, codePostal, ville),
    FOREIGN KEY(idGroupe) REFERENCES Groupe(idGroupe)
 );
 
