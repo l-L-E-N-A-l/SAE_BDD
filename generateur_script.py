@@ -252,7 +252,7 @@ for id in ids_groupe.keys():
 # TYPEMACHINE
 
 for i in range(len(data_typeMachine)):
-    file.write(f"INSERT INTO TypeMachine(nomTypeM) VALUES('{nomTypeM[i]}');\n")
+    file.write(f"INSERT INTO TypeMachine(nomTypeM) VALUES('{unidecode(nomTypeM[i])}');\n")
 
 # ADRESSE POSTALE
 
@@ -393,6 +393,7 @@ for id in id_tenrac:
 # MACHINE
 
 #Machine = (#(#nomTypeM, referenceMod), nomM VARCHAR2(50));
+machines = []
 
 nombreDeMachines = 5000
 def random_ref():
@@ -406,7 +407,9 @@ csv_nomMachines.write("nomRef\n")
 for _ in range(nombreDeMachines):
     ref = random_ref()    
     csv_nomMachines.write(f"MACHINE RACLETTE {ref}\n")
-    file.write(f"INSERT INTO Machine(nomTypeM, referenceMod, nomM) VALUES('{unidecode(choice(nomTypeM)).upper()}',{choice(referenceMod)},'MACHINE RACLETTE {ref}');\n")
+    machine = [unidecode(choice(nomTypeM)).upper(),choice(referenceMod),f"MACHINE RACLETTE {ref}"]
+    machines.append(machine)
+    file.write(f"INSERT INTO Machine(nomTypeM,referenceMod,nomM) VALUES('{machine[0]}',{machine[1]},'{machine[2]}');\n")
 
 # COMPOSE
 def ingredient_compose(ingredient, plat_sauce) :
@@ -434,7 +437,7 @@ for i in range(len(ingredients)-1) :
 # PRESIDE
 
 for i in reunions.keys():
-    file.write(f"INSERT INTO Preside_EstPreside(idTenrac,idRepas,adressePart,idGroupe,idReu) VALUES({choice(id_tenrac_grade)},{reunions[i][0]},{reunions[i][3]},{reunions[i][4]},'{reunions[i][5]}'; \n")
+    file.write(f"INSERT INTO Preside_EstPreside(idTenrac,idRepas,adressePart,idGroupe,idReu) VALUES({choice(id_tenrac_grade)},{reunions[i][0]},{reunions[i][3]},{reunions[i][4]},'{reunions[i][5]}'); \n")
 
 #ASSAISONNEMENT
 def assaisone(plat, sauce) :
@@ -448,6 +451,11 @@ for i in range(len(plats)-1) :
             file.write(f"INSERT INTO Assaisone(idPlat,idSauce) VALUES({i},{j}); \n")
             csv_assaisonnement.write(f"{i},{j} \n")
 
+# UTILISABLE
+
+for reu in reunions.values():
+    mac = choice(machines)
+    file.write(f"INSERT INTO Utilisable(idRepas,AdressePart,idGroupe,dateReu,nomTypeM,referenceMod,nomM) VALUES({reu[0]},'{reu[3]}',{reu[4]},'{reu[5]}','{mac[0]}',{mac[1]},'{mac[2]}'); \n")
 
 
 #ALLERGIE

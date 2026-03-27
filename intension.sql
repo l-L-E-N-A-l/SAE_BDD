@@ -277,7 +277,7 @@ CONSTRAINT fk_Machine_Modele FOREIGN KEY(nomTypeM, referenceMod) REFERENCES Mode
 CREATE TABLE Entretien(
 typeEnt VARCHAR2(50),
 idTenrac NUMBER(10),
-dateEntre TIMESTAMP,
+dateEntre VARCHAR2(30),
 idClub NUMBER(10) NOT NULL,
 idOrdre NUMBER(10) NOT NULL,
 nomTypeM VARCHAR2(50) NOT NULL,
