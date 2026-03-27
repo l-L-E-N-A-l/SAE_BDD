@@ -450,5 +450,3 @@ CONSTRAINT fk_Partenariat_Legume FOREIGN KEY(idIngredient) REFERENCES Legume(idI
 CONSTRAINT fk_Partenariat_Allergene FOREIGN KEY(idAller) REFERENCES Allergene(idAller)
 );
 
-ALTER TABLE Ordre
-ADD CONSTRAINT fk_chefO FOREIGN KEY (chefO) REFERENCES Tenrac(idTenrac);

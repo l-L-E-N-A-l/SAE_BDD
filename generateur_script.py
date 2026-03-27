@@ -137,6 +137,10 @@ def random_grade(sexe):
 open("./script.sql", 'w').close()
 file = open("./script.sql",'a')
 
+intension = open("./intension.sql")
+str_intension = intension.read()
+file.write(str_intension)
+
 # Ouverture CSVs (Écriture)
 open("./csv_finaux/codes_postaux.csv", 'w').close()
 csv_codes_postaux = open("./csv_finaux/codes_postaux.csv", 'a')
@@ -379,16 +383,6 @@ for i in range(20000) :
 
     file.write(f"INSERT INTO Reunion(idRepas,codePostal,ville,AdressePart,idGroupe,dateReu,nomReu) VALUES({repas},'{lieu[0]}','{lieu[1].upper()}','{lieu[2].upper()}',{groupe},'{date}','{nom.upper()}'); \n")
     csv_reunions.write(f"{repas},{lieu[0]},{lieu[1]},{lieu[2]},{groupe},{date},{nom} \n")
-               
-
-# REGISTRE
-for i in range(100):
-    file.write(f"INSERT INTO Registre(idClub,idOrdre,dateOuverture,dateFermeture) VALUES({choice(id_structure[100:])},{id_structure[i]},TO_DATE('202{randint(0,6)}-0{randint(1,9)}-0{randint(1,9)}','YYYY-MM-DD'),TO_DATE('202{randint(0,6)}-0{randint(1,9)}-0{randint(1,9)}','YYYY-MM-DD')); \n")
-
-
-# CARTE
-for id in id_tenrac:
-    file.write(f"INSERT INTO Carte(idOrdre,idClub,idTenrac,referenceOrg,idCarte) VALUES({choice(id_structure[:100])},{choice(id_structure[100:])},{id},{tenrac_org[id]},{fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)}); \n")
 
 # MACHINE
 
@@ -410,6 +404,20 @@ for _ in range(nombreDeMachines):
     machine = [unidecode(choice(nomTypeM)).upper(),choice(referenceMod),f"MACHINE RACLETTE {ref}"]
     machines.append(machine)
     file.write(f"INSERT INTO Machine(nomTypeM,referenceMod,nomM) VALUES('{machine[0]}',{machine[1]},'{machine[2]}');\n")
+
+# REGISTRE
+for i in range(100):
+    file.write(f"INSERT INTO Registre(idClub,idOrdre,dateOuverture,dateFermeture) VALUES({choice(id_structure[100:])},{id_structure[i]},TO_DATE('202{randint(0,6)}-0{randint(1,9)}-0{randint(1,9)}','YYYY-MM-DD'),TO_DATE('202{randint(0,6)}-0{randint(1,9)}-0{randint(1,9)}','YYYY-MM-DD')); \n")
+
+
+# CARTE
+for id in id_tenrac:
+    file.write(f"INSERT INTO Carte(idOrdre,idClub,idTenrac,referenceOrg,idCarte) VALUES({choice(id_structure[:100])},{choice(id_structure[100:])},{id},{tenrac_org[id]},{fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)}); \n")
+
+# ENTRETIEN
+for id in id_tenrac :
+    mac = choice(machines)
+    file.write(f"INSERT INTO Entretien(typeEnt,idTenrac,dateEntre,idOrdre,idClub,nomTypeM,referenceMod,nomM) VALUES('{unidecode(choice(liste_typeEntretien[:]).upper())}',{id},'202{randint(0,8)}-0{randint(1,9)}-0{randint(1,9)}',{choice(id_structure[100:])},{choice(id_structure[:100])},'{mac[0]}',{mac[1]},'{mac[2]}'); \n")
 
 # COMPOSE
 def ingredient_compose(ingredient, plat_sauce) :
@@ -482,7 +490,7 @@ for doctrine in doctrines_rejette:
         if randint(0,1):
             file.write(f"INSERT INTO Heurte(doctrine,idIngredient) VALUES('{doctrine}',{id_leg}); \n")
 
-
+file.write("COMMIT;")
 
 print("- - - FINI - - -")
 
