@@ -164,6 +164,8 @@ open("./csv_finaux/lieu_partenaire.csv", 'w').close()
 csv_lieu_partenaire = open("./csv_finaux/lieu_partenaire.csv", 'a')
 open("./csv_finaux/reunions.csv", 'w').close()
 csv_reunions = open("./csv_finaux/reunions.csv", 'a')
+open("./csv_finaux/cartes.csv", 'w').close()
+csv_cartes = open("./csv_finaux/cartes.csv", 'a')
 
 open("./csv_sources/nomMachines.csv", 'w').close()
 csv_nomMachines = open("nomMachines.csv", 'a')
@@ -410,8 +412,11 @@ for i in range(100):
 
 
 # CARTE
+csv_cartes.write(f"idOrdre,idClub,idTenrac,referenceOrg,idCarte\n")
 for id in id_tenrac:
-    file.write(f"INSERT INTO Carte(idOrdre,idClub,idTenrac,referenceOrg,idCarte) VALUES({choice(id_structure[:100])},{choice(id_structure[100:])},{id},{tenrac_org[id]},{fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)}); \n")
+    data_carte=[choice(id_structure[:100]),choice(id_structure[100:]),tenrac_org[id],fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)]
+    file.write(f"INSERT INTO Carte(idOrdre,idClub,idTenrac,referenceOrg,idCarte) VALUES({data_carte[0]},{data_carte[1]},{id},{data_carte[2]},{data_carte[3]}); \n")
+    csv_cartes.write(f"{data_carte[0]},{data_carte[1]},{id},{data_carte[2]},{data_carte[3]} \n")
 
 # ENTRETIEN
 for id in id_tenrac :
