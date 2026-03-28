@@ -27,11 +27,10 @@ data_structure = pa.read_csv("./csv_sources/structure_tenrac.csv")
 nom_structure = data_structure["nom"].values
 
 # Codes_postaux
-data_villes = pa.read_csv("./csv_sources/codes_villes.csv", encoding="latin-1")
-data_villes = data_villes.drop_duplicates(subset=["Code_postal", "Nom_de_la_commune"])
+data_villes = pa.read_csv("./csv_sources/codes_villes.csv", encoding = "UTF-8")
 data_villes = data_villes.reset_index(drop=True)
-codes = data_villes["Code_postal"]
-villes = data_villes["Nom_de_la_commune"]
+codes = data_villes["code_postal"]
+villes = data_villes["ville"]
 
 
 # Ingredients
@@ -264,7 +263,7 @@ for i in range(len(data_typeMachine)):
 
 csv_codes_postaux.write(f"Code Postal, Ville \n")
 for i in range(len(codes)):
-    file.write(f"INSERT INTO AdressePostale(codePostal,ville) VALUES('{codes[i]}','{villes[i]}'); \n")
+    file.write(f"INSERT INTO AdressePostale(codePostal,ville) VALUES('{codes[i]}','{unidecode(villes[i])}'); \n")
     csv_codes_postaux.write(f"{codes[i]},{villes[i]} \n")
 
 # TYPEENTRETIEN
@@ -308,14 +307,14 @@ for i in range(len(id_legumes)-1) :
         ids_allergies.append(i+j)
 
 # TENRAC
-csv_tenrac.write(f"idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade \n")
+csv_tenrac.write(f"idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,doctrine,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade \n")
 for i in range(NB_TENRAC):
-    id_ville = randint(0,len(villes)-1)
+    id_ville = randint(0,randint(1,len(villes)-1))
     rtd = random_rang_titre_dignite()
     sexe = 'F' if randint(0, 3) == 0 else 'M'
-    data_tenrac = {"id":id_tenrac[i], "nom":unidecode(fake.last_name()).upper(), "prenom":unidecode(fake.first_name_female() if sexe == 'F' else fake.first_name_male()).upper(), "tel":"06"+str(fake.unique.random_int(0,99_999_999)), "adresse":unidecode(fake.street_address()), "sexe":sexe, "doctrine":liste_croyance[randint(0,len(liste_croyance)-2)].upper(), "rang":rtd[0], "titre":rtd[1], "codePostal":codes[id_ville], "ville":villes[id_ville],"referenceOrg" : choice(org_ref), "dignite":rtd[2], "grade":random_grade(sexe)}
+    data_tenrac = {"id":id_tenrac[i], "nom":unidecode(fake.last_name()).upper(), "prenom":unidecode(fake.first_name_female() if sexe == 'F' else fake.first_name_male()).upper(), "tel":"06"+str(fake.unique.random_int(0,99_999_999)), "adresse":unidecode(fake.street_address()), "sexe":sexe, "doctrine":liste_croyance[randint(0,len(liste_croyance)-2)].upper(), "rang":rtd[0], "titre":rtd[1], "codePostal":codes[id_ville], "ville":unidecode(villes[id_ville]),"referenceOrg" : choice(org_ref), "dignite":rtd[2], "grade":random_grade(sexe)}
 
-    file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}','{data_tenrac["doctrine"]}','{data_tenrac["rang"]}','{data_tenrac["titre"]}','{data_tenrac["codePostal"]}','{data_tenrac["ville"]}','{data_tenrac['referenceOrg']}','{data_tenrac["dignite"]}','{data_tenrac["grade"]}'); \n".replace("'null'","null")) # .replace(...) -> on remplace les chaines "null" par des vrais null
+    file.write(f"INSERT INTO Tenrac(idTenrac,nomT,prenomT,courriel,tel,adresseT,sexe,doctrine,typeRang,typeTitre,codePostal,ville,referenceOrg,typeDignite,typeGrade) VALUES({data_tenrac["id"]},'{data_tenrac["nom"]}','{data_tenrac["prenom"]}','{email_generator(data_tenrac["nom"],data_tenrac["prenom"])}','{data_tenrac["tel"]}','{data_tenrac["adresse"]}','{data_tenrac["sexe"]}','{data_tenrac["doctrine"]}','{data_tenrac["rang"]}','{data_tenrac["titre"]}','{data_tenrac["codePostal"]}','{data_tenrac["ville"]}','{data_tenrac['referenceOrg']}','{data_tenrac["dignite"]}','{data_tenrac["grade"]}'); \n".replace("'null'","null")) # .replace(...) -> on remplace les chaines "null" par des vrais null
     csv_tenrac.write(f"{data_tenrac["id"]},{data_tenrac["nom"]},{data_tenrac["prenom"]},{email_generator(data_tenrac["nom"],data_tenrac["prenom"])},{data_tenrac["tel"]},{data_tenrac["adresse"]},{data_tenrac["sexe"]},{data_tenrac["doctrine"]},{data_tenrac["rang"]},{data_tenrac["titre"]},{data_tenrac["codePostal"]},{data_tenrac["ville"]},{data_tenrac['referenceOrg']},{data_tenrac["dignite"]},{data_tenrac["grade"]} \n")
     tenrac_org[data_tenrac["id"]] = data_tenrac["referenceOrg"]
     if data_tenrac["grade"] in ("CHEVALIER", "GRAND CHEVALIER", "COMMANDEUR" , "GRAND CROIX", "DAME", "HAUTE DAME", "COMMANDERESSE" , "GRANDE-CROIX") : id_tenrac_grade.append(data_tenrac["id"])
