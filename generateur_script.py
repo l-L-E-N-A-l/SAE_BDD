@@ -334,11 +334,11 @@ csv_lieu_partenaire.write(f"adressePart,codePostal,ville \n")
 
 for i in range(10000) :
 
-    id_ville = randint(0,len(villes)-1)
+    id_ville = randint(0,randint(1,len(villes)-1))
     adresse = unidecode(fake.street_address())
     lieux_partenaire[i] = (codes[id_ville],villes[id_ville],adresse)
     file.write(f"INSERT INTO LieuPartenaire(adressePart,codePostal,ville) VALUES('{adresse.upper()}','{codes[id_ville]}','{villes[id_ville].upper()}'); \n")
-    csv_lieu_partenaire.write(f"{adresse},{codes[id_ville]},{villes[id_ville]} \n")
+    csv_lieu_partenaire.write(f"{adresse},{codes[id_ville]},{unidecode(villes[id_ville])} \n")
 
 # MODELE
 
@@ -382,7 +382,7 @@ for i in range(20000) :
     reunions[i] = (repas,lieu[0],lieu[1],lieu[2],groupe,date,nom)
 
     file.write(f"INSERT INTO Reunion(idRepas,codePostal,ville,AdressePart,idGroupe,dateReu,nomReu) VALUES({repas},'{lieu[0]}','{lieu[1].upper()}','{lieu[2].upper()}',{groupe},'{date}','{nom.upper()}'); \n")
-    csv_reunions.write(f"{repas},{lieu[0]},{lieu[1]},{lieu[2]},{groupe},{date},{nom} \n")
+    csv_reunions.write(f"{repas},{lieu[0]},{unidecode(lieu[1])},{lieu[2]},{groupe},{date},{nom} \n")
 
 # MACHINE
 
