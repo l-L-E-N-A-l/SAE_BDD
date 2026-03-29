@@ -165,6 +165,8 @@ open("./csv_finaux/reunions.csv", 'w').close()
 csv_reunions = open("./csv_finaux/reunions.csv", 'a')
 open("./csv_finaux/cartes.csv", 'w').close()
 csv_cartes = open("./csv_finaux/cartes.csv", 'a')
+open("./csv_finaux/structures.csv", 'w').close()
+csv_structures = open("./csv_finaux/structures.csv", 'a')
 
 open("./csv_sources/nomMachines.csv", 'w').close()
 csv_nomMachines = open("nomMachines.csv", 'a')
@@ -320,13 +322,19 @@ for i in range(NB_TENRAC):
     if data_tenrac["grade"] in ("CHEVALIER", "GRAND CHEVALIER", "COMMANDEUR" , "GRAND CROIX", "DAME", "HAUTE DAME", "COMMANDERESSE" , "GRANDE-CROIX") : id_tenrac_grade.append(data_tenrac["id"])
 
 # STRUCTURE
+csv_structures.write("idStructure,nom,ordre\n")
 for i in range(1_000):
     file.write(f"INSERT INTO Structure(idStructure,chef) VALUES({id_structure[i]},{id_tenrac[i]}); \n")
 
 # ORDRES / CLUBS
 for i in range(999):
-    if i <= 100: file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
-    else: file.write(f"INSERT INTO Club(idClub,nomC,idOrdre) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}',{id_structure[i//10]}); \n")
+    ordre_asc = choice(id_structure[:100])
+    if i <= 100: 
+        file.write(f"INSERT INTO Ordre(idOrdre,nomO) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}'); \n")
+        csv_structures.write(f"{id_structure[i]},{unidecode(nom_structure[i])}\n")
+    else: 
+        file.write(f"INSERT INTO Club(idClub,nomC,idOrdre) VALUES({id_structure[i]},'{unidecode(nom_structure[i]).upper()}',{ordre_asc}); \n")
+        csv_structures.write(f"{id_structure[i]},{unidecode(nom_structure[i])},{ordre_asc}\n")
 
 # LIEU PARTENAIRE
 lieux_partenaire = {}
@@ -411,11 +419,11 @@ for i in range(100):
 
 
 # CARTE
-csv_cartes.write(f"idOrdre,idClub,idTenrac,referenceOrg,idCarte\n")
+csv_cartes.write(f"idOrdre,idClub,idTenrac,referenceOrg,idCarte,nomOrdre,nomClub\n")
 for id in id_tenrac:
     data_carte=[choice(id_structure[:100]),choice(id_structure[100:]),tenrac_org[id],fake.unique.random_int(min=1_000_000_000,max=9_999_999_999)]
     file.write(f"INSERT INTO Carte(idOrdre,idClub,idTenrac,referenceOrg,idCarte) VALUES({data_carte[0]},{data_carte[1]},{id},{data_carte[2]},{data_carte[3]}); \n")
-    csv_cartes.write(f"{data_carte[0]},{data_carte[1]},{id},{data_carte[2]},{data_carte[3]} \n")
+    csv_cartes.write(f"{data_carte[0]},{data_carte[1]},{id},{data_carte[2]},{data_carte[3]},{unidecode(nom_structure[id_structure.index(data_carte[0])])},{unidecode(nom_structure[id_structure.index(data_carte[1])])} \n")
 
 # ENTRETIEN
 for id in id_tenrac :
